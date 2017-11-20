@@ -1,370 +1,430 @@
 <?php
 include_once 'crud/crud_dest.php';
 
-
-$limit =10;
-if (isset($_GET['pag']))
-{
-	$pag=(int)$_GET['pag'];
-}
-else 
- $pag=1;
-$offset =($pag-1)*$limit;
-
-if (isset($_SESSION['message'])/*&& $_SESSION['message']*/)
-{
-	$mensajito=$_SESSION['message'];
-	
-}
-
-if (isset($_GET['edit']))
-{
-	$id_tipo=$getROW['id_tipo_usuario'];
-	$id_estatus=$getROW['id_estatus'];
-}
-
-?>
-<!DOCTYPE html>
-<!--[if IE 8]><html class="ie ie8"> <![endif]-->
-<!--[if IE 9]><html class="ie ie9"> <![endif]-->
-<html lang="es">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<meta name="description" content="Xtravagancia - Agencia de Viajes.">
-	<meta name="author" content="Ansonika">
-	<title>XTRAVAGANCIA - Nicaragua Tours</title>
-
-	<!-- Favicons-->
-	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
-	
-	<!-- Google web fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Lato:300,400|Montserrat:400,400i,700,700i" rel="stylesheet">
-
-	<!-- CSS -->
-	<link href="css/base.css" rel="stylesheet">
-
-	<!-- Radio and check inputs -->
-	<link href="css/skins/square/grey.css" rel="stylesheet">
-
-	<!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-	<!--[if lte IE 8]>
-    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
-<![endif]-->
-
-	<!--<div id="preloader">
-		<div class="sk-spinner sk-spinner-wave">
-			<div class="sk-rect1"></div>
-			<div class="sk-rect2"></div>
-			<div class="sk-rect3"></div>
-			<div class="sk-rect4"></div>
-			<div class="sk-rect5"></div>
-		</div>
-	</div>-->
-	<!-- End Preload -->
-
-	<div class="layer"></div>
-	<!-- Mobile menu overlay mask -->
-
-	<!-- Header================================================== -->
-    <?php include("includes/menu.php");?>
-	
-	<!-- End Header -->
-
-	<section id="hero_2">
-	  <div class="intro_title animated fadeInDown">
-		<h1>Usuarios</h1>
-		  <!-- End bs-wizard -->
-		</div>
-		<!-- End intro-title -->
-	</section>
-	<!-- End Section hero_2 -->
-
-	<main>
-		<div id="position">
-			<div class="container">
-				<ul>
-					<li><a href="#">Home</a>
-					</li>
-					<li><a href="#">Category</a>
-					</li>
-					<li>Page active</li>
-				</ul>
-			</div>
-		</div>
-		<!-- End position -->
-        
-        <div class="container margin_40">
-        
-		<?php if (isset($mensajito)) {?>
-		<div class="alert alert-success text-center" role="alert">
-			<?php 
-				echo $mensajito; 
-				$mensajito=null;
-				/*$_SESSION['message'] = false;*/
-				unset($_SESSION['message']);
-				
-			?>
-		</div>
-	<?php } ?>
-		
-			<form method="post" enctype="multipart/form-data"><div class="row">
-				
-                <div class="col-md-12 add_bottom_15">
-<div>
-			
-        <div class="row">
-							
-          <div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Email</label>
-								  <input type="text" class="form-control" id="email" placeholder="Email" name="email" value="<?php if(isset($_GET['edit'])) echo $getROW['email'];  ?>" required>
-								</div>
-						</div>
-          
-          <div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Contraseña</label>
-								  <input type="text" class="form-control" id="password" placeholder="Contraseña" name="password" value="<?php if(isset($_GET['edit'])) echo $getROW['password'];  ?>" required>
-								</div>
-						</div>
-          
-          <div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Nombre</label>
-								  <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre'];  ?>" required>
-								</div>
-						</div>
-          
-          <div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Apellido</label>
-								  <input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido" value="<?php if(isset($_GET['edit'])) echo $getROW['apellido'];  ?>" required>
-								</div>
-						</div>
-			<div class="col-md-6 col-sm-6">
-						    <div class="form-group">
-						      <label>Tipo usuario</label>
-						      <select class="form-control" name="id_tipo_usuario" id="id_tipo_usuario" required>
-						        <option value="" >Seleccione tipo usuario</option>
-						        <?php
-			$usrtip = $MySQLiconn->query("SELECT * FROM tipo_usuario");
-			while($row=$usrtip->fetch_array())
-			{
-				if($id_tipo==$row['id_tipo_usuario'])
-				{					
-            ?>
-                                <option selected value="<?php echo $row['id_tipo_usuario'];  ?>"><?php echo $row['descripcion'];  ?></option>
-                                
-                                <?php
-               }
-               else {
-               ?>
-               				  <option value="<?php echo $row['id_tipo_usuario'];  ?>"><?php echo $row['descripcion'];  ?></option>	
-               <?php
-                             }
-			}
-			?>
-						      </select>
-					        </div>
-					      </div>
-			<div class="col-md-6 col-sm-6">
-						    <div class="form-group">
-						      <label>Departamento</label>
-						      <select class="form-control" name="id_estatus" id="id_estatus" required>
-						        <option value="" >Seleccione estatus</option>
-						        <?php
-			$usrest = $MySQLiconn->query("SELECT * FROM estatus");
-			while($row=$usrest->fetch_array())
-			{	
-				if($id_estatus==$row['id_estatus'])
-				{				
-            ?>
-                                <option selected value="<?php echo $row['id_estatus'];  ?>"><?php echo $row['descripcion'];  ?></option>
-                                
-                                <?php
-               }
-               else {
-               ?>
-               				  <option value="<?php echo $row['id_estatus'];  ?>"><?php echo $row['descripcion'];  ?></option>	
-               <?php
-                             }
-			}
-			?>
-						      </select>
-					        </div>
-					      </div>
-		    <div class='col-md-6 col-sm-6'>
-		    	<div class="form-group">
-			    <label for="exampleFormControlFile1">Seleccione Imagen</label>
-			    <input type="file" class="form-control-file" id="imagen">
-			  </div>
-		    </div>
-                       
-          </div>
-          </div>
-		  <div class="row"></div>
-<div class="row"> </div>
-			  </div>
-					<!--End step -->
-					<!--End step -->
-					<!--End step -->
-
-					<!--<div id="policy">
-						<h4>Cancellation policy</h4>-->
-						<!--<div class="form-group">
-							<label>
-								<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
-						</div>-->
-						<?php
 if(isset($_GET['edit']))
 {
-	?>
-                        <button  class="btn_1 green medium" name="update">Editar</a>
-                        
-                        <?php
-}
-else
-{
-	?>
-	<button class="btn_1 green medium" name="save">Aceptar</a>
-	<?php
-}
 ?>
-					</div>
-				</div>
-                </form>
-</div>
-			<!--End row -->
-        <div class="container margin_40" > 
-        <table class="table table-inverse " >
-          <thead>
-            <tr>
-              <th>Imagen</th>
-              <th>Id</th>
-              <th>descripcion</th>
-              <th>nombre_depto</th>
-              <th>nombre_municipio</th>
-              <th>precio</th>
-              <th>dias</th>
-              <th>Estatus</th>
-              <th colspan="2" style="text-align:center;" >Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-	     <?php
-			$dest = $MySQLiconn->query("SELECT dest.id_destino,dest.descripcion, dep.id_depto, dep.nombre_depto, dest.id_municipio, mun.nombre_municipio,dest.precio,dest.dias,dest.imagen,dest.estatus
-from destino as dest
-inner join municipio as mun on dest.id_municipio = mun.id_municipio
-inner join departamento dep on mun.id_depto = dep.id_depto
-order by dest.id_destino limit $offset,$limit");
-			$total_dest = $MySQLiconn->query("SELECT dest.id_destino from destino as dest
-inner join municipio as mun on dest.id_municipio = mun.id_municipio
-inner join departamento dep on mun.id_depto = dep.id_depto");
+<script type="text/javascript">
+	window.onload = function() {
+        $(document).ready(function () {
+            $("#myModal").modal();
+        });
+		}
+</script>
 
-			$total= $total_dest-> num_rows;
-			while($row=$dest->fetch_array())
-			{					
-            ?>
-            <tr>
-              <!--<th scope="row">1</th>-->
-              <td ><img src="<?php echo $row['imagen']; ?>" class="rounded" alt="<?php echo $row['imagen']; ?>" width="204" height="136"></td>
-              <td ><?php echo $row['id_destino']; ?></td>
-              <td ><?php echo $row['descripcion']; ?></td>
-              <td ><?php echo $row['nombre_depto']; ?></td>
-              <td ><?php echo $row['nombre_municipio']; ?></td>
-              <td ><?php echo $row['precio']; ?></td>
-              <td ><?php echo $row['dias']; ?></td>
-              <td ><?php echo $row['estatus']; ?></td>
-              <td width="10%"><a href="?edit=<?php echo $row['id_destino']; ?>" onclick="return confirm('Estas seguro que desea editar!'); " >edit</a></td>
-    		  <td width="10%"><a href="?del=<?php echo $row['id_destino']; ?>" onclick="return confirm('Estas seguro que desea borrar el registro !'); " >delete</a></td>
-            </tr>
-            <?php
-			}
-			?>
-			
+<?php
+}
 
-          </tbody>
-    
-        </table>
-        	<nav aria-label="...">
-			  <ul class="pagination justify-content-center">
-			    <?php
-			$total_pag = ceil($total/$limit);
-			$links= array();
-			for ($i=1; $i <=$total_pag; $i++)
-			{
-				if($pag == $i) // Es igual a la pagina que estoy lo resalto
-					{	
-				?>
-				<li class="page-item active"><a class="page-link" href="?pag=<?php echo $i; ?>"><?php echo $i; ?> <span class="sr-only">(current)</span></a>
-			    <?php 
-			    	}
-				else  // No lo resalto
-				{
-			    ?>
-				<li class="page-item"><a class="page-link" href="?pag=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-				<?php 
-					}
-				?>
-    </li>
-			    <?php	
-			}
-			?>
-			  </ul>
-			</nav>
-		</div>
+//$limit = 10;
+//if ( isset( $_GET[ 'pag' ] ) ) {
+//	$pag = ( int )$_GET[ 'pag' ];
+//} else
+//	$pag = 1;
+//$offset = ( $pag - 1 ) * $limit;
 
-		
-		</div>
-		<!--End container -->
-	</main>
-	<!-- End main -->
-	<!-- Start footer -->
-	<?php include("includes/footer.php");?>
-	<!-- End footer -->
+if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
+	$mensajito = $_SESSION[ 'message' ];
 
-	<div id="toTop"></div><!-- Back to top button -->
+}
+
+
+
+?>
+
+
+
+
+<div class="layer"></div>
+<!-- Mobile menu overlay mask -->
+
+<!-- Menu================================================== -->
+<?php include("includes/dashboard.php");?>
+
+<!-- End Menu -->
+
+
+<!-- End position -->
+
+<!--		<div class="container margin_40">-->
+
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header bg-modal">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Destinos</h4>
+						</div>
+						<div class="modal-body">
+
+							<form method="post" enctype="multipart/form-data">
+								<div class="row">
+
+									<div class="col-md-12 add_bottom_15">
+										<div>
+
+										<div class="row">
 	
-	<!-- Search Menu -->
-	<!--<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon_set_1_icon-78"></i>
-			</button>
-		</form>
-	</div>--><!-- End Search Menu -->
+<!--
+											<div class="col-md-12 col-sm-6">
+  											<div class="form-group">
+   											<input id="input-es" name="input-es[]" type="file" class="file" multiple 
+    											data-show-upload="false" data-show-caption="true" data-msg-placeholder="Seleccione archivo a cargar..." data-allowed-file-extensions='["jpg", "png"]' >
+    										</div>
+    										</div>
+-->
+											<div class="col-md-12">
+											<div class="col-xs-12 text-center " >
+												<div class="kv-avatar center-block" >
+													<div class="file-loading" >
+														<input id="avatar-1" name="avatar-1" type="file" required>
+													</div>
+												</div>
+												<div class="kv-avatar-hint"><small>Archivos < 1500 KB</small></div>
+												<div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
+											</div>
+											
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Nombre del destino</label>
+													<input type="text" class="form-control" id="descripcion" placeholder="Nombre del destino" name="descripcion" value="<?php if(isset($_GET['edit'])) echo $getROW['descripcion'];  ?>" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Municipio</label>
+													<select class="form-control" name="id_municipio" id="id_municipio" required>
+														<option value="">Seleccione municipio</option>
+														<?php
+														$mun = $MySQLiconn->query( "SELECT * FROM municipio" );
+														while ( $row = $mun->fetch_array() ) {
+															if ( $getROW[ 'id_municipio' ] == $row[ 'id_municipio' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_municipio'];  ?>">
+															<?php echo $row['nombre_municipio'];  ?>
+														</option>
 
-	<!-- Common scripts -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/common_scripts_min.js"></script>
-	<script src="js/functions.js"></script>
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_municipio'];  ?>">
+															<?php echo $row['nombre_municipio'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Precio</label>
+													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="<?php if(isset($_GET['edit'])) echo $getROW['precio'];  ?>" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Dias</label>
+													<input type="number" class="form-control" id="dias" placeholder="Cant. de dias" name="dias" value="<?php if(isset($_GET['edit'])) echo $getROW['precio'];  ?>" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Estatus</label>
+													<select class="form-control" name="id_depto" id="id_depto" required>
+														<option value="">Seleccione estatus</option>
+														<?php
+														$destest = $MySQLiconn->query( "SELECT * FROM estatus" );
+														while ( $row = $destest->fetch_array() ) {
+															if ( $getROW[ 'estatus' ] == $row[ 'id_estatus' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_estatus'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
 
-	<!-- Specific scripts -->
-	<script src="js/icheck.js"></script>
-	<script>
-		$('input').iCheck({
-			checkboxClass: 'icheckbox_square-grey',
-			radioClass: 'iradio_square-grey'
-		});
-	</script>
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_estatus'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Actividades</label>
+													<select name="id[]" class="form-control select2" multiple="multiple" data-placeholder="Actividades"
+                        							style="width: 100%;">
+                        							<?php
+														$act = $MySQLiconn->query( "SELECT * FROM actividad" );
+														while ( $row = $act->fetch_array() ) {
+															 
+														?>
+                       									<option value="<?php echo $row['id_actividad'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+														
+														?>
+                        							</select>
+												</div>
+											</div>
+										</div>
 
-<script>/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/\>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script></body>
+									    <div class="row"> </div>
+										</div>
+										<!--End step -->
+										<!--End step -->
+										<!--End step -->
 
-</html>
+										<!--<div id="policy">
+								<h4>Cancellation policy</h4>-->
+										<!--<div class="form-group">
+									<label>
+										<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
+								</div>-->
+										<?php
+										if ( isset( $_GET[ 'edit' ] ) ) {
+											?>
+										<button class="btn btn-warning" name="update">Editar</a>
+
+										<?php
+										}
+										else
+										{
+										?>
+										<button class="btn btn-primary" name="save">Aceptar</a>
+										<?php
+										}
+										?>
+									</div>
+							</div>
+						</form>
+					</div>
+						<div class="modal-footer bg-modal-footer">
+						  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+								</div>
+				</div>
+			</div>
+<!--		</div>-->
+		<!--End row -->
+		<div class="content-wrapper">
+			<section class="content-header">
+						<h1>
+						Catalogos
+						<small>Destinos</small>
+						</h1>
+
+						<ol class="breadcrumb">
+							<li><a href="#"><i class="fa fa-dashboard"></i> Home</a>
+							</li>
+							<li><a href="#">Catalogos</a>
+							</li>
+							<li class="active">Destinos</li>
+						</ol>
+			</section>
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">Listado de Destinos</h3>
+								<button type="button" class="btn btn-info btn-md pull-right" data-toggle="modal" data-target="#myModal">Agregar</button>
+							</div>
+							<?php if (isset($mensajito)) {?>
+							<div class="alert alert-info alert-dismissible text-center" role="alert">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<?php 
+								echo $mensajito; 
+								$mensajito=null;
+								/*$_SESSION['message'] = false;*/
+								unset($_SESSION['message']);
+
+								?>
+								
+							</div>
+							<?php } ?>
+							<!-- /.box-header -->
+							<div class="box-body">
+							<table id="dtatable" class="table table-bordered table-hover dataTable " >
+                              <thead>  
+                               <tr>  
+								  <td>Imagen</td>
+<!--								  <td>Id</td>-->
+								  <td>Destino</td>
+								  <td>Departamento</td>
+								  <td>Municipio</td>
+								  <td>Precio</td>
+								  <td>Dias</td>
+								  <td>Actividades</td>
+								  <td>Estatus</td>
+                                  <td style="text-align:center;">Acciones</td>
+                               </tr>  
+                          	 </thead>  
+                          <?php 
+						 
+						$res = $MySQLiconn->query("SELECT dest.id_destino,dest.descripcion, dep.id_depto, 
+										   dep.nombre_depto, dest.id_municipio, mun.nombre_municipio,dest.precio,dest.dias,dest.imagen,dest.estatus,
+										   (SELECT GROUP_CONCAT( ac.descripcion SEPARATOR ', ') as actividades
+											FROM maestro_act as ma
+											inner join actividad as ac on ma.id_actividad = ac.id_actividad
+											where ma.id_destino = dest.id_destino) as actividades
+									from destino as dest
+									inner join municipio as mun on dest.id_municipio = mun.id_municipio
+									inner join departamento dep on mun.id_depto = dep.id_depto
+									order by dest.id_destino");
+						while($row = mysqli_fetch_array($res))  
+                          {  
+                               ?>
+<!--                               <tbody>-->
+							  <tr>
+								   <td ><img src="<?php echo $row['imagen']; ?>" class="rounded" alt="<?php echo $row['imagen']; ?>" width="50" height="30"></td>
+<!--								   <td ><?php echo $row['id_destino']; ?></td>-->
+								   <td ><?php echo $row['descripcion']; ?></td>
+								   <td ><?php echo $row['nombre_depto']; ?></td>
+								   <td ><?php echo $row['nombre_municipio']; ?></td>
+								   <td ><?php echo $row['precio']; ?></td>
+								   <td ><?php echo $row['dias']; ?></td>
+								   <td ><?php echo $row['actividades']; ?></td>
+								   <td ><?php echo $row['estatus']; ?></td>
+									<td class= "text-center" ><a href="?edit=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="?del=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									</td>
+							 </tr>  
+<!--                        		</tbody>-->
+                         <?php
+                           }  
+                          ?>  
+
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</section>
+		</div>
+		<?php include("includes/footeradmin.php");?>
+	</div>
+
+
+</div>
+<!--End container -->
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="bower_components/bootstrap-fileinput/js/locales/es.js"></script>
+
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!--<script src="bower_components/fileinput/js/fileinput.min.js"></script>-->
+<!--<script src="bower_components/bootstrap-fileinput-4.4.6/js/fileinput.min.js"></script>-->
+
+<!--<script src="bower_components/bootstrap-fileinput-4.4.6/js/locales/es.js"></script>-->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+
+
+<script>
+  $(function () {
+      $('.select2').select2();
+	  $("#dtatable").DataTable({
+    language: {
+        processing:     "Procesando...",
+        search:         "Buscar:",
+        lengthMenu:    "Mostrar _MENU_ registros",
+        info:           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        infoEmpty:      "Mostrando registros del 0 al 0 de un total de 0 registros",
+        infoFiltered:   "(filtrado de un total de _MAX_ registros)",
+        infoPostFix:    "",
+        loadingRecords: "Cargando...",
+        zeroRecords:    "No se encontraron resultados",
+        emptyTable:     "Ningún dato disponible en esta tabla",
+        paginate: {
+            first:      "Primero",
+            previous:   "Anterior",
+            next:       "Siguiente",
+            last:       "Último"
+        },
+        aria: {
+            sortAscending:  ": Activar para ordenar la columna de manera ascendente",
+            sortDescending: ": Activar para ordenar la columna de manera descendente"
+        }
+    }
+});
+	  document.title= "AdminLTE | Catalogos";
+		  
+
+	  
+//$("#input-es").fileinput(
+////	{
+////	language: "es",
+////    uploadUrl: "uploads/",
+////    allowedFileExtensions: ["jpg", "png", "gif"]
+//////	language: {
+//////		browseLabel: "Navegar",
+//////	}
+////}	
+//);
+	  
+var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
+    'onclick="alert(\'Call your custom code here.\')">' +
+    '<i class="glyphicon glyphicon-tag"></i>' +
+    '</button>'; 
+$("#avatar-1").fileinput({
+    language: "es",
+	overwriteInitial: true,
+    maxFileSize: 1500,
+    showClose: false,
+    showCaption: false,
+    browseLabel: '',
+    removeLabel: '',
+    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+    removeTitle: 'Cancel or reset changes',
+    elErrorContainer: '#kv-avatar-errors-1',
+    msgErrorClass: 'alert alert-block alert-danger',
+    defaultPreviewContent: '<img src="uploads/default_avatar_male.jpg" alt="Your Avatar">',
+    layoutTemplates: {main2: '{preview} ' +  /*btnCust +*/ ' {remove} {browse}'},
+//	uploadUrl: "/uploads/",
+	maxImageWidth: 1000,
+    maxImageHeight: 667,
+	minImageWidth: 1000,
+    minImageHeight: 667,
+    allowedFileExtensions: ["jpg", "png", "gif"]
+});	  
+	 
+  });
+
+</script>
+
+
+
+
+
+
+
