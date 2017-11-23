@@ -69,7 +69,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												<div class="form-group">
 													<label>Categoria</label>
 													<select class="form-control" name="id_categoria" id="id_categoria" required>
-														<option value="">Seleccione Cateforia</option>
+														<option value="">Seleccione Categoria</option>
 														<?php
 														$cat = $MySQLiconn->query( "SELECT * FROM categoria" );
 														while ( $row = $cat->fetch_array() ) {

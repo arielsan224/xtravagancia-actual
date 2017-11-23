@@ -6,21 +6,21 @@ include_once 'conexion.php';
 if(isset($_POST['save']))
 {
 
-    $items1 = ($_POST['id']);
+    $items1 = ($_POST['id_actividad']);
 	$id_d = 2;
-	$actividad = $MySQLiconn->real_escape_string($_POST['actividad']);
-	$id_categoria = $MySQLiconn->real_escape_string($_POST['id_categoria']);
+//	$actividad = $MySQLiconn->real_escape_string($_POST['actividad']);
+//	$id_categoria = $MySQLiconn->real_escape_string($_POST['id_categoria']);
  
-	$SQL = $MySQLiconn->query("INSERT INTO destino(descripcion,id_categoria) VALUES('$actividad','$id_categoria')");
-	$_SESSION['message'] = "Registro Guardado";
-	$inserted = mysqli_insert_id($MySQLiconn);
-  
-	if(!$SQL)
-	  {
-	   echo $MySQLiconn->error;
-	  } 
+//	$SQL = $MySQLiconn->query("INSERT INTO destino(descripcion,id_categoria) VALUES('$actividad','$id_categoria')");
+//	$_SESSION['message'] = "Registro Guardado";
+//	$inserted = mysqli_insert_id($MySQLiconn);
+//  
+//	if(!$SQL)
+//	  {
+//	   echo $MySQLiconn->error;
+//	  } 
   	
- 	elseif($inserted != 0 ) {
+// 	elseif($inserted != 0 ) {
 	
 		while(true) {
 
@@ -33,7 +33,7 @@ if(isset($_POST['save']))
 				    
 
 				    //// CONCATENAR LOS VALORES EN ORDEN PARA SU FUTURA INSERCIÓN ////////
-				    $valores='('.$id.',"'.$inserted.'"),';
+				    $valores='('.$id.',"'.$id_d.'"),';
 
 				    //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
 				    $valoresQ= substr($valores, 0, -1);
@@ -55,7 +55,7 @@ if(isset($_POST['save']))
 				    if($item1 === false ) break;
     
 				}
-	}
+//	}
 	
 //  for ($i=0;$i<count($items1);$i++)    
 //	{     

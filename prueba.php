@@ -1,3 +1,9 @@
+<?php
+include_once 'crud/crud_dest.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +39,7 @@
 
   <form action="crud/test.php" method="post">
   
+<!--
   <div class="col-md-6">
               <div class="form-group">
                 <label>Multiple</label>
@@ -47,10 +54,57 @@
                   <option value="7">Washington</option>
                 </select>
               </div>
+-->
               <!-- /.form-group -->
-              <button class="btn btn-primary" name="save">Aceptar</a>
+              
               <!-- /.form-group -->
-            </div>
+<!--            </div>-->
+           <div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Actividades</label>
+													<select id="actividad" name="actividad[]" class="form-control select2 " multiple="multiple" data-placeholder="Actividades"
+                        							style="width: 100%;">
+                        							<?php
+														if(isset($_GET['edit'])){
+														$act = $MySQLiconn->query( "SELECT * FROM actividad where id_categoria=1" );
+														$selected_ids = array();
+														$result1 =$MySQLiconn->query("SELECT id_actividad from maestro_act where id_destino = 1");
+														while($row1 = mysqli_fetch_assoc($result1))
+														{
+															$selected_ids[] = $row1['id_actividad'];
+															
+														}
+														
+														while ( $row = mysqli_fetch_assoc($act) ) {
+																															
+//															if ( $getROW2[ 'id_actividad' ] == $row[ 'id_actividad' ] ) 
+															if(in_array($row['id_actividad'], $selected_ids))
+															{
+																?>
+														<option selected value="<?php echo $row['id_actividad'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+
+														<?php
+																next($getROW2);
+														} else {
+															?>
+														<option value="<?php echo $row['id_actividad'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+																
+														}
+															}
+														?>
+                        							</select>
+												</div>
+												<?php
+												var_dump ($selected_ids);
+			   									echo $row['id_actividad'];
+			   									?>
+											</div>
             
 </form>            
   

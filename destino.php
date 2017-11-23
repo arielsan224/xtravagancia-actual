@@ -53,7 +53,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header bg-modal">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" class="close" data-dismiss="modal" 
+							<?php
+								if(isset($_GET['edit'])){
+							?>
+							onclick="location='destino.php'"
+							<?php
+								}
+							?>
+							>&times;</button>
 							<h4 class="modal-title">Destinos</h4>
 						</div>
 						<div class="modal-body">
@@ -74,11 +82,40 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
     										</div>
     										</div>
 -->
-											<div class="col-md-12">
+											<?php
+											if(isset($_GET['edit'])){
+											?>
+											<input type="hidden" name="id_destino" value="<?php echo $getROW['id_destino']; ?>">
+											<?php
+												}
+											?>
+											<?php
+											if(isset($_GET['edit'])){
+											?>
+											<div class="col-md-6">
+											<div class="form-group">
+												<label for="img_cargada" class="col-sm-3 control-label">Imagen de destino: </label>
+												<label class="col-sm-1 control-label">: </label>
+													<div class="col-sm-8">							    				   
+													  <img src="<?php echo $getROW['imagen']; ?>" id="img_cargada" class="thumbnail" style="width:250px; height:200px;"  alt="<?php echo $getROW['imagen']; ?>"/>
+													</div>
+											</div>
+											</div>
+											<?php
+											}
+											?>
+											<div class="col-md-6">
 											<div class="col-xs-12 text-center " >
 												<div class="kv-avatar center-block" >
 													<div class="file-loading" >
-														<input id="avatar-1" name="avatar-1" type="file" required>
+														<input id="img_dest" name="img_dest" type="file" 
+														<?php if(!isset($_GET['edit'])) {  
+														?>
+														required
+														<?php
+															}
+														?>
+														>
 													</div>
 												</div>
 												<div class="kv-avatar-hint"><small>Archivos < 1500 KB</small></div>
@@ -94,11 +131,41 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Municipio</label>
-													<select class="form-control" name="id_municipio" id="id_municipio" required>
-														<option value="">Seleccione municipio</option>
+													<label>Departamento</label>
+													<select class="form-control" name="id_depto" id="id_depto" required>
+														<option value="">Seleccione departamento</option>
 														<?php
-														$mun = $MySQLiconn->query( "SELECT * FROM municipio" );
+														$mun = $MySQLiconn->query( "SELECT * FROM departamento" );
+														while ( $row = $mun->fetch_array() ) {
+															if ( $getROW[ 'id_depto' ] == $row[ 'id_depto' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_depto'];  ?>">
+															<?php echo $row['nombre_depto'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_depto'];  ?>">
+															<?php echo $row['nombre_depto'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Municipio</label>
+													<select class="form-control" name="id_municipio" id="id_municipio" required placeholder="Seleccione municipio">
+
+														<option value="">Seleccione municipio</option>
+														
+														<?php
+														if(isset($_GET['edit'])){
+														$mun = $MySQLiconn->query( "SELECT * FROM municipio where id_depto=".$getROW[ 'id_depto' ] );
 														while ( $row = $mun->fetch_array() ) {
 															if ( $getROW[ 'id_municipio' ] == $row[ 'id_municipio' ] ) {
 																?>
@@ -115,8 +182,10 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 														<?php
 														}
 														}
+															}
 														?>
 													</select>
+
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -128,13 +197,13 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Dias</label>
-													<input type="number" class="form-control" id="dias" placeholder="Cant. de dias" name="dias" value="<?php if(isset($_GET['edit'])) echo $getROW['precio'];  ?>" required>
+													<input type="number" class="form-control" id="dias" placeholder="Cant. de dias" name="dias" value="<?php if(isset($_GET['edit'])) echo $getROW['dias'];  ?>" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Estatus</label>
-													<select class="form-control" name="id_depto" id="id_depto" required>
+													<select class="form-control" name="id_estatus" id="id_estatus" required>
 														<option value="">Seleccione estatus</option>
 														<?php
 														$destest = $MySQLiconn->query( "SELECT * FROM estatus" );
@@ -160,24 +229,82 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Actividades</label>
-													<select name="id[]" class="form-control select2" multiple="multiple" data-placeholder="Actividades"
-                        							style="width: 100%;">
-                        							<?php
-														$act = $MySQLiconn->query( "SELECT * FROM actividad" );
-														while ( $row = $act->fetch_array() ) {
-															 
-														?>
-                       									<option value="<?php echo $row['id_actividad'];  ?>">
+													<label>Categoria</label>
+													<select class="form-control" name="id_categoria" id="id_categoria" required>
+														<option value="">Seleccione Categoria</option>
+														<?php
+														$destest = $MySQLiconn->query( "SELECT * FROM categoria" );
+														while ( $row = $destest->fetch_array() ) {
+															if ( $getROW[ 'id_categoria' ] == $row[ 'id_categoria' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_categoria'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_categoria'];  ?>">
 															<?php echo $row['descripcion'];  ?>
 														</option>
 														<?php
 														}
+														}
+														?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Actividades</label>
+													<select id="actividad" name="actividad[]" class="form-control select2 " multiple="multiple" data-placeholder="Actividades"
+                        							style="width: 100%;">
+                        							<?php
+														if(isset($_GET['edit'])){
+														$act = $MySQLiconn->query( "SELECT * FROM actividad where id_categoria=".$getROW['id_categoria'] );
+														$selected_ids = array();
+														$result1 =$MySQLiconn->query("SELECT id_actividad from maestro_act where id_destino = ".$getROW['id_destino']);
+														while($row1 = mysqli_fetch_assoc($result1))
+														{
+															$selected_ids[] = $row1['id_actividad'];
+															
+														}
 														
+														while ( $row = mysqli_fetch_assoc($act) ) {
+																															
+//															if ( $getROW2[ 'id_actividad' ] == $row[ 'id_actividad' ] ) 
+															if(in_array($row['id_actividad'], $selected_ids))
+															{
+																?>
+														<option selected value="<?php echo $row['id_actividad'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+
+														<?php
+																
+														} else {
+															?>
+														<option value="<?php echo $row['id_actividad'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+																
+														}
+															}
 														?>
                         							</select>
 												</div>
+												<?php
+//												var_dump ($selected_ids);
+			   									echo $row['id_actividad'];
+			   									?>
 											</div>
+<!--
+											<?php
+												var_dump($datos) ;
+												?>
+-->
 										</div>
 
 									    <div class="row"> </div>
@@ -211,7 +338,14 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 						</form>
 					</div>
 						<div class="modal-footer bg-modal-footer">
-						  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						  <button type="button" class="btn btn-primary" data-dismiss="modal" <?php
+								if(isset($_GET['edit'])){
+							?>
+							onclick="location='destino.php'"
+							<?php
+								}
+							?>
+							>Close</button>
 						</div>
 								</div>
 				</div>
@@ -274,7 +408,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                           <?php 
 						 
 						$res = $MySQLiconn->query("SELECT dest.id_destino,dest.descripcion, dep.id_depto, 
-										   dep.nombre_depto, dest.id_municipio, mun.nombre_municipio,dest.precio,dest.dias,dest.imagen,dest.estatus,
+										   dep.nombre_depto, dest.id_municipio, mun.nombre_municipio,dest.precio,dest.dias,dest.imagen,es.descripcion as estatus,
 										   (SELECT GROUP_CONCAT( ac.descripcion SEPARATOR ', ') as actividades
 											FROM maestro_act as ma
 											inner join actividad as ac on ma.id_actividad = ac.id_actividad
@@ -282,6 +416,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									from destino as dest
 									inner join municipio as mun on dest.id_municipio = mun.id_municipio
 									inner join departamento dep on mun.id_depto = dep.id_depto
+									inner join estatus es on dest.estatus = es.id_estatus
 									order by dest.id_destino");
 						while($row = mysqli_fetch_array($res))  
                           {  
@@ -297,8 +432,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 								   <td ><?php echo $row['dias']; ?></td>
 								   <td ><?php echo $row['actividades']; ?></td>
 								   <td ><?php echo $row['estatus']; ?></td>
-									<td class= "text-center" ><a href="?edit=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									<td class= "text-center" ><a href="?edit=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="?del=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
@@ -395,7 +530,7 @@ var btnCust = '<button type="button" class="btn btn-secondary" title="Add pictur
     'onclick="alert(\'Call your custom code here.\')">' +
     '<i class="glyphicon glyphicon-tag"></i>' +
     '</button>'; 
-$("#avatar-1").fileinput({
+$("#img_dest").fileinput({
     language: "es",
 	overwriteInitial: true,
     maxFileSize: 1500,
@@ -416,7 +551,37 @@ $("#avatar-1").fileinput({
 	minImageWidth: 1000,
     minImageHeight: 667,
     allowedFileExtensions: ["jpg", "png", "gif"]
-});	  
+});
+
+	$('#id_categoria').on('change', function(){
+    var id = $('#id_categoria').val()
+    $.ajax({
+      type: 'POST',
+      url: 'crud/actividades.php',
+      data: {'id_act': id}
+    })
+    .done(function(lista_act){
+      $('#actividad').html(lista_act)
+    })
+    .fail(function(){
+      alert('Hubo un errror al cargar las actividades')
+    })
+  });  
+	
+	 $('#id_depto').on('change', function(){
+    var id = $('#id_depto').val()
+    $.ajax({
+      type: 'POST',
+      url: 'crud/actividades.php',
+      data: {'id_depto': id}
+    })
+    .done(function(lista_mun){
+      $('#id_municipio').html(lista_mun)
+    })
+    .fail(function(){
+      alert('Hubo un errror al cargar los Municipios')
+    })
+  });   
 	 
   });
 
