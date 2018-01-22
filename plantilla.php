@@ -227,7 +227,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<?php } ?>
 							<!-- /.box-header -->
 							<div class="box-body">
-							<table id="dtatable" class="table table-bordered table-hover dataTable " >
+							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" >
                               <thead>  
                                <tr>  
 								  <td>Imagen</td>
@@ -307,6 +307,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!-- Datatable responsive -->
+<script src="bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
+<script src="bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <script>
   $(function () {
       $("#dtatable").DataTable({

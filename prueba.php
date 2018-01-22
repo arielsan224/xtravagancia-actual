@@ -116,6 +116,9 @@ include_once 'crud/crud_dest.php';
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+<!-- Datatable responsive -->
+<script src="bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
+<script src="bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <!-- InputMask -->
 
 <!-- Page script -->
