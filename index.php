@@ -64,7 +64,26 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6"><i class="icon-phone"></i><strong>00505 8960-3207</strong></div>
                     
-                    <div class="col-md-6 col-sm-6 col-xs-6"> </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+						<ul id="top_links">
+                            <li>
+                                <div class="dropdown dropdown-access">
+                                    <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="false">Sign in</a>
+                                    <div class="dropdown-menu">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="inputUsernameEmail" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                        </div>
+                                        <a id="forgot_pw" href="#">Forgot password?</a>
+                                        <input type="submit" name="Sign_in" value="Sign in" id="Sign_in" class="button_drop">
+                                        <input type="submit" name="Sign_up" value="Sign up" id="Sign_up" class="button_drop outline">
+                                    </div>
+                                </div><!-- End Dropdown access -->
+                            </li>
+                        </ul>
+					</div>
                 </div><!-- End row -->
             </div><!-- End container-->
         </div><!-- End top line-->

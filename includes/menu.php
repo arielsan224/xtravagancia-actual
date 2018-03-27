@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Lato:300,400|Montserrat:400,400i,700,700i" rel="stylesheet">
 
 	<!-- CSS -->
-	<link href="./css/base.css" rel="stylesheet">
+	<link href="../css/base.css" rel="stylesheet">
 
 	<!-- Radio and check inputs -->
 	<!--<link href="css/skins/square/grey.css" rel="stylesheet">-->
@@ -86,9 +86,9 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-3">
 					<div id="logo">
-						<a href="../index.html"><img src="./img/logo.png" width="208" height="94" alt="City tours" data-retina="true" class="logo_normal">
+						<a href="../index.html"><img src="../img/logo.png" width="208" height="94" alt="City tours" data-retina="true" class="logo_normal">
 						</a>
-						<a href="../index.html"><img src="./img/logo_sticky.png" width="208" height="94" alt="City tours" data-retina="true" class="logo_sticky">
+						<a href="../index.html"><img src="../img/logo_sticky.png" width="208" height="94" alt="City tours" data-retina="true" class="logo_sticky">
 						</a>
 					</div>
 				</div>
@@ -96,7 +96,7 @@
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="./img/logo_sticky.png" width="160" height="34" alt="City tours" data-retina="true">
+                            <img src="../img/logo_sticky.png" width="160" height="34" alt="City tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
@@ -135,27 +135,27 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class=" icon-basket-1"></i>Cart (0) </a>
                                 <ul class="dropdown-menu" id="cart_items">
                                     <li>
-                                        <div class="image"><img src="./img/thumb_cart_1.jpg" alt="image"></div>
+                                        <div class="image"><img src="../img/thumb_cart_1.jpg" alt="image"></div>
                                         <strong>
 										<a href="#">Louvre museum</a>1x $36.00 </strong>
                                         <a href="#" class="action"><i class="icon-trash"></i></a>
                                     </li>
                                     <li>
-                                        <div class="image"><img src="./img/thumb_cart_2.jpg" alt="image"></div>
+                                        <div class="image"><img src="../img/thumb_cart_2.jpg" alt="image"></div>
                                         <strong>
 										<a href="#">Versailles tour</a>2x $36.00 </strong>
                                         <a href="#" class="action"><i class="icon-trash"></i></a>
                                     </li>
                                     <li>
-                                        <div class="image"><img src="./img/thumb_cart_3.jpg" alt="image"></div>
+                                        <div class="image"><img src="../img/thumb_cart_3.jpg" alt="image"></div>
                                         <strong>
 										<a href="#">Versailles tour</a>1x $36.00 </strong>
                                         <a href="#" class="action"><i class="icon-trash"></i></a>
                                     </li>
                                     <li>
                                         <div>Total: <span>$120.00</span></div>
-                                        <a href="./cart.html" class="button_drop">Go to cart</a>
-                                        <a href="./payment.html" class="button_drop outline">Check out</a>
+                                        <a href="../cart.html" class="button_drop">Go to cart</a>
+                                        <a href="../payment.html" class="button_drop outline">Check out</a>
                                     </li>
                                 </ul>
                             </div><!-- End dropdown-cart-->

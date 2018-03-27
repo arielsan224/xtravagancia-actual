@@ -1,4 +1,0 @@
-<script>
-        //works if JS is enabled
-        document.write("<a href='#' onclick='javascript:window.print();'>Print this page for your records.</a>");
-    </script>
