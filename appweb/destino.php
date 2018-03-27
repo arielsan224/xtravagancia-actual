@@ -1,5 +1,5 @@
 <?php
-include_once 'crud/crud_dest.php';
+include_once '../crud/crud_dest.php';
 
 if(isset($_GET['edit']))
 {
@@ -38,7 +38,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Mobile menu overlay mask -->
 
 <!-- Menu================================================== -->
-<?php include("includes/dashboard.php");?>
+<?php include("../includes/dashboard.php");?>
 
 <!-- End Menu -->
 
@@ -452,42 +452,42 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<!-- /.row -->
 			</section>
 		</div>
-		<?php include("includes/footeradmin.php");?>
+		<?php include("../includes/footeradmin.php");?>
 	</div>
 
 
 </div>
 <!--End container -->
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
-<script src="bower_components/bootstrap-fileinput/js/locales/es.js"></script>
+<script src="../bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="../bower_components/bootstrap-fileinput/js/locales/es.js"></script>
 
 <!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
-<script src="bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
-<script src="bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <!--<script src="bower_components/fileinput/js/fileinput.min.js"></script>-->
 <!--<script src="bower_components/bootstrap-fileinput-4.4.6/js/fileinput.min.js"></script>-->
 
 <!--<script src="bower_components/bootstrap-fileinput-4.4.6/js/locales/es.js"></script>-->
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="../bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- Datatable responsive -->
-<script src="bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
-<script src="bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 
 
 
@@ -553,7 +553,7 @@ $("#img_dest").fileinput({
     removeTitle: 'Cancel or reset changes',
     elErrorContainer: '#kv-avatar-errors-1',
     msgErrorClass: 'alert alert-block alert-danger',
-    defaultPreviewContent: '<img src="uploads/default_avatar_male.jpg" alt="Your Avatar">',
+    defaultPreviewContent: '<img src="../uploads/default_avatar_male.jpg" alt="Your Avatar">',
     layoutTemplates: {main2: '{preview} ' +  /*btnCust +*/ ' {remove} {browse}'},
 //	uploadUrl: "/uploads/",
 	maxImageWidth: 1000,
@@ -567,7 +567,7 @@ $("#img_dest").fileinput({
     var id = $('#id_categoria').val()
     $.ajax({
       type: 'POST',
-      url: 'crud/actividades.php',
+      url: '../crud/actividades.php',
       data: {'id_act': id}
     })
     .done(function(lista_act){
@@ -582,7 +582,7 @@ $("#img_dest").fileinput({
     var id = $('#id_depto').val()
     $.ajax({
       type: 'POST',
-      url: 'crud/actividades.php',
+      url: '../crud/actividades.php',
       data: {'id_depto': id}
     })
     .done(function(lista_mun){

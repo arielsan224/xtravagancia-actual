@@ -1,5 +1,5 @@
 <?php
-include_once 'crud/crud_cat.php';
+include_once '../crud/crud_cat.php';
 
 if(isset($_GET['edit']))
 {
@@ -38,7 +38,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Mobile menu overlay mask -->
 
 <!-- Menu================================================== -->
-<?php include("includes/dashboard.php");?>
+<?php include("../includes/dashboard.php");?>
 
 <!-- End Menu -->
 
@@ -168,8 +168,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							  <tr>
 									<td ><?php echo $row['id_categoria']; ?></td>
               						<td ><?php echo $row['descripcion']; ?></td>
-									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_categoria']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php echo $row['id_categoria']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									<td class= "text-center" width="20%"><a href="../?edit=<?php echo $row['id_categoria']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="../?del=<?php echo $row['id_categoria']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
@@ -188,30 +188,30 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<!-- /.row -->
 			</section>
 		</div>
-		<?php include("includes/footeradmin.php");?>
+		<?php include("../includes/footeradmin.php");?>
 	</div>
 
 
 </div>
 <!--End container -->
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
-<script src="bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
-<script src="bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <script>
   $(function () {
       $("#dtatable").DataTable({

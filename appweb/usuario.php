@@ -1,5 +1,5 @@
 <?php
-include_once 'crud/crud_act.php';
+include_once '../crud/crud_user.php';
 
 if(isset($_GET['edit']))
 {
@@ -38,7 +38,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Mobile menu overlay mask -->
 
 <!-- Menu================================================== -->
-<?php include("includes/dashboard.php");?>
+<?php include("../includes/dashboard.php");?>
 
 <!-- End Menu -->
 
@@ -54,7 +54,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 					<div class="modal-content">
 						<div class="modal-header bg-modal">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Actividades</h4>
+							<h4 class="modal-title">Usuarios</h4>
 						</div>
 						<div class="modal-body">
 
@@ -65,24 +65,52 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 										<div>
 
 										<div class="row">
+
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Categoria</label>
-													<select class="form-control" name="id_categoria" id="id_categoria" required>
-														<option value="">Seleccione Categoria</option>
+													<label>Email</label>
+													<input type="text" class="form-control" id="email" placeholder="Email" name="email" value="<?php if(isset($_GET['edit'])) echo $getROW['email'];  ?>" required>
+												</div>
+											</div>
+
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Contraseña</label>
+													<input type="password" class="form-control" id="password" placeholder="Contraseña" name="password" value="<?php if(isset($_GET['edit'])) echo $getROW['password'];  ?>" required>
+												</div>
+											</div>
+
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Nombre</label>
+													<input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre'];  ?>" required>
+												</div>
+											</div>
+
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Apellido</label>
+													<input type="text" class="form-control" id="apellido" placeholder="Apellido" name="apellido" value="<?php if(isset($_GET['edit'])) echo $getROW['apellido'];  ?>" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Tipo usuario</label>
+													<select class="form-control" name="id_tipo_usuario" id="id_tipo_usuario" required>
+														<option value="">Seleccione tipo usuario</option>
 														<?php
-														$cat = $MySQLiconn->query( "SELECT * FROM categoria" );
-														while ( $row = $cat->fetch_array() ) {
-															if ( $getROW['id_categoria' ] == $row[ 'id_categoria' ] ) {
+														$usrtip = $MySQLiconn->query( "SELECT * FROM tipo_usuario" );
+														while ( $row = $usrtip->fetch_array() ) {
+															if ( $getROW['id_tipo_usuario' ] == $row[ 'id_tipo_usuario' ] ) {
 																?>
-														<option selected value="<?php echo $row['id_categoria'];  ?>">
+														<option selected value="<?php echo $row['id_tipo_usuario'];  ?>">
 															<?php echo $row['descripcion'];  ?>
 														</option>
 
 														<?php
 														} else {
 															?>
-														<option value="<?php echo $row['id_categoria'];  ?>">
+														<option value="<?php echo $row['id_tipo_usuario'];  ?>">
 															<?php echo $row['descripcion'];  ?>
 														</option>
 														<?php
@@ -94,11 +122,33 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Nombre de actividad</label>
-													<input type="text" class="form-control" id="actividad" placeholder="Nombre actividad" name="actividad" value="<?php if(isset($_GET['edit'])) echo $getROW['actividad'];  ?>" required>
+													<label>Estatus</label>
+													<select class="form-control" name="id_estatus" id="id_estatus" required>
+														<option value="">Seleccione estatus</option>
+														<?php
+														$usrest = $MySQLiconn->query( "SELECT * FROM estatus" );
+														while ( $row = $usrest->fetch_array() ) {
+															if ( $getROW['id_estatus' ] == $row[ 'id_estatus' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_estatus'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_estatus'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
 												</div>
 											</div>
-										</div>
+
+</div>
 
 									    <div class="row"> </div>
 										</div>
@@ -142,7 +192,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			<section class="content-header">
 						<h1>
 						Catalogos
-						<small>Actividades</small>
+						<small>Usuarios</small>
 						</h1>
 
 						<ol class="breadcrumb">
@@ -150,7 +200,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							</li>
 							<li><a href="#">Catalogos</a>
 							</li>
-							<li class="active">Actividades</li>
+							<li class="active">Usuarios</li>
 						</ol>
 			</section>
 			<section class="content">
@@ -158,7 +208,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">Listado de Actividades</h3>
+								<h3 class="box-title">Listado de Usuarios</h3>
 								<button type="button" class="btn btn-info btn-md pull-right" data-toggle="modal" data-target="#myModal">Agregar</button>
 							</div>
 							<?php if (isset($mensajito)) {?>
@@ -180,27 +230,37 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                               <thead>  
                                <tr>  
 								  <td>Id</td>
-								  <td>Categoria</td>
-								  <td>Actividad</td>
+								  <td>Nombre</td>
+								  <td>Apellido</td>
+<!--								  <td>Password</td>-->
+								  <td>Email</td>
+								  <td>Tipo</td>
+								  <td>Estatus</td>
                                   <td style="text-align:center;">Acciones</td>
                                </tr>  
                           	 </thead>  
                           <?php 
 						 
-						$res = $MySQLiconn->query("SELECT act.id_actividad,cat.descripcion as categoria, act.descripcion as actividad 
-													from actividad as act
-													inner join categoria as cat on act.id_categoria = cat.id_categoria
-													order by act.id_actividad ");
+						$res = $MySQLiconn->query("SELECT us.id_usuario,us.nombre, us.apellido,us.password,us.email, 
+													  tu.descripcion as tipo,es.descripcion as estatus 
+													FROM usuario as us
+													inner join tipo_usuario as tu on us.id_tipo_usuario = tu.id_tipo_usuario
+													inner join estatus as es on us.id_estatus=es.id_estatus
+													order by us.id_usuario ");
 						while($row = mysqli_fetch_array($res))  
                           {  
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-									  <td ><?php echo $row['id_actividad']; ?></td>
-									  <td ><?php echo $row['categoria']; ?></td>
-									  <td ><?php echo $row['actividad']; ?></td>
-									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_actividad']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php echo $row['id_actividad']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									  <td ><?php echo $row['id_usuario']; ?></td>
+									  <td ><?php echo $row['nombre']; ?></td>
+									  <td ><?php echo $row['apellido']; ?></td>
+<!--									  <td ><?php echo $row['password']; ?></td>-->
+									  <td ><?php echo $row['email']; ?></td>
+									  <td ><?php echo $row['tipo']; ?></td>
+									  <td ><?php echo $row['estatus']; ?></td>
+									<td class= "text-center" width="20%"><a href="../?edit=<?php echo $row['id_usuario']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="../?del=<?php echo $row['id_usuario']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
@@ -219,30 +279,30 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<!-- /.row -->
 			</section>
 		</div>
-		<?php include("includes/footeradmin.php");?>
+		<?php include("../includes/footeradmin.php");?>
 	</div>
 
 
 </div>
 <!--End container -->
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
-<script src="bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
-<script src="bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <script>
   $(function () {
       $("#dtatable").DataTable({
@@ -272,7 +332,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	  document.title= "AdminLTE | Catalogos";
 	  $("li").removeClass("active");
 	  $(".catalogo").addClass("active");
-      $(".actividad").addClass("active");
+      $(".usuario").addClass("active");
 
   });
 

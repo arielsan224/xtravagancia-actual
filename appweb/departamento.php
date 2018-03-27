@@ -1,5 +1,5 @@
 <?php
-include_once 'crud/crud_mun.php';
+include_once '../crud/crud_depto.php';
 
 if(isset($_GET['edit']))
 {
@@ -38,7 +38,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Mobile menu overlay mask -->
 
 <!-- Menu================================================== -->
-<?php include("includes/dashboard.php");?>
+<?php include("../includes/dashboard.php");?>
 
 <!-- End Menu -->
 
@@ -54,7 +54,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 					<div class="modal-content">
 						<div class="modal-header bg-modal">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Municipios</h4>
+							<h4 class="modal-title">Departamentos</h4>
 						</div>
 						<div class="modal-body">
 
@@ -64,43 +64,17 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									<div class="col-md-12 add_bottom_15">
 										<div>
 
-										<div class="row">
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Municipios</label>
-													<select class="form-control" name="id_depto" id="id_depto" required>
-														<option value="">Seleccione Municipios</option>
-														<?php
-														$dep = $MySQLiconn->query( "SELECT * FROM departamento" );
-														while ( $row = $dep->fetch_array() ) {
-															if ( $getROW[ 'id_depto' ] == $row[ 'id_depto' ] ) {
-																?>
-														<option selected value="<?php echo $row['id_depto'];  ?>">
-															<?php echo $row['nombre_depto'];  ?>
-														</option>
-
-														<?php
-														} else {
-															?>
-														<option value="<?php echo $row['id_depto'];  ?>">
-															<?php echo $row['nombre_depto'];  ?>
-														</option>
-														<?php
-														}
-														}
-														?>
-													</select>
+											<div class="row">
+												<div class="col-md-6 col-sm-6">
+													<div class="form-group">
+														<label>Nombre departamento</label>
+														<input type="text" class="form-control" id="nombre_depto" placeholder="Nombre departamento" name="nombre_depto" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_depto'];  ?>" required>
+													</div>
 												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Nombre de municipio</label>
-													<input type="text" class="form-control" id="nombre_depto" placeholder="Nombre municipio" name="nombre_municipio" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_municipio'];  ?>" required>
-												</div>
-											</div>
-										</div>
 
-									    <div class="row"> </div>
+											</div>
+
+											<div class="row"> </div>
 										</div>
 										<!--End step -->
 										<!--End step -->
@@ -142,7 +116,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			<section class="content-header">
 						<h1>
 						Catalogos
-						<small>Municipios</small>
+						<small>Departamento</small>
 						</h1>
 
 						<ol class="breadcrumb">
@@ -150,7 +124,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							</li>
 							<li><a href="#">Catalogos</a>
 							</li>
-							<li class="active">Municipios</li>
+							<li class="active">Departamento</li>
 						</ol>
 			</section>
 			<section class="content">
@@ -158,7 +132,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">Listado de Municipios</h3>
+								<h3 class="box-title">Listado de Departamentos</h3>
 								<button type="button" class="btn btn-info btn-md pull-right" data-toggle="modal" data-target="#myModal">Agregar</button>
 							</div>
 							<?php if (isset($mensajito)) {?>
@@ -179,27 +153,27 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" >
                               <thead>  
                                <tr>  
-								  <td>Id</td>
-								  <td>Municipios</td>
-								  <td>Municipio</td>
-                                  <td style="text-align:center;">Acciones</td>
+                                    <td>Id</td>  
+                                    <td>Departemanto</td>
+                                    <td style="text-align:center;">Acciones</td>
                                </tr>  
                           	 </thead>  
                           <?php 
 						 
-						$res = $MySQLiconn->query("SELECT mun.id_municipio,dep.nombre_depto, mun.nombre_municipio 
-												FROM municipio mun inner join departamento dep on mun.id_depto = dep.id_depto 
-												order by mun.Id_municipio ");
+						$res = $MySQLiconn->query( "SELECT * FROM departamento order by id_depto" );
 						while($row = mysqli_fetch_array($res))  
                           {  
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-									  <td ><?php echo $row['id_municipio']; ?></td>
-									  <td ><?php echo $row['nombre_depto']; ?></td>
-									  <td ><?php echo $row['nombre_municipio']; ?></td>
-									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									<td>
+										<?php echo $row['id_depto']; ?>
+									</td>
+									<td>
+										<?php echo $row['nombre_depto']; ?>
+									</td>
+									<td class= "text-center" width="20%"><a href="../?edit=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="../?del=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
@@ -218,30 +192,30 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<!-- /.row -->
 			</section>
 		</div>
-		<?php include("includes/footeradmin.php");?>
+		<?php include("../includes/footeradmin.php");?>
 	</div>
 
 
 </div>
 <!--End container -->
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
-<script src="bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
-<script src="bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
+<script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <script>
   $(function () {
       $("#dtatable").DataTable({
@@ -271,7 +245,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	  document.title= "AdminLTE | Catalogos";
 	  $("li").removeClass("active");
 	  $(".catalogo").addClass("active");
-      $(".municipio").addClass("active");
+      $(".departamento").addClass("active");
 
   });
 
