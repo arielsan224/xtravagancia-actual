@@ -242,7 +242,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                           <?php 
 						 
 						$res = $MySQLiconn->query("SELECT us.id_usuario,us.nombre, us.apellido,us.password,us.email, 
-													  tu.descripcion as tipo,es.descripcion as estatus 
+													  tu.descripcion as tipo,es.descripcion as estatus,us.id_estatus 
 													FROM usuario as us
 													inner join tipo_usuario as tu on us.id_tipo_usuario = tu.id_tipo_usuario
 													inner join estatus as es on us.id_estatus=es.id_estatus
@@ -258,9 +258,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!--									  <td ><?php echo $row['password']; ?></td>-->
 									  <td ><?php echo $row['email']; ?></td>
 									  <td ><?php echo $row['tipo']; ?></td>
-									  <td ><?php echo $row['estatus']; ?></td>
-									<td class= "text-center" width="20%"><a href="../?edit=<?php echo $row['id_usuario']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="../?del=<?php echo $row['id_usuario']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									  <td ><span class=<?php if ($row['id_estatus']==1) { ?>"label label-success"<?php } else { ?>"label label-danger"<?php }?>><?php echo $row['estatus']; ?></span></td>
+									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_usuario']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="?del=<?php echo $row['id_usuario']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->

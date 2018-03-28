@@ -172,8 +172,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									<td>
 										<?php echo $row['nombre_depto']; ?>
 									</td>
-									<td class= "text-center" width="20%"><a href="../?edit=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="../?del=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="?del=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
