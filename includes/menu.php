@@ -72,7 +72,7 @@
                                             <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
                                         </div>
                                         <a id="forgot_pw" href="#">Olvidaste contaseña?</a>
-                                        <a id="forgot_pw" href="login.php">Eres Administrador?</a>
+                                        <a id="forgot_pw" href="login">Eres Administrador?</a>
                                         <input type="submit" name="Sign_in" value="Iniciar Sesion" id="Sign_in" class="button_drop" style="text-align: center;">
                                         <input type="submit" name="Sign_up" value="Registrate" id="Sign_up" class="button_drop outline">
                                     </div>
