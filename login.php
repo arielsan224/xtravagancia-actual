@@ -5,9 +5,9 @@ session_start();
 
 if(isset($_SESSION['userId'])) {
 	if ($_SESSION['user_type'] == 2 ){
-	header('location: /appweb/dashboard.php');	
+	header('location: appweb/dashboard');	
 		}
-	else header('location: index.php');
+	else header('location: index');
 }
 
 $errors = array();
@@ -44,9 +44,9 @@ if($_POST) {
 				$_SESSION['userId'] = $user_id;
 				$_SESSION['user_type'] = $user_type;
 				if ($_SESSION['user_type'] == 2 ){
-					header('location: /appweb/dashboard.php');	
+					header('location: appweb/dashboard');	
 						}
-					else header('location: index.php');
+					else header('location: index');
 				/*header('location: http://localhost:9080/stock/dashboard.php');	*/
 			} else{
 				
