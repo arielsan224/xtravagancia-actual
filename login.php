@@ -4,9 +4,10 @@ require_once 'crud/conexion.php';
 session_start();
 
 if(isset($_SESSION['userId'])) {
-	if ($_SESSION['user_type'] == 1 ){
-	header('location: dashboard.php');	
+	if ($_SESSION['user_type'] == 2 ){
+	header('location: /appweb/dashboard.php');	
 		}
+	else header('location: index.php');
 }
 
 $errors = array();
@@ -25,7 +26,7 @@ if($_POST) {
 			$errors[] = "Password is required";
 		}
 	} else {
-		$sql = "SELECT * FROM usuario WHERE email = '$email'";
+		$sql = "SELECT * FROM usuario WHERE email = '$email' AND id_estatus = 1";
 		$result = $MySQLiconn->query($sql);
 
 		if($result->num_rows == 1) {
@@ -42,14 +43,17 @@ if($_POST) {
 				// set session
 				$_SESSION['userId'] = $user_id;
 				$_SESSION['user_type'] = $user_type;
-
-				header('location: http://localhost:9080/stock/dashboard.php');	
+				if ($_SESSION['user_type'] == 2 ){
+					header('location: /appweb/dashboard.php');	
+						}
+					else header('location: index.php');
+				/*header('location: http://localhost:9080/stock/dashboard.php');	*/
 			} else{
 				
 				$errors[] = "usuario/password Incorrecto";
 			} // /else
 		} else {		
-			$errors[] = "Usuario no existe";		
+			$errors[] = "Usuario no existe o inactivo";		
 		} // /else
 	} // /else not empty username // password
 	

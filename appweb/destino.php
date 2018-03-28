@@ -407,17 +407,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                           	 </thead>  
                           <?php 
 						 
-						$res = $MySQLiconn->query("SELECT dest.id_destino,dest.descripcion, dep.id_depto, 
-										   dep.nombre_depto, dest.id_municipio, mun.nombre_municipio,dest.precio,dest.dias,dest.imagen,es.descripcion as estatus,
-										   (SELECT GROUP_CONCAT( ac.descripcion SEPARATOR ', ') as actividades
-											FROM maestro_act as ma
-											inner join actividad as ac on ma.id_actividad = ac.id_actividad
-											where ma.id_destino = dest.id_destino) as actividades
-									from destino as dest
-									inner join municipio as mun on dest.id_municipio = mun.id_municipio
-									inner join departamento dep on mun.id_depto = dep.id_depto
-									inner join estatus es on dest.estatus = es.id_estatus
-									order by dest.id_destino");
+						$res = $MySQLiconn->query("SELECT * from v_destinos");
 						while($row = mysqli_fetch_array($res))  
                           {  
                                ?>
