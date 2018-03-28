@@ -148,7 +148,7 @@ hr {
 	border: none;
 	color: #e04f67!important;
 	background: #ededed;
-	padding: 5px 15px!important;
+	padding: 5px 5px!important;/*se cambio de 15 a 5 para centrar*/
 	font-size: 11px;
 	transition: all .3s;
 	-webkit-border-radius: 3px;
@@ -161,7 +161,7 @@ hr {
 	border: 2px solid #ededed;
 	color: #e04f67;
 	background: 0 0;
-	padding: 3px 23px!important
+	padding: 3px 15px!important /*se cambio de 23 a 15 para centrar*/
 }
 .button_drop:hover, a.button_drop:hover {
 	background: #ededed;

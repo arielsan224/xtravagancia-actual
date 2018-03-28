@@ -1,11 +1,145 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="EledaTours - Tours & Transportations.">
+    <meta name="author" content="Arlo Productions">
+    <title>ELEDA TOURS - Nicaragua tours</title>
 
-<html>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
 
+    <!-- BASE CSS -->
+    <link href="css/base.css" rel="stylesheet">
 
+    <!-- Google web fonts -->
+   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+   <link href="http://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet" type="text/css">
+   <link href="http://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
 
-<!--<body>-->
+    <!-- REVOLUTION SLIDER CSS -->
+    <link href="rs-plugin/css/settings.css" rel="stylesheet">
+    <link href="css/extralayers.css" rel="stylesheet">
 
-<?php include_once 'includes/menu.php' ?>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!--[if lte IE 8]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>.</p>
+<![endif]-->
+
+    <div id="preloader">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div>
+    <!-- End Preload -->
+
+    <div class="layer"></div>
+    <!-- Mobile menu overlay mask -->
+
+    <!-- Header================================================== -->
+    <header>
+        <div id="top_line">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6"><i class="icon-phone"></i><strong>00505 8960-3207</strong></div>
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+						<ul id="top_links">
+                            <li>
+                                <div class="dropdown dropdown-access">
+                                    <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="false">Sign in</a>
+                                    <div class="dropdown-menu">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="inputUsernameEmail" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                        </div>
+                                        <a id="forgot_pw" href="#">Forgot password?</a>
+                                        <input type="submit" name="Sign_in" value="Sign in" id="Sign_in" class="button_drop">
+                                        <input type="submit" name="Sign_up" value="Sign up" id="Sign_up" class="button_drop outline">
+                                    </div>
+                                </div><!-- End Dropdown access -->
+                            </li>
+                        </ul>
+					</div>
+                </div><!-- End row -->
+            </div><!-- End container-->
+        </div><!-- End top line-->
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div id="logo_home">
+                    	<h1><a href="index" title="Eleda Tours">Eleda Tours</a></h1>
+                    </div>
+                </div>
+                <nav class="col-md-9 col-sm-9 col-xs-9">
+                    <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
+                    <div class="main-menu">
+                        <div id="header_menu">
+                            <img src="img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
+                        </div>
+                        <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
+                        <ul>
+                            <li class="submenu">
+                                <a href="index" class="show-submenu">Home <i class=""></i></a>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="show-submenu">Tours <i class="icon-down-open-mini"></i></a>
+                                <ul>
+                                    <li><a href="all_tours_list">All tours list</a></li>
+                                    <li><a href="granada">Granada City</a></li>
+                                    <li><a href="clasico">Clasico</a></li>
+                                    <li><a href="laguna_apoyo">Laguna de Apoyo</a></li>
+                                    <li><a href="mombacho">Volcán Mombacho & Canopy</a></li>
+                                    <li><a href="las_isletas">Las Isletas</a></li>
+                                    <li><a href="ometepe">Ometepe</a></li>
+                                    <li><a href="leon">León</a></li>
+                                    <li><a href="san_juan_del_sur">San Juan del Sur</a></li>
+                                    <li><a href="lava_tour">Lava tour in volcan Masaya</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="index.html" class="show-submenu">All Transfers <i class=""></i></a>
+                                
+                            </li>
+                          
+                          <li class="submenu">
+                             <a href="javascript:void(0);" class="show-submenu">Especial <i class="icon-down-open-mini"></i></a><ul>
+                                 <li><a href="single_hotel_contact.php">Hotel page contact form</a></li>
+                                 <li><a href="single_hotel_contact.php">Hotel page contact form</a></li>
+                               </ul>
+                            </li>
+                             <li class="submenu"> <a href="gallery" class="show-submenu">Gallery <i class=""></i></a></li>
+                             <li class="submenu"> <a href="index.html" class="show-submenu">Recomendations <i class=""></i></a></li>
+                             <li class="submenu"> <a href="index.html" class="show-submenu">Contact <i class=""></i></a></li>
+                        </ul>
+                    </div><!-- End main-menu -->                </nav>
+            </div>
+        </div><!-- container -->
+    </header><!-- End Header -->
 
     <!-- Slider -->
     <div class="tp-banner-container">
@@ -24,7 +158,7 @@
                             Lava Tour / Tour Tickets / Tour Guides</div>
                     </div>
                     <!-- LAYER NR. 3 -->
-                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="lava_tour" class="button_intro">View tour</a> 
+                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="all_tour_list.html" class="button_intro">View tour</a> 
                     </div>
                 </li>
                  <!-- SLIDE 2 -->
@@ -40,7 +174,7 @@
                             Diferents Tour / Tour Tickets / Tour Guides</div>
                     </div>
                     <!-- LAYER NR. 3 -->
-                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="mombacho" class="button_intro">View tour</a> 
+                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="all_tour_list.html" class="button_intro">View tour</a> 
                     </div>
                 </li>
                 
@@ -57,7 +191,7 @@
                             We offer a variety of services and options</div>
                     </div>
                     <!-- LAYER NR. 3 -->
-                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="laguna_apoyo" class="button_intro">View tour</a>
+                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="all_tour_list.html" class="button_intro">View tour</a>
                     </div>
                 </li>
                 
@@ -74,7 +208,7 @@
                             Visit cathedral with a dedicated tour guide</div>
                     </div>
                     <!-- LAYER NR. 3 -->
-                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="leon" class="button_intro">View tour</a> 
+                    <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href="all_tour_list.html" class="button_intro">View tour</a> 
                     </div>
                 </li>
 
@@ -99,7 +233,7 @@
                 	<div class="ribbon_3 popular"><span>Top rated</span></div>
                     <div class="img_container">
                         <a href="single_tour.html">
-                        <img src="uploads/Cerro Negro/6_medium.jpg" class="img-responsive" alt="image">
+                        <img src="img/volcanmaslist.jpg" class="img-responsive" alt="image">
                         <div class="short_info">
                             <i class="icon_set_1_icon-30"></i>Walking tour <span class="price"><!--<sup>$</sup>00--></span>
                         </div>
@@ -241,7 +375,16 @@
                         <li><a href="#">Gallery</a></li>
                     </ul>
                 </div>
-           </div><!-- End row -->
+                <div class="col-md-2 col-sm-3">
+                    <h3>Settings</h3>
+                    <div class="styled-select">
+                        <select class="form-control" name="lang" id="lang">
+                            <option value="English" selected>English</option>
+                            <option value="Spanish">Spanish</option>
+                        </select>
+                    </div>
+                    </div>
+            </div><!-- End row -->
             <div class="row">
                 <div class="col-md-12">
                     <div id="social_footer">
@@ -277,5 +420,4 @@
 
 <script type="text/javascript">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script>
 </body>
-
 </html>

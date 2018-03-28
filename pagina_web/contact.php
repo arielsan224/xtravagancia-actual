@@ -12,11 +12,11 @@
     <title>CITY TOURS - City tours and travel site template by Ansonika</title>
     
     <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="shortcut icon" href="../pagina web/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="../pagina web/img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="../pagina web/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="../pagina web/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="../pagina web/img/apple-touch-icon-144x144-precomposed.png">
 
     <!-- CSS -->
     <link href="../css/base.css" rel="stylesheet">
@@ -108,34 +108,34 @@ else{
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <div id="logo_home">
-                        <h1><a href="index" title="Eleda Tours">Eleda Tours</a></h1>
+                        <h1><a href="../pagina web/index" title="Eleda Tours">Eleda Tours</a></h1>
                     </div>
                 </div>
                 <nav class="col-md-9 col-sm-9 col-xs-9">
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
+                            <img src="../pagina web/img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
                             <li class="submenu">
-                                <a href="index" class="show-submenu">Home <i class=""></i></a>
+                                <a href="../pagina web/index" class="show-submenu">Home <i class=""></i></a>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">Tours <i class="icon-down-open-mini"></i></a>
                                 <ul>
-                                    <li><a href="all_tours_list">All tours list</a></li>
-                                    <li><a href="granada">Granada City</a></li>
-                                    <li><a href="laguna_apoyo">Laguna de Apoyo</a></li>
-                                    <li><a href="mombacho">Mombacho volcano & Canopy</a></li>
-                                    <li><a href="las_isletas">Las Isletas</a></li>
-                                    <li><a href="ometepe">Ometepe</a></li>
-                                    <li><a href="leon">León</a></li>
-                                    <li><a href="san_juan_del_sur">San Juan del Sur</a></li>
-                                    <li><a href="lava_tour">Lava tour in volcan Masaya</a></li>
-                                    <li><a href="chocoyero">Chocoyero</a></li>
-                                    <li><a href="sandboard">Sand Board</a></li>
+                                    <li><a href="../pagina web/all_tours_list">All tours list</a></li>
+                                    <li><a href="../pagina web/granada">Granada City</a></li>
+                                    <li><a href="../pagina web/laguna_apoyo">Laguna de Apoyo</a></li>
+                                    <li><a href="../pagina web/mombacho">Mombacho volcano & Canopy</a></li>
+                                    <li><a href="../pagina web/las_isletas">Las Isletas</a></li>
+                                    <li><a href="../pagina web/ometepe">Ometepe</a></li>
+                                    <li><a href="../pagina web/leon">León</a></li>
+                                    <li><a href="../pagina web/san_juan_del_sur">San Juan del Sur</a></li>
+                                    <li><a href="../pagina web/lava_tour">Lava tour in volcan Masaya</a></li>
+                                    <li><a href="../pagina web/chocoyero">Chocoyero</a></li>
+                                    <li><a href="../pagina web/sandboard">Sand Board</a></li>
                                 </ul>
                             </li>
                             
@@ -143,14 +143,14 @@ else{
                           <li class="submenu">
                              <a href="javascript:void(0);" class="show-submenu">Especial <i class="icon-down-open-mini"></i></a><ul>
                                  <!--<li><a href="travesia">Eleda journey</a></li>
-                                 <li><a href="border_land">Border Land</a></li>--><li><a href="butterfly">Butterfly Tour</a></li>    
-                                 <li><a href="estiloeleda">Eleda style</a></li>
+                                 <li><a href="border_land">Border Land</a></li>--><li><a href="../pagina web/butterfly">Butterfly Tour</a></li>    
+                                 <li><a href="../pagina web/estiloeleda">Eleda style</a></li>
                                </ul>
                             </li>
-                             <li class="submenu"> <a href="gallery" class="show-submenu">Gallery <i class=""></i></a></li>
-                             <li class="submenu"> <a href="index.php" class="show-submenu">Recomendations <i class=""></i></a></li>
-                             <li class="submenu"> <a href="reservacion" class="show-submenu">Reservations <i class=""></i></a></li>
-                             <li class="submenu"> <a href="contact" class="show-submenu">Contact <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/gallery" class="show-submenu">Gallery <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../index.php" class="show-submenu">Recomendations <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/reservacion" class="show-submenu">Reservations <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/contact" class="show-submenu">Contact <i class=""></i></a></li>
                         </ul>
                     </div><!-- End main-menu -->                </nav>
             </div>
@@ -169,7 +169,7 @@ else{
     <div id="position">
     	<div class="container">
                 	<ul>
-                    <li><a href="index">Home</a></li>
+                    <li><a href="../pagina web/index">Home</a></li>
                         <li>Contact</li>
                     </ul>
         </div>
@@ -300,14 +300,14 @@ else{
                 <div class="col-md-3 col-sm-3">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="about">About us</a></li>
+                        <li><a href="../pagina web/about">About us</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
                     <h3>Discover</h3>
                     <ul>
                         <li><a href="#">Tour guide</a></li>
-                        <li><a href="gallery">Gallery</a></li>
+                        <li><a href="../pagina web/gallery">Gallery</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-sm-3">

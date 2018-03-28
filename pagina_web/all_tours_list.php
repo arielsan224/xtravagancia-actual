@@ -13,11 +13,11 @@
     <title>ELEDA TOURS - Nicaragua tours</title>
 
 	<!-- Favicons-->
-	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+	<link rel="shortcut icon" href="../pagina web/img/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" type="image/x-icon" href="../pagina web/img/apple-touch-icon-57x57-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="../pagina web/img/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="../pagina web/img/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="../pagina web/img/apple-touch-icon-144x144-precomposed.png">
 	
 	<!-- Google web fonts -->
     <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Lato:300,400|Montserrat:400,400i,700,700i" rel="stylesheet">
@@ -26,14 +26,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     <!-- CSS -->
-	<link href="css/base.css" rel="stylesheet">
+	<link href="../pagina web/css/base.css" rel="stylesheet">
 
 	<!-- Radio and check inputs -->
-	<link href="css/skins/square/grey.css" rel="stylesheet">
+	<link href="../pagina web/css/skins/square/grey.css" rel="stylesheet">
 
 	<!-- Range slider -->
-	<link href="css/ion.rangeSlider.css" rel="stylesheet">
-	<link href="css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+	<link href="../pagina web/css/ion.rangeSlider.css" rel="stylesheet">
+	<link href="../pagina web/css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
 
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -93,34 +93,34 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <div id="logo_home">
-                    	<h1><a href="index" title="Eleda Tours">Eleda Tours</a></h1>
+                    	<h1><a href="../pagina web/index" title="Eleda Tours">Eleda Tours</a></h1>
                     </div>
                 </div>
                 <nav class="col-md-9 col-sm-9 col-xs-9">
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
+                            <img src="../pagina web/img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
                             <li class="submenu">
-                                <a href="index" class="show-submenu">Home <i class=""></i></a>
+                                <a href="../pagina web/index" class="show-submenu">Home <i class=""></i></a>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">Tours <i class="icon-down-open-mini"></i></a>
                                 <ul>
-                                    <li><a href="all_tours_list">All tours list</a></li>
-                                    <li><a href="granada">Granada City</a></li>
-                                    <li><a href="laguna_apoyo">Laguna de Apoyo</a></li>
-                                    <li><a href="mombacho">Mombacho volcano & Canopy</a></li>
-                                    <li><a href="las_isletas">Las Isletas</a></li>
-                                    <li><a href="ometepe">Ometepe</a></li>
-                                    <li><a href="leon">León</a></li>
-                                    <li><a href="san_juan_del_sur">San Juan del Sur</a></li>
-                                    <li><a href="lava_tour">Lava tour in volcan Masaya</a></li>
-                                    <li><a href="chocoyero">Chocoyero</a></li>
-                                    <li><a href="sandboard">Sand Board</a></li>
+                                    <li><a href="../pagina web/all_tours_list">All tours list</a></li>
+                                    <li><a href="../pagina web/granada">Granada City</a></li>
+                                    <li><a href="../pagina web/laguna_apoyo">Laguna de Apoyo</a></li>
+                                    <li><a href="../pagina web/mombacho">Mombacho volcano & Canopy</a></li>
+                                    <li><a href="../pagina web/las_isletas">Las Isletas</a></li>
+                                    <li><a href="../pagina web/ometepe">Ometepe</a></li>
+                                    <li><a href="../pagina web/leon">León</a></li>
+                                    <li><a href="../pagina web/san_juan_del_sur">San Juan del Sur</a></li>
+                                    <li><a href="../pagina web/lava_tour">Lava tour in volcan Masaya</a></li>
+                                    <li><a href="../pagina web/chocoyero">Chocoyero</a></li>
+                                    <li><a href="../pagina web/sandboard">Sand Board</a></li>
                                 </ul>
                             </li>
                             
@@ -128,14 +128,14 @@
                           <li class="submenu">
                              <a href="javascript:void(0);" class="show-submenu">Especial <i class="icon-down-open-mini"></i></a><ul>
                                  <!--<li><a href="travesia">Eleda journey</a></li>
-                                 <li><a href="border_land">Border Land</a></li>--><li><a href="butterfly">Butterfly Tour</a></li>    
-                                 <li><a href="estiloeleda">Eleda style</a></li>
+                                 <li><a href="border_land">Border Land</a></li>--><li><a href="../pagina web/butterfly">Butterfly Tour</a></li>    
+                                 <li><a href="../pagina web/estiloeleda">Eleda style</a></li>
                                </ul>
                             </li>
-                             <li class="submenu"> <a href="gallery" class="show-submenu">Gallery <i class=""></i></a></li>
-                             <li class="submenu"> <a href="index.php" class="show-submenu">Recomendations <i class=""></i></a></li>
-                             <li class="submenu"> <a href="reservacion" class="show-submenu">Reservations <i class=""></i></a></li>
-                             <li class="submenu"> <a href="contact" class="show-submenu">Contact <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/gallery" class="show-submenu">Gallery <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../index.php" class="show-submenu">Recomendations <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/reservacion" class="show-submenu">Reservations <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/contact" class="show-submenu">Contact <i class=""></i></a></li>
                         </ul>
                     </div><!-- End main-menu -->                </nav>
             </div>
@@ -227,7 +227,7 @@
 								<div class="ribbon_3 popular"><span>Top rated</span>
 								</div>
 						<div class="img_list">
-						  <a href="lava_tour"><img src="img/volcanmaslist.jpg" alt="Image">
+						  <a href="../pagina web/lava_tour"><img src="../pagina web/img/volcanmaslist.jpg" alt="Image">
 						  <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 									</a>
 								</div>
@@ -287,7 +287,7 @@
 							<div class="col-lg-2 col-md-2 col-sm-2">
 								<div class="price_list">
 									<div><sup>$</sup>30*<!--<span class="normal_price_list">$30</span>--><small>*Per person</small>
-										<p><a href="lava_tour" class="btn_1">Details</a>
+										<p><a href="../pagina web/lava_tour" class="btn_1">Details</a>
 										</p>
 									</div>
 
@@ -299,7 +299,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 eco"><span>Eco-Tour</span> </div>
-					      <div class="img_list"> <a href="laguna_apoyo"><img src="img/lagunalist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/laguna_apoyo"><img src="../pagina web/img/lagunalist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 					        </a> </div>
 				        </div>
@@ -350,7 +350,7 @@
 					        <div>
 					          <sup>$</sup>25*<!--<span class="normal_price_list">$99</span>--><small>*Per person
 					          </small>
-					          <p><a href="laguna_apoyo" class="btn_1">Details</a> </p>
+					          <p><a href="../pagina web/laguna_apoyo" class="btn_1">Details</a> </p>
 				            </div>
 				          </div>
 				        </div>
@@ -360,7 +360,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Extreme</span></div>
-					      <div class="img_list"> <a href="mombacho"><img src="img/mombacholist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/mombacho"><img src="../pagina web/img/mombacholist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 					        </a></div>
 				        </div>
@@ -411,7 +411,7 @@
 					        <div>
 					          <sup>$</sup>100*<!--<span class="normal_price_list">$100</span>--><small>*Per person
 					          </small>
-					          <p><a href="mombacho" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/mombacho" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -421,7 +421,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Popular</span></div>
-					      <div class="img_list"> <a href="leon"><img src="img/leonlist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/leon"><img src="../pagina web/img/leonlist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-44"></i>Historic Buildings </div>
 					        </a></div>
 				        </div>
@@ -472,7 +472,7 @@
 					        <div>
 					          <sup>$</sup>150*<!--<span class="normal_price_list">$150</span>--><small>*Per person
 					          </small>
-					          <p><a href="leon" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/leon" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -482,7 +482,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="las_isletas"><img src="img/isletaslist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/las_isletas"><img src="../pagina web/img/isletaslist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_2_icon-108"></i>Water tour </div>
 					        </a></div>
 				        </div>
@@ -533,7 +533,7 @@
 					        <div>
 					          <sup>$</sup>20*<!--<span class="normal_price_list">$100</span>--><small>*Per person
 					          </small>
-					          <p><a href="las_isletas" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/las_isletas" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -543,7 +543,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="ometepe"><img src="img/ometepelist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/ometepe"><img src="../pagina web/img/ometepelist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_2_icon-108"></i>Water tour </div>
 					        </a></div>
 				        </div>
@@ -594,7 +594,7 @@
 					        <div>
 					          <sup>$</sup>150*<!--<span class="normal_price_list">$150</span>--><small>*Per person
 					          </small>
-					          <p><a href="ometepe" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/ometepe" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -604,7 +604,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="san_juan_del_sur"><img src="img/sanjuanlist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/san_juan_del_sur"><img src="../pagina web/img/sanjuanlist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_2_icon-108"></i>Beach </div>
 					        </a></div>
 				        </div>
@@ -655,7 +655,7 @@
 					        <div>
 					          <sup>$</sup>100*<!--<span class="normal_price_list">$100</span>--><small>*Per person
 					          </small>
-					          <p><a href="san_juan_del_sur" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/san_juan_del_sur" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -665,7 +665,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="granada"><img src="img/granadalist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/granada"><img src="../pagina web/img/granadalist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 					        </a></div>
 				        </div>
@@ -716,7 +716,7 @@
 					        <div>
 					          <sup>$</sup>52*<!--<span class="normal_price_list">$52</span>--><small>*Per person
 					          </small>
-					          <p><a href="granada" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/granada" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -726,7 +726,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="clasico"><img src="img/masayalist.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/clasico"><img src="../pagina web/img/masayalist.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 					        </a></div>
 				        </div>
@@ -777,7 +777,7 @@
 					        <div>
 					          <sup>$</sup>70*<!--<span class="normal_price_list">$70</span>--><small>*Per person
 					          </small>
-					          <p><a href="clasico" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/clasico" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -787,7 +787,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="clasico"><img src="img/slider_single_tour/chocoyero/1_medium.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/clasico"><img src="../pagina web/img/slider_single_tour/chocoyero/1_medium.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 					        </a></div>
 				        </div>
@@ -838,7 +838,7 @@
 					        <div>
 					          <sup>$</sup>60*<!--<span class="normal_price_list">$70</span>--><small>*Per person
 					          </small>
-					          <p><a href="chocoyero" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/chocoyero" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -848,7 +848,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="clasico"><img src="img/slider_single_tour/chocoyero/1_medium.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/clasico"><img src="../pagina web/img/slider_single_tour/chocoyero/1_medium.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 					        </a></div>
 				        </div>
@@ -899,7 +899,7 @@
 					        <div>
 					          <sup>$</sup>100*<!--<span class="normal_price_list">$70</span>--><small>*Per person
 					          </small>
-					          <p><a href="sandboard" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/sandboard" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -909,7 +909,7 @@
 					  <div class="row">
 					    <div class="col-lg-4 col-md-4 col-sm-4">
 					      <div class="ribbon_3 popular"><span>Top rated</span></div>
-					      <div class="img_list"> <a href="clasico"><img src="img/slider_single_tour/chocoyero/1_medium.jpg" alt="Image">
+					      <div class="img_list"> <a href="../pagina web/clasico"><img src="../pagina web/img/slider_single_tour/chocoyero/1_medium.jpg" alt="Image">
 					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
 					        </a></div>
 				        </div>
@@ -960,7 +960,7 @@
 					        <div>
 					          <sup>$</sup>150*<!--<span class="normal_price_list">$70</span>--><small>*Per person
 					          </small>
-					          <p><a href="mariposa" class="btn_1">Details</a></p>
+					          <p><a href="../pagina web/mariposa" class="btn_1">Details</a></p>
 				            </div>
 				          </div>
 				        </div>
@@ -996,14 +996,14 @@
                 <div class="col-md-3 col-sm-3">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="about">About us</a></li>
+                        <li><a href="../pagina web/about">About us</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
                     <h3>Discover</h3>
                     <ul>
                         <li><a href="#">Tour guide</a></li>
-                        <li><a href="gallery">Gallery</a></li>
+                        <li><a href="../pagina web/gallery">Gallery</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-sm-3">
@@ -1045,19 +1045,19 @@
 	
 
 	<!-- Common scripts -->
-	<script src="js/jquery-1.11.2.min.js"></script>
-	<script src="js/common_scripts_min.js"></script>
+	<script src="../pagina web/js/jquery-1.11.2.min.js"></script>
+	<script src="../pagina web/js/common_scripts_min.js"></script>
 
-	<script src="js/functions.js"></script>
+	<script src="../pagina web/js/functions.js"></script>
 
 	<!-- Specific scripts -->
 	<!-- Cat nav mobile -->
-	<script src="js/cat_nav_mobile.js"></script>
+	<script src="../pagina web/js/cat_nav_mobile.js"></script>
 	<script>
 		$('#cat_nav').mobileMenu();
 	</script>
 	<!-- Check and radio inputs -->
-	<script src="js/icheck.js"></script>
+	<script src="../pagina web/js/icheck.js"></script>
 	<script>
 		$('input').iCheck({
 			checkboxClass: 'icheckbox_square-grey',

@@ -12,18 +12,18 @@
     <title>ELEDA TOURS - Nicaragua tours</title>
     
     <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="shortcut icon" href="../pagina web/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="../pagina web/img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="../pagina web/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="../pagina web/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="../pagina web/img/apple-touch-icon-144x144-precomposed.png">
     
     <!-- CSS -->
-    <link href="css/base.css" rel="stylesheet">
+    <link href="../pagina web/css/base.css" rel="stylesheet">
     
     <!-- CSS -->
-    <link href="css/slider-pro.min.css" rel="stylesheet">
-     <link href="css/date_time_picker.css" rel="stylesheet">
+    <link href="../pagina web/css/slider-pro.min.css" rel="stylesheet">
+     <link href="../pagina web/css/date_time_picker.css" rel="stylesheet">
     
      <!-- Google web fonts -->
    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -86,34 +86,34 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <div id="logo_home">
-                    	<h1><a href="index" title="Eleda Tours">Eleda Tours</a></h1>
+                    	<h1><a href="../pagina web/index" title="Eleda Tours">Eleda Tours</a></h1>
                     </div>
                 </div>
                 <nav class="col-md-9 col-sm-9 col-xs-9">
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
+                            <img src="../pagina web/img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
                             <li class="submenu">
-                                <a href="index" class="show-submenu">Home <i class=""></i></a>
+                                <a href="../pagina web/index" class="show-submenu">Home <i class=""></i></a>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">Tours <i class="icon-down-open-mini"></i></a>
                                 <ul>
-                                    <li><a href="all_tours_list">All tours list</a></li>
-                                    <li><a href="granada">Granada City</a></li>
-                                    <li><a href="laguna_apoyo">Laguna de Apoyo</a></li>
-                                    <li><a href="mombacho">Mombacho volcano & Canopy</a></li>
-                                    <li><a href="las_isletas">Las Isletas</a></li>
-                                    <li><a href="ometepe">Ometepe</a></li>
-                                    <li><a href="leon">León</a></li>
-                                    <li><a href="san_juan_del_sur">San Juan del Sur</a></li>
-                                    <li><a href="lava_tour">Lava tour in volcan Masaya</a></li>
-                                    <li><a href="chocoyero">Chocoyero</a></li>
-                                    <li><a href="sandboard">Sand Board</a></li>
+                                    <li><a href="../pagina web/all_tours_list">All tours list</a></li>
+                                    <li><a href="../pagina web/granada">Granada City</a></li>
+                                    <li><a href="../pagina web/laguna_apoyo">Laguna de Apoyo</a></li>
+                                    <li><a href="../pagina web/mombacho">Mombacho volcano & Canopy</a></li>
+                                    <li><a href="../pagina web/las_isletas">Las Isletas</a></li>
+                                    <li><a href="../pagina web/ometepe">Ometepe</a></li>
+                                    <li><a href="../pagina web/leon">León</a></li>
+                                    <li><a href="../pagina web/san_juan_del_sur">San Juan del Sur</a></li>
+                                    <li><a href="../pagina web/lava_tour">Lava tour in volcan Masaya</a></li>
+                                    <li><a href="../pagina web/chocoyero">Chocoyero</a></li>
+                                    <li><a href="../pagina web/sandboard">Sand Board</a></li>
                                 </ul>
                             </li>
                             
@@ -121,14 +121,14 @@
                           <li class="submenu">
                              <a href="javascript:void(0);" class="show-submenu">Especial <i class="icon-down-open-mini"></i></a><ul>
                                  <!--<li><a href="travesia">Eleda journey</a></li>
-                                 <li><a href="border_land">Border Land</a></li>--><li><a href="butterfly">Butterfly Tour</a></li>    
-                                 <li><a href="estiloeleda">Eleda style</a></li>
+                                 <li><a href="border_land">Border Land</a></li>--><li><a href="../pagina web/butterfly">Butterfly Tour</a></li>    
+                                 <li><a href="../pagina web/estiloeleda">Eleda style</a></li>
                                </ul>
                             </li>
-                             <li class="submenu"> <a href="gallery" class="show-submenu">Gallery <i class=""></i></a></li>
-                             <li class="submenu"> <a href="index.php" class="show-submenu">Recomendations <i class=""></i></a></li>
-                             <li class="submenu"> <a href="reservacion" class="show-submenu">Reservations <i class=""></i></a></li>
-                             <li class="submenu"> <a href="contact" class="show-submenu">Contact <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/gallery" class="show-submenu">Gallery <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../index.php" class="show-submenu">Recomendations <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/reservacion" class="show-submenu">Reservations <i class=""></i></a></li>
+                             <li class="submenu"> <a href="../pagina web/contact" class="show-submenu">Contact <i class=""></i></a></li>
                         </ul>
                     </div><!-- End main-menu -->                </nav>
             </div>
@@ -157,7 +157,7 @@
     <div id="position">
             <div class="container">
                         <ul>
-                        <li><a href="index">Home</a></li>
+                        <li><a href="../pagina web/index">Home</a></li>
                         <li>Page active</li>
                         </ul>
             </div>
@@ -189,7 +189,7 @@
                 <div class="sp-slides">
                 
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/1_medium.jpg" 
                         data-small="img/slider_single_tour/leon/1_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/1_medium.jpg" 
@@ -197,7 +197,7 @@
                         data-retina="img/slider_single_tour/leon/1_medium.jpg">
                     </div>
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/2_medium.jpg" 
                         data-small="img/slider_single_tour/leon/2_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/2_medium.jpg" 
@@ -214,7 +214,7 @@
                     </div>
                     
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/3_medium.jpg" 
                         data-small="img/slider_single_tour/leon/3_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/3_medium.jpg" 
@@ -229,7 +229,7 @@
                     </div>
                     
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/4_medium.jpg" 
                         data-small="img/slider_single_tour/leon/4_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/4_medium.jpg" 
@@ -241,7 +241,7 @@
                     </div>
                     
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/5_medium.jpg" 
                         data-small="img/slider_single_tour/leon/5_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/5_medium.jpg" 
@@ -253,7 +253,7 @@
                     </div>
                     
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/6_medium.jpg" 
                         data-small="img/slider_single_tour/leon/6_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/6_medium.jpg" 
@@ -265,7 +265,7 @@
                     </div>
                     
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/7_medium.jpg" 
                         data-small="img/slider_single_tour/leon/7_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/7_medium.jpg" 
@@ -277,7 +277,7 @@
                     </div>
                     
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/8_medium.jpg" 
                         data-small="img/slider_single_tour/leon/8_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/8_medium.jpg" 
@@ -292,7 +292,7 @@
                     </div>
                     
                     <div class="sp-slide">
-                        <img alt="Image" class="sp-image" src="css/images/blank.gif" 
+                        <img alt="Image" class="sp-image" src="../pagina web/css/images/blank.gif" 
                         data-src="img/slider_single_tour/leon/9_medium.jpg" 
                         data-small="img/slider_single_tour/leon/9_medium.jpg" 
                         data-medium="img/slider_single_tour/leon/9_medium.jpg" 
@@ -301,15 +301,15 @@
                     </div>
                 </div>
                 <div class="sp-thumbnails">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/1_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/2_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/3_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/4_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/5_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/6_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/7_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/8_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="img/slider_single_tour/leon/9_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/1_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/2_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/3_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/4_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/5_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/6_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/7_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/8_medium.jpg">
+                    <img alt="Image" class="sp-thumbnail" src="../pagina web/img/slider_single_tour/leon/9_medium.jpg">
                 </div>
             </div>
             <!--End of carroussel-->
@@ -567,14 +567,14 @@
                 <div class="col-md-3 col-sm-3">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="about">About us</a></li>
+                        <li><a href="../pagina web/about">About us</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-3">
                     <h3>Discover</h3>
                     <ul>
                         <li><a href="#">Tour guide</a></li>
-                        <li><a href="gallery">Gallery</a></li>
+                        <li><a href="../pagina web/gallery">Gallery</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2 col-sm-3">
@@ -614,12 +614,12 @@
 <!-- Modal Review --><!-- End modal review -->
 
  <!-- Common scripts -->
-<script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/common_scripts_min.js"></script>
-<script src="js/functions.js"></script>
+<script src="../pagina web/js/jquery-1.11.2.min.js"></script>
+<script src="../pagina web/js/common_scripts_min.js"></script>
+<script src="../pagina web/js/functions.js"></script>
 
  <!-- Specific scripts -->
-<script src="js/icheck.js"></script>
+<script src="../pagina web/js/icheck.js"></script>
 <script>
 $('input').iCheck({
    checkboxClass: 'icheckbox_square-grey',
@@ -627,7 +627,7 @@ $('input').iCheck({
  });
  </script>
  <!-- Date and time pickers -->
-<script src="js/jquery.sliderPro.min.js"></script>
+<script src="../pagina web/js/jquery.sliderPro.min.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function( $ ) {
 		$( '#Img_carousel' ).sliderPro({
@@ -659,7 +659,7 @@ $('input').iCheck({
   </script>-->
   
 <!--Review modal validation -->
-<script src="assets/validate.js"></script>
+<script src="../pagina web/assets/validate.js"></script>
 
  <!-- Map -->
 <!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAUQKuq-IHkzCt4VoGq2z4XYJ_ip7ZRkws"></script>
