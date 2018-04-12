@@ -23,7 +23,7 @@ $inactivo = 900;
         if($vida_session > $inactivo)
         {
             session_destroy();
-            header("Location: login.php"); 
+            header("Location: ../login.php"); 
         }
     }
 $_SESSION['tiempo'] = time();

@@ -423,7 +423,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 								   <td ><?php echo $row['precio']; ?></td>
 								   <td ><?php echo $row['dias']; ?></td>
 								   <td ><?php echo $row['actividades']; ?></td>
-								   <td ><span class=<?php if ($row['id_estatus']==1) { ?>"label label-success"<?php } else { ?>"label label-danger"<?php }?>><?php echo $row['estatus']; ?></span></td>
+								   <td ><span <?php if ($row['id_estatus']==1) { ?>class="label label-success"<?php } else { ?>class="label label-danger"<?php }?>><?php echo $row['estatus']; ?></span></td>
 									<td class= "text-center" ><a href="?edit=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
 									   <a href="?del=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
