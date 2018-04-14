@@ -244,7 +244,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 });
 	  document.title= "AdminLTE | Catalogos";
 	  $("li").removeClass("active");
-	  $(".catalogo").addClass("active");
+	  $(".Catalogos").addClass("active");
       $(".departamento").addClass("active");
 
   });

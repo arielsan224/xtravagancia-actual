@@ -355,37 +355,30 @@
           </ul>
 -->
         </li>
-        <li class="treeview catalogo">
+        <?php 
+			$menu = $MySQLiconn->query("select * from r_menu rm order by rm.orden");
+			while($tree = mysqli_fetch_assoc($menu))  
+                          {  ?>
+        <li class="treeview <?php echo $tree['nombre_menu']; ?>">
           <a href="#">
-            <i class="fa fa-table"></i> <span>Catalogos</span>
+            <i class="<?php echo $tree['icono']; ?>"></i> <span><?php echo $tree['nombre_menu']; ?></span>
             <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
           </a>
           <ul class="treeview-menu">
-            <li class="departamento"><a href="departamento"><i class="fa fa-circle-o"></i> Departamentos</a></li>
-			<li class="municipio"><a href="municipio"><i class="fa fa-circle-o"></i> Municipios</a></li>
-			<li class="categoria"><a href="categoria"><i class="fa fa-circle-o"></i> Categorias</a></li>
-			<li class="actividad"><a href="actividad"><i class="fa fa-circle-o"></i> Actividades</a></li>
-			<li class="destino"><a href="destino"><i class="fa fa-circle-o"></i> Destinos</a></li>
-			<li class="paquete"><a href="paquete"><i class="fa fa-circle-o"></i> Paquetes</a></li>
-            <li class="usuario"><a href="usuario"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-          </ul>
+          <?php 
+			$sub_menu = $MySQLiconn->query("select * from r_menu_sub sm where sm.id_menu = ".$tree['id_menu']." order by sm.secuencia_sub_menu");
+			while($sub_tree = mysqli_fetch_assoc($sub_menu))  
+                          {  ?>
+          
+            <li class="<?php echo $sub_tree['url']?>"><a href="<?php echo $sub_tree['url']?>"><i class="<?php echo $sub_tree['icon']?>"></i> <?php echo $sub_tree['title']?></a></li>
+		  
+         <?php  }  ?>
+         </ul>
         </li>
-		<li class="treeview reportes">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Reportes</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Manual de usuario</span></a></li>
+        <?php  }  ?>
+		<li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Manual de usuario</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
