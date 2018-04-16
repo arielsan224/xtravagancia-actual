@@ -99,11 +99,21 @@
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
+                           <?php 
+							
+							$menu = $MySQLiconn->query("select * from r_menu where orden > 3");
+							
+							while ($lmenu = mysqli_fetch_array($menu))
+							{
+							
+							?>
                             <li class="submenu">
-                                <a href="index" class="show-submenu">Home <i class=""></i></a>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu">Tours <i class="icon-down-open-mini"></i></a>
+                               <?php 
+								if($lmenu['nombre_menu']=='Tours')
+								{
+								?>
+                                <a href="javascript:void(0);" class="show-submenu"><?php echo $lmenu['nombre_menu']?> <i class="icon-down-open-mini"></i></a>
+                             
                                 <ul>
                                     <li><a href="all_tours_list">All tours list</a></li>
                                     <li><a href="granada">Granada City</a></li>
@@ -116,22 +126,23 @@
                                     <li><a href="san_juan_del_sur">San Juan del Sur</a></li>
                                     <li><a href="lava_tour">Lava tour in volcan Masaya</a></li>
                                 </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="index.html" class="show-submenu">All Transfers <i class=""></i></a>
+                                <?php }
+								else 
+									{															
+								?>
+                           <a href="<?php echo $lmenu['nombre_menu']?>" class="show-submenu"><?php echo $lmenu['nombre_menu']?> <i class=""></i></a>
+                            <?php }?>
                                 
                             </li>
-                          
-                          <li class="submenu">
-                             <a href="javascript:void(0);" class="show-submenu">Especial <i class="icon-down-open-mini"></i></a><ul>
-                                 <li><a href="single_hotel_contact.php">Hotel page contact form</a></li>
-                                 <li><a href="single_hotel_contact.php">Hotel page contact form</a></li>
-                               </ul>
-                            </li>
-                             <li class="submenu"> <a href="gallery" class="show-submenu">Gallery <i class=""></i></a></li>
-                             <li class="submenu"> <a href="index.html" class="show-submenu">Recomendations <i class=""></i></a></li>
-                             <li class="submenu"> <a href="index.html" class="show-submenu">Contact <i class=""></i></a></li>
-                        </ul>
+                            
+                            <?php }?>
+                            
+<!--
+                               <li class="submenu">
+                                <a href="javascript:void(0);" class="show-submenu">Tours <i class="icon-down-open-mini"></i></a>
+                                </li>
+-->
+                            </ul>
                     </div><!-- End main-menu -->                </nav>
             </div>
         </div><!-- container -->

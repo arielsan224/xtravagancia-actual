@@ -5,7 +5,9 @@
 
 <!--<body>-->
 
-<?php include_once 'includes/menu.php' ?>
+<?php 
+	require_once 'crud/conexion.php';
+	include_once 'includes/menu.php' ?>
 
     <!-- Slider -->
     <div class="tp-banner-container">
@@ -93,63 +95,39 @@
         </div>
         
         <div class="row">
-        
+         <?php $dest = $MySQLiconn->query("select vd.*
+										from (
+										select id_depto, max(id_destino) as id_destino
+										from v_destinos
+										group by id_depto ) as gd
+										inner join v_destinos vd on vd.id_depto=gd.id_depto and 									vd.id_destino =gd.id_destino
+										where vd.id_estatus = 1
+										order by vd.id_destino
+										limit 12");
+		     while ($lisd = mysqli_fetch_array($dest))
+			 {
+			?>
             <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
                 <div class="tour_container">
                 	<div class="ribbon_3 popular"><span>Top rated</span></div>
                     <div class="img_container">
-                        <a href="single_tour.html">
-                        <img src="uploads/Cerro Negro/6_medium.jpg" class="img-responsive" alt="image">
+                        <a href="tour?id_dest=<?php echo $lisd['id_destino']; ?> ">
+                        <img src="<?php echo $lisd['imagen']?>" class="img-responsive" alt="image">
                         <div class="short_info">
-                            <i class="icon_set_1_icon-30"></i>Walking tour <span class="price"><sup>$</sup>00</span>
+                            <i class="icon_set_1_icon-30"></i>Walking tour <span class="price"><sup>$</sup><?php echo $lisd['precio']?></span>
                         </div>
                         </a>
                     </div>
                     <div class="tour_title">
-                        <h3><strong>Volcan Masaya</strong> Lava tour</h3>
+                        <h3><strong><?php echo $lisd['descripcion']?></strong> tour</h3>
                         <div class="rating">
                             <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><small>(100)</small>
                         </div><!-- end rating -->
                     </div>
                 </div><!-- End box tour -->
             </div>
-          <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
-              <div class="tour_container">
-                <div class="ribbon_3 popular"><span>Top rated</span></div>
-                <div class="img_container"> <a href="single_tour.html"> <img src="img/volcanmaslist.jpg" class="img-responsive" alt="image">
-                  <div class="short_info"> <i class="icon_set_1_icon-30"></i>Walking tour <span class="price">
-                    <!--<sup>$</sup>00-->
-                  </span> </div>
-                </a> </div>
-                <div class="tour_title">
-                  <h3><strong>Volcan Masaya</strong> Lava tour</h3>
-                  <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><small>(100)</small> </div>
-                  <!-- end rating -->
-                </div>
-              </div>
-              <!-- End box tour -->
-            </div>
-          <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
-              <div class="tour_container">
-                <div class="ribbon_3 popular"><span>Top rated</span></div>
-                <div class="img_container"> <a href="single_tour.html"> <img src="img/volcanmaslist.jpg" class="img-responsive" alt="image">
-                  <div class="short_info"> <i class="icon_set_1_icon-30"></i>Walking tour <span class="price">
-                    <!--<sup>$</sup>00-->
-                  </span></div>
-                </a></div>
-                <div class="tour_title">
-                  <h3><strong>Volcan Masaya</strong> Lava tour</h3>
-                  <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><small>(100)</small></div>
-                  <!-- end rating -->
-                </div>
-              </div>
-              <!-- End box tour -->
-            </div>
-            <!-- End col-md-4 -->
-            <!-- End col-md-4 -->
-            <!-- End col-md-4 -->
-            <!-- End col-md-4 -->
-            <!-- End col-md-4 -->          <!-- End col-md-4 -->
+            <?php } ?>
+          
             
         </div><!-- End row -->
         <p class="text-center add_bottom_30">
