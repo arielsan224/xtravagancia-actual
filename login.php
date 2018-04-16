@@ -5,7 +5,7 @@ session_start();
 
  
 if(isset($_SESSION['userId'])) {
-	if ($_SESSION['user_type'] == 2 ){
+	if ($_SESSION['user_type'] == 1 ){
 	header('location: appweb/dashboard');	
 		}
 	else header('location: index');
@@ -45,7 +45,7 @@ if($_POST) {
 				$_SESSION['userId'] = $user_id;
 				$_SESSION['user_type'] = $user_type;
 				$_SESSION['tiempo'] = time();
-				if ($_SESSION['user_type'] == 2 ){
+				if ($_SESSION['user_type'] == 1 ){
 					header('location: appweb/dashboard');	
 						}
 					else header('location: index');

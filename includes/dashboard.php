@@ -368,7 +368,7 @@
           </a>
           <ul class="treeview-menu">
           <?php 
-			$sub_menu = $MySQLiconn->query("select * from r_menu_sub sm where sm.id_menu = ".$tree['id_menu']." order by sm.secuencia_sub_menu");
+			$sub_menu = $MySQLiconn->query("select * from r_menu_sub sm where sm.id_menu = ".$tree['id_menu']." and sm.acceso =1 order by sm.secuencia_sub_menu");
 			while($sub_tree = mysqli_fetch_assoc($sub_menu))  
                           {  ?>
           
