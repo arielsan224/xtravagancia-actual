@@ -119,13 +119,13 @@ if($_POST) {
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8">
+        <!--<div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
               <input type="checkbox"> Recordarme
             </label>
           </div>
-        </div>
+        </div>-->
         <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
@@ -146,7 +146,7 @@ if($_POST) {
     <!-- /.social-auth-links -->
 
     <a href="#">Olvide mi contraseña</a><br>
-    <a href="register.html" class="text-center">Registrar una nueva cuenta</a>
+    <!--<a href="register.html" class="text-center">Registrar una nueva cuenta</a>-->
 
   </div>
   <!-- /.login-box-body -->

@@ -101,7 +101,7 @@
                         <ul>
                            <?php 
 							
-							$menu = $MySQLiconn->query("select * from r_menu where orden > 3");
+							$menu = $MySQLiconn->query("select * from r_menu where id_tipo_usuario=2");
 							
 							while ($lmenu = mysqli_fetch_array($menu))
 							{
