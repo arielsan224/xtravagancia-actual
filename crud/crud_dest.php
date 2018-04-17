@@ -17,6 +17,8 @@ if(isset($_POST['save']))
 	 $url = 'uploads/'.$descripcion.'/';
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
+		var_dump($_FILES);
+		var_dump($imagen);
 	
 		
 	if (!file_exists($url)) {
@@ -71,6 +73,7 @@ if(isset($_POST['save']))
 				} 
 			}
 			$_SESSION['message'] = "Registro Guardado";
+				//print_r( $_SESSION['message'] ); 
 					}
 			else{
 				$_SESSION['message'] = "La imagen no se guardo favor verificar";
@@ -139,15 +142,24 @@ if(isset($_POST['update']))
 	if (!file_exists($url)) {
 		mkdir($url, 0777, true);
 	}
-
+	else {
+		chmod($url, 0777);
+	}
  	if (is_uploaded_file($_FILES['img_dest']['tmp_name'])){
 		if(move_uploaded_file($_FILES['img_dest']['tmp_name'], $imagen )) {
 			$SQL4 = $MySQLiconn->query("UPDATE destino SET imagen='".$imagen."'  WHERE id_destino=".$id_destino);
 		}
 		else {
 			$_SESSION['message'] = "La imagen no se guardo favor verificar";
+			header("Location: destino.php");
+ 			exit();
 		}
 	}
+	else {
+		$_SESSION['message'] = "No se cargo ninguna imagen";
+		header("Location: destino.php");
+ 		exit();
+	} 
 	
 	 
 	$SQL = $MySQLiconn->query("UPDATE destino SET descripcion= '".$descripcion."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'  WHERE id_destino=".$id_destino);
