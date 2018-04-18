@@ -14,11 +14,11 @@ if(isset($_POST['save']))
 //     $imagen = $MySQLiconn->real_escape_string($_POST['imagen']);
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
-	 $url = 'uploads/'.$descripcion.'/';
+	 $url = '../uploads/'.$descripcion.'/';
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
-		var_dump($_FILES);
-		var_dump($imagen);
+		//var_dump($_FILES);
+		//var_dump($imagen);
 	
 		
 	if (!file_exists($url)) {
@@ -134,17 +134,18 @@ if(isset($_POST['update']))
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
 	 $id_destino=($_POST['id_destino']);
-	 $url = 'uploads/'.$descripcion.'/';
+	 $url = '../uploads/'.$descripcion.'/';
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
-	
+	 //var_dump($_FILES);
+	 //var_dump($imagen);
 		
 	if (!file_exists($url)) {
 		mkdir($url, 0777, true);
 	}
-	else {
+	/*else {
 		chmod($url, 0777);
-	}
+	}*/
  	if (is_uploaded_file($_FILES['img_dest']['tmp_name'])){
 		if(move_uploaded_file($_FILES['img_dest']['tmp_name'], $imagen )) {
 			$SQL4 = $MySQLiconn->query("UPDATE destino SET imagen='".$imagen."'  WHERE id_destino=".$id_destino);

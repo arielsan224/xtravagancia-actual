@@ -97,7 +97,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												<label for="img_cargada" class="col-sm-3 control-label">Imagen de destino: </label>
 												<label class="col-sm-1 control-label">: </label>
 													<div class="col-sm-8">							    				   
-													  <img src="../<?php echo $getROW['imagen']; ?>" id="img_cargada" class="thumbnail" style="width:250px; height:200px;"  alt="../<?php echo $getROW['imagen']; ?>"/>
+													  <img src="<?php echo $getROW['imagen']; ?>" id="img_cargada" class="thumbnail" style="width:250px; height:200px;"  alt="<?php echo $getROW['imagen']; ?>"/>
 													</div>
 											</div>
 											</div>
@@ -415,7 +415,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-								   <td ><img src="../<?php echo $row['imagen']; ?>" class="rounded" alt="../<?php echo $row['imagen']; ?>" width="50" height="30"></td>
+								   <td ><img src="<?php echo $row['imagen']; ?>" class="rounded" alt="<?php echo $row['imagen']; ?>" width="50" height="30"></td>
 <!--								   <td ><?php echo $row['id_destino']; ?></td>-->
 								   <td ><?php echo $row['descripcion']; ?></td>
 								   <td ><?php echo $row['nombre_depto']; ?></td>
