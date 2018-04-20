@@ -54,7 +54,7 @@
     <!-- Mobile menu overlay mask -->
 <!-- Header================================================== -->
     <header>
-        <div id="top_line">
+        <div id="top_line visible_on_mobile">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6"><i class="icon-phone"></i><strong>00505 8960-3207</strong></div>

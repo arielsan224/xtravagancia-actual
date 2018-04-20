@@ -266,19 +266,32 @@
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->
+          
+          <?php  
+			$user = $MySQLiconn->query("SELECT us.id_usuario, CONCAT (us.nombre,' ',us.apellido) AS n_apellidos, us.email, 
+						IFNULL(us.telefono,'0') AS telefono,us.fecha_creacion,us.imagen,tu.descripcion
+						FROM usuario us
+						INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario = us.id_tipo_usuario
+						WHERE us.id_usuario = 1");
+			$usinfo = mysqli_fetch_assoc($user);
+			$date = date_create($usinfo['fecha_creacion']);
+			$fechaformat = date_format($date, 'd/m/Y');
+			
+			?>
+          
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="<?php echo $usinfo['imagen']?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $usinfo['n_apellidos']?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo $usinfo['imagen']?>" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?php echo $usinfo['n_apellidos']?> - <?php echo $usinfo['descripcion']?>
+                  <small>Miembro desde <?php echo $fechaformat?></small>
                 </p>
               </li>
               <!-- Menu Body -->
