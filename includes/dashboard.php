@@ -53,7 +53,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>X</b>travagancia</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -272,7 +272,7 @@
 						IFNULL(us.telefono,'0') AS telefono,us.fecha_creacion,us.imagen,tu.descripcion
 						FROM usuario us
 						INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario = us.id_tipo_usuario
-						WHERE us.id_usuario = 1");
+						WHERE us.id_usuario = ".$_SESSION['userId']);
 			$usinfo = mysqli_fetch_assoc($user);
 			$date = date_create($usinfo['fecha_creacion']);
 			$fechaformat = date_format($date, 'd/m/Y');
@@ -281,13 +281,13 @@
           
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $usinfo['imagen']?>" class="user-image" alt="User Image">
+              <img src="../<?php echo $usinfo['imagen']?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $usinfo['n_apellidos']?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo $usinfo['imagen']?>" class="img-circle" alt="User Image">
+                <img src="../<?php echo $usinfo['imagen']?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $usinfo['n_apellidos']?> - <?php echo $usinfo['descripcion']?>
@@ -331,10 +331,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../<?php echo $usinfo['imagen']?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?php echo $usinfo['n_apellidos']?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -369,8 +369,13 @@
 -->
         </li>
         <?php 
-			$menu = $MySQLiconn->query("select * from r_menu rm where rm.id_tipo_usuario=1 order by rm.orden");
-			while($tree = mysqli_fetch_assoc($menu))  
+			$menu = $MySQLiconn->query("select distinct m.*
+										from r_menu m
+										inner join r_menu_sub sm on m.id_menu = sm.id_menu
+										where sm.id_tipo_usuario = ".$_SESSION['user_type']."
+										order by m.orden");
+			while($tree = mysqli_fetch_assoc($menu)) 
+				
                           {  ?>
         <li class="treeview <?php echo $tree['nombre_menu']; ?>">
           <a href="#">
@@ -381,7 +386,11 @@
           </a>
           <ul class="treeview-menu">
           <?php 
-			$sub_menu = $MySQLiconn->query("select * from r_menu_sub sm where sm.id_menu = ".$tree['id_menu']." and sm.acceso =1 order by sm.secuencia_sub_menu");
+			$sub_menu = $MySQLiconn->query("select * from r_menu_sub sm 
+											where sm.id_menu = ".$tree['id_menu']."
+												and sm.id_tipo_usuario = ".$_SESSION['user_type']."
+												and sm.acceso =1 
+											order by sm.secuencia_sub_menu");
 			while($sub_tree = mysqli_fetch_assoc($sub_menu))  
                           {  ?>
           

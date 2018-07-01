@@ -20,9 +20,9 @@
     <link href="css/base.css" rel="stylesheet">
 
     <!-- Google web fonts -->
-   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-   <link href="http://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet" type="text/css">
-   <link href="http://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
 
     <!-- REVOLUTION SLIDER CSS -->
     <link href="rs-plugin/css/settings.css" rel="stylesheet">
@@ -101,7 +101,11 @@
                         <ul>
                            <?php 
 							
-							$menu = $MySQLiconn->query("select * from r_menu where id_tipo_usuario=2");
+							$menu = $MySQLiconn->query("SELECT sm.*
+														FROM  r_menu_sub AS sm 
+														WHERE id_tipo_usuario=2
+															and sm.acceso = 1
+														ORDER BY secuencia_sub_menu");
 							
 							while ($lmenu = mysqli_fetch_array($menu))
 							{
@@ -109,28 +113,55 @@
 							?>
                             <li class="submenu">
                                <?php 
-								if($lmenu['nombre_menu']=='Tours')
+								if($lmenu['title']=='Tours')
 								{
 								?>
-                                <a href="javascript:void(0);" class="show-submenu"><?php echo $lmenu['nombre_menu']?> <i class="icon-down-open-mini"></i></a>
+                                <a href="javascript:void(0);" class="show-submenu"><?php echo $lmenu['title']?> <i class="icon-down-open-mini"></i></a>
                              
-                                <ul>
-                                    <li><a href="all_tours_list">All tours list</a></li>
-                                    <li><a href="granada">Granada City</a></li>
-                                    <li><a href="clasico">Clasico</a></li>
-                                    <li><a href="laguna_apoyo">Laguna de Apoyo</a></li>
-                                    <li><a href="mombacho">Volcán Mombacho & Canopy</a></li>
-                                    <li><a href="las_isletas">Las Isletas</a></li>
-                                    <li><a href="ometepe">Ometepe</a></li>
-                                    <li><a href="leon">León</a></li>
-                                    <li><a href="san_juan_del_sur">San Juan del Sur</a></li>
-                                    <li><a href="lava_tour">Lava tour in volcan Masaya</a></li>
-                                </ul>
+                               <ul>
+								<li><a href="all_tours_list">Todos los tours</a></li>
+								<?php 
+								$cat = $MySQLiconn->query("SELECT distinct cat.id_categoria, cat.descripcion
+															FROM categoria cat
+															inner join actividad a on cat.id_categoria = a.id_categoria
+															inner join maestro_act ma on a.id_actividad = ma.id_actividad");
+								while ($categoria = mysqli_fetch_array($cat))
+								{
+								 
+								?>
+								
+								<li><a href="javascript:void(0);"><?php echo $categoria['descripcion']?> </a>
+								 <ul>
+								 <?php
+								   $dest = $MySQLiconn->query("select d.*
+																from destino d
+																inner join maestro_act ma on d.id_destino = ma.id_destino
+																inner join actividad a on ma.id_actividad = a.id_actividad
+																where a.id_categoria = ".$categoria['id_categoria']);
+									while ($destinos = mysqli_fetch_array($dest))
+									{
+								  ?>
+								  <li><a href="tour?id_dest=<?php echo $destinos['id_destino']?>"><?php echo $destinos['descripcion']?></a>
+								  </li>
+								 <?php
+									}
+								 ?>
+								 </ul>
+								</li>
+								<?php }?>
+							  </ul>
                                 <?php }
-								else 
+								elseif (!isset($_SESSION['userId']) )
 									{															
 								?>
-                           <a href="<?php echo $lmenu['nombre_menu']?>" class="show-submenu"><?php echo $lmenu['nombre_menu']?> <i class=""></i></a>
+                           <a href="<?php echo $lmenu['url']?>" class="show-submenu"><?php echo $lmenu['title']?> <i class=""></i></a>
+                            <?php }
+								
+                               else 
+									{															
+								?>
+                           <a href="busquedas" class="show-submenu">Busquedas <i class=""></i></a>
+                           <a href="reservaciones" class="show-submenu">Reservaciones <i class=""></i></a>
                             <?php }?>
                                 
                             </li>
