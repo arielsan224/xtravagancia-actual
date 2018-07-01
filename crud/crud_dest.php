@@ -15,8 +15,10 @@ if(isset($_POST['save']))
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
 	 $url = '../uploads/'.$descripcion.'/';
+	 $url2 = 'uploads/'.$descripcion.'/';
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
+	 $imagen_ins=$url2.$nombre_img;
 		//var_dump($_FILES);
 		//var_dump($imagen);
 	
@@ -30,7 +32,7 @@ if(isset($_POST['save']))
 	
 	    
  
-		  $SQL = $MySQLiconn->query("INSERT INTO destino (descripcion,id_municipio,precio,dias,imagen,estatus) VALUES('$descripcion','$id_municipio','$precio','$dias','$imagen','$id_estatus')");
+		  $SQL = $MySQLiconn->query("INSERT INTO destino (descripcion,id_municipio,precio,dias,imagen,estatus) VALUES('$descripcion','$id_municipio','$precio','$dias','$imagen_ins','$id_estatus')");
 
 			$inserted = mysqli_insert_id($MySQLiconn);
 
@@ -134,11 +136,27 @@ if(isset($_POST['update']))
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
 	 $id_destino=($_POST['id_destino']);
+	 $carpeta_ant = '../uploads/'.$getROW['descripcion'].'/';
 	 $url = '../uploads/'.$descripcion.'/';
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
 	 //var_dump($_FILES);
 	 //var_dump($imagen);
+	//var_dump($carpeta_ant,$url);
+	/*if (file_exists($carpeta_ant)){
+		var_dump('archivo existe');
+	}*/
+	
+	if ($carpeta_ant != $url){
+		rename($carpeta_ant,$url);
+		chmod($url, 0777);
+		//var_dump('carpetas no son iguales');
+	}
+	/*else
+	{
+		var_dump('las carpetas son iguales');
+	}
+	exit;*/
 		
 	if (!file_exists($url)) {
 		mkdir($url, 0777, true);
@@ -156,11 +174,11 @@ if(isset($_POST['update']))
  			exit();
 		}
 	}
-	else {
-		$_SESSION['message'] = "No se cargo ninguna imagen";
-		header("Location: destino.php");
- 		exit();
-	} 
+//	else {
+//		$_SESSION['message'] = "No se cargo ninguna imagen";
+//		header("Location: destino.php");
+// 		exit();
+//	}  en la actualizacion si no se cargo imagen es porque no se actualizo la imagen
 	
 	 
 	$SQL = $MySQLiconn->query("UPDATE destino SET descripcion= '".$descripcion."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'  WHERE id_destino=".$id_destino);

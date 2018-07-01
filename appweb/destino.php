@@ -66,7 +66,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 						</div>
 						<div class="modal-body">
 
-							<form method="post" enctype="multipart/form-data">
+							<form method="post" enctype="multipart/form-data" id=formModal>
 								<div class="row">
 
 									<div class="col-md-12 add_bottom_15">
@@ -415,7 +415,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-								   <td ><img src="<?php echo $row['imagen']; ?>" class="rounded" alt="<?php echo $row['imagen']; ?>" width="50" height="30"></td>
+								   <td ><img src="../<?php echo $row['imagen']; ?>" class="rounded" alt="<?php echo $row['imagen']; ?>" width="50" height="30"></td>
 <!--								   <td ><?php echo $row['id_destino']; ?></td>-->
 								   <td ><?php echo $row['descripcion']; ?></td>
 								   <td ><?php echo $row['nombre_depto']; ?></td>
@@ -587,6 +587,12 @@ $("#img_dest").fileinput({
   });   
 	 
   });
+	
+	$("#myModal").on('hidden.bs.modal', function (e) { 
+        $("#formModal")[0].reset();
+        $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
+
+      });
 
 </script>
 
