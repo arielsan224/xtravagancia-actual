@@ -1,5 +1,5 @@
 
-<html>
+<!--<html>-->
 
 
 
@@ -119,7 +119,7 @@
                         </a>
                     </div>
                     <div class="tour_title">
-                        <h3><strong><?php echo $lisd['descripcion']?></strong> tour</h3>
+                        <h3><strong><?php echo $lisd['nombre_dest']?></strong> tour</h3>
                         <div class="rating">
                             <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><small>(100)</small>
                         </div><!-- end rating -->
@@ -196,7 +196,7 @@
         </div><!--End row --><!-- End row -->
         
     </div><!-- End container -->
-    
+	 
     <?php include_once 'includes/footer.php' ?>
 
 <div id="toTop"></div><!-- Back to top button -->

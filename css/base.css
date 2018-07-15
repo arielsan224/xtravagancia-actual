@@ -23,4 +23,7 @@
 @import url("new_icons/css/icon_set_all.min.css");									        /* Icon pack */
 @import url("magnific-popup.css");															/* Lightbox & dialog script */
 @import url("pop_up.css");																	/* Popup Advertising */
-@import url("custom.css");	
+@import url("custom.css");
+@import url("skins/square/grey.css");
+@import url("ion.rangeSlider.css");
+@import url("ion.rangeSlider.skinFlat.css");

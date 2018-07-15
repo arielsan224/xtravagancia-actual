@@ -6,7 +6,9 @@ include_once 'conexion.php';
 if(isset($_POST['save']))
 {
 
-     $descripcion = $MySQLiconn->real_escape_string($_POST['descripcion']);
+     $nombre_dest = $MySQLiconn->real_escape_string($_POST['nombre_dest']);
+	 $desc_corta = $MySQLiconn->real_escape_string($_POST['desc_corta']);
+	 $desc_larga = $MySQLiconn->real_escape_string($_POST['desc_larga']);
      $id_municipio = $MySQLiconn->real_escape_string($_POST['id_municipio']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
      $dias = $MySQLiconn->real_escape_string($_POST['dias']);
@@ -14,8 +16,8 @@ if(isset($_POST['save']))
 //     $imagen = $MySQLiconn->real_escape_string($_POST['imagen']);
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
-	 $url = '../uploads/'.$descripcion.'/';
-	 $url2 = 'uploads/'.$descripcion.'/';
+	 $url = '../uploads/'.$nombre_dest.'/';
+	 $url2 = 'uploads/'.$nombre_dest.'/';
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
 	 $imagen_ins=$url2.$nombre_img;
@@ -32,7 +34,7 @@ if(isset($_POST['save']))
 	
 	    
  
-		  $SQL = $MySQLiconn->query("INSERT INTO destino (descripcion,id_municipio,precio,dias,imagen,estatus) VALUES('$descripcion','$id_municipio','$precio','$dias','$imagen_ins','$id_estatus')");
+		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,id_municipio,precio,dias,imagen,estatus) VALUES('$nombre_dest','$id_municipio','$precio','$dias','$imagen_ins','$id_estatus')");
 
 			$inserted = mysqli_insert_id($MySQLiconn);
 
@@ -109,7 +111,7 @@ if(isset($_GET['del']))
 /* code for data update */
 if(isset($_GET['edit']))
 {
- $SQL = $MySQLiconn->query("SELECT dest.id_destino,dest.descripcion, mun.id_depto, dest.id_municipio, 
+ $SQL = $MySQLiconn->query("SELECT dest.id_destino,dest.nombre_dest,dest.desc_corta,dest.desc_larga, mun.id_depto, dest.id_municipio, 
 								   (SELECT ac.id_categoria
 									FROM maestro_act as ma
 									inner join actividad as ac on ma.id_actividad = ac.id_actividad
@@ -127,7 +129,9 @@ if(isset($_GET['edit']))
 
 if(isset($_POST['update']))
 {
-     $descripcion = $MySQLiconn->real_escape_string($_POST['descripcion']);
+     $nombre_dest = $MySQLiconn->real_escape_string($_POST['nombre_dest']);
+	 $desc_corta = $MySQLiconn->real_escape_string($_POST['desc_corta']);
+	 $desc_larga = $MySQLiconn->real_escape_string($_POST['desc_larga']);
      $id_municipio = $MySQLiconn->real_escape_string($_POST['id_municipio']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
      $dias = $MySQLiconn->real_escape_string($_POST['dias']);
@@ -136,8 +140,8 @@ if(isset($_POST['update']))
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
 	 $id_destino=($_POST['id_destino']);
-	 $carpeta_ant = '../uploads/'.$getROW['descripcion'].'/';
-	 $url = '../uploads/'.$descripcion.'/';
+	 $carpeta_ant = '../uploads/'.$getROW['nombre_dest'].'/';
+	 $url = '../uploads/'.$nombre_dest.'/';
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
 	 //var_dump($_FILES);
@@ -181,7 +185,7 @@ if(isset($_POST['update']))
 //	}  en la actualizacion si no se cargo imagen es porque no se actualizo la imagen
 	
 	 
-	$SQL = $MySQLiconn->query("UPDATE destino SET descripcion= '".$descripcion."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'  WHERE id_destino=".$id_destino);
+	$SQL = $MySQLiconn->query("UPDATE destino SET nombre_dest= '".$nombre_dest."',desc_corta='".$desc_corta."',desc_larga='".$desc_larga."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'  WHERE id_destino=".$id_destino);
  	$_SESSION['message'] = "Registro Actualizado";
  
 	if(!$SQL)

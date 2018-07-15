@@ -21,7 +21,7 @@
     
 
     <!-- BASE CSS -->
-    <link href="css/base.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
 
     <!-- Google web fonts -->
    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -29,8 +29,8 @@
    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
 
     <!-- REVOLUTION SLIDER CSS -->
-    <link href="rs-plugin/css/settings.css" rel="stylesheet">
-    <link href="css/extralayers.css" rel="stylesheet">
+    <link href="../rs-plugin/css/settings.css" rel="stylesheet">
+    <link href="../css/extralayers.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -99,7 +99,7 @@
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
+                            <img src="../img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
@@ -147,7 +147,7 @@
 									while ($destinos = mysqli_fetch_array($dest))
 									{
 								  ?>
-								  <li><a href="pagina_web/tour?id_dest=<?php echo $destinos['id_destino']?>"><?php echo $destinos['nombre_dest']?></a>
+								  <li><a href="tour?id_dest=<?php echo $destinos['id_destino']?>"><?php echo $destinos['nombre_dest']?></a>
 								  </li>
 								 <?php
 									}
