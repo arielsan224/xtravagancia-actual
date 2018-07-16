@@ -76,7 +76,7 @@
                                             <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
                                         </div>
                                         <a id="forgot_pw" href="#">Olvidaste contaseña?</a>
-                                        <a id="forgot_pw" href="login">Eres Administrador?</a>
+                                        <a id="forgot_pw" href="../login">Eres Administrador?</a>
                                         <input type="submit" name="Sign_in" value="Iniciar Sesion" id="Sign_in" class="button_drop" style="text-align: center;">
                                         <input type="submit" name="Sign_up" value="Registrate" id="Sign_up" class="button_drop outline">
                                     </div>
@@ -92,7 +92,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <div id="logo_home">
-                    	<h1><a href="index" title="Xtravagancia Tours">Xtravagancia Tours</a></h1>
+                    	<h1><a href="../index" title="Xtravagancia Tours">Xtravagancia Tours</a></h1>
                     </div>
                 </div>
                 <nav class="col-md-9 col-sm-9 col-xs-9">
@@ -138,7 +138,7 @@
 								<li><a href="javascript:void(0);"><?php echo $categoria['descripcion']?> </a>
 								 <ul>
 								 <?php
-								   $dest = $MySQLiconn->query("select d.id_destino,d.nombre_dest
+								   $dest = $MySQLiconn->query("select distinct d.id_destino,d.nombre_dest
 																from destino d
 																inner join maestro_act ma on d.id_destino = ma.id_destino
 																inner join actividad a on ma.id_actividad = a.id_actividad

@@ -50,12 +50,17 @@
 						<ul id="cat_nav">
 							
 							<?php
-								$cat_nav=$MySQLiconn->query("select count(cat.id_categoria) as cant_tours, 									cat.descripcion FROM categoria cat
-															inner join actividad a on cat.id_categoria = a.id_categoria
-															inner join maestro_act ma on a.id_actividad = ma.id_actividad
+								$cat_nav=$MySQLiconn->query("SELECT count( distinct ma.id_destino) as 									cant_tours,cat.descripcion,cat.tag
+															FROM categoria cat
+															INNER JOIN actividad a ON cat.id_categoria = a.id_categoria
+															INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad
+															INNER JOIN (
+																SELECT dest.id_destino
+																FROM destino dest
+																WHERE estatus=1) AS d ON d.id_destino = ma.id_destino
 															group by cat.id_categoria
-															order by cat.id_categoria");
-								$c_tours=$MySQLiconn->query("SELECT d.id_destino FROM destino as d");
+															ORDER BY cat.id_categoria");
+								$c_tours=$MySQLiconn->query("SELECT d.id_destino FROM destino as d where d.estatus =1");
 								$cant_tours= $c_tours->num_rows;
 							
 							?>
@@ -65,7 +70,7 @@
 								while ($nav_categoria=mysqli_fetch_array($cat_nav)) 
 								{
 							?>
-							<li class = "fill" id="<?php echo $nav_categoria['descripcion']?>"><a href="#"><i class="icon_set_1_icon-46"></i><?php echo $nav_categoria['descripcion']?> <span>(<?php echo $nav_categoria['cant_tours']?>)</span></a>
+							<li class = "fill" id="<?php echo $nav_categoria['descripcion']?>"><a href="#"><i class="<?php echo $nav_categoria['tag']?>"></i><?php echo $nav_categoria['descripcion']?> <span>(<?php echo $nav_categoria['cant_tours']?>)</span></a>
 							</li>
 							<?php
 								}
@@ -76,25 +81,6 @@
 
 							//$mysqli->close();
 							?>
-							<!--
-                            <li class = "fill" id="wt"><a href="#"><i class="icon_set_2_icon-110"></i>Water Tours <span>(04)</span></a>
-							</li>
-							<li class = "fill" id="b"><a href="#"><i class="icon_set_1_icon-4"></i>Museum tours <span>(16)</span></a>
-							</li>
-							<li class = "fill" id="hb"><a href="#"><i class="icon_set_1_icon-44"></i>Historic Buildings <span>(01)</span></a>
-							</li>
-							<li class = "fill" id="walk"><a href="#"><i class="icon_set_1_icon-37"></i>Walking tours <span>(05)</span></a>
-							</li>
-							<!--<li class = "fill" id="e"><a href="#"><i class="icon_set_1_icon-14"></i>Eat & Drink <span>(20)</span></a>
-							</li>
-							<li class = "fill" id="church"><a href="#"><i class="icon_set_1_icon-43"></i>Churces <span>(02)</span></a>
-							</li>
-                            <li class = "fill" id="beach"><a href="#"><i class="icon_set_2_icon-108"></i>Beaches <span>(01)</span></a>
-							</li>
-                            <li class = "fill" id="vip"><a href="#"><i class="icon_set_1_icon-81"></i>Especial <span>(01)</span></a>
-							</li>
-							<!--<li class = "fill" id="g"><a href="#"><i class="icon_set_1_icon-28"></i>Skyline tours <span>(11)</span></a>
-							</li>-->
 						</ul>
 					</div>
 <!--End filters col-->
@@ -107,15 +93,30 @@
 				</aside>
 				<!--End aside -->
 				<div class="col-lg-9 col-md-9" id="parent"> <!--/tools -->
-
-				  <div class="strip_all_tour_list wow fadeIn walk" data-wow-delay="0.1s">
+				<?php 
+					$tour_list = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,
+													vd.imagen,vd.precio,vd.direccion,
+													cat.descripcion as categoria,cat.tag
+													FROM v_destinos AS vd
+													INNER JOIN (
+														SELECT DISTINCT cat.id_categoria, cat.descripcion,ma.id_destino,cat.tag
+														FROM categoria cat
+														INNER JOIN actividad a ON cat.id_categoria = a.id_categoria
+														INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad) AS cat 
+														ON cat.id_destino = vd.id_destino
+													WHERE vd.id_estatus = 1");	
+					while ($all_tour_list=mysqli_fetch_array($tour_list))
+					{ 
+				
+				?>
+				  <div class="strip_all_tour_list wow fadeIn <?php echo $all_tour_list['categoria']?>" data-wow-delay="0.1s">
 						<div class="row">
 							<div class="col-lg-4 col-md-4 col-sm-4">
 								<div class="ribbon_3 popular"><span>Top rated</span>
 								</div>
 						<div class="img_list">
-						  <a href="../pagina web/lava_tour"><img src="../pagina web/img/volcanmaslist.jpg" alt="Image">
-						  <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
+						  <a href="../<?php echo $all_tour_list['imagen']?>"><img src="../<?php echo $all_tour_list['imagen']?>" alt="Image">
+						  <div class="short_info"><i class="<?php echo $all_tour_list['tag']?>"></i><?php echo $all_tour_list['categoria']?> </div>
 									</a>
 								</div>
 							</div>
@@ -124,8 +125,8 @@
 								<div class="tour_list_desc">
 									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile voted"></i><small>(100)</small>
 									</div>
-									<h3><strong>Volcan Masaya</strong> Lava tour</h3>
-									<p>Be witness of an unique nature event and see lava flowing from the bottom of the crater!, forming a river of magma that glows in the dark and illuminates the interior of the volcano.</p>
+									<h3><strong><?php echo $all_tour_list['nombre_dest']?></strong> tour</h3>
+									<p><?php echo $all_tour_list['desc_corta']?></p>
 									<ul class="add_info">
 										<li>
 											<div class="tooltip_styled tooltip-effect-4">
@@ -146,7 +147,7 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
 												<div class="tooltip-content">
-													<h4>Address</h4> Km 23, Street to Masaya, Masaya
+													<h4>Address</h4> <?php echo $all_tour_list['direccion']?>
 													<br>
 												</div>
 											</div>
@@ -173,8 +174,8 @@
 							</div>
 							<div class="col-lg-2 col-md-2 col-sm-2">
 								<div class="price_list">
-									<div><sup>$</sup>30*<!--<span class="normal_price_list">$30</span>--><small>*Per person</small>
-										<p><a href="../pagina web/lava_tour" class="btn_1">Details</a>
+									<div><sup>$</sup><?php echo $all_tour_list['precio']?>*<span class="normal_price_list">$<?php echo $all_tour_list['precio']?></span><small>*Per person</small>
+										<p><a href="tour?id_dest=<?php echo $all_tour_list['id_destino']?>" class="btn_1">Details</a>
 										</p>
 									</div>
 
@@ -182,67 +183,8 @@
 							</div>
 						</div>
 					</div>
-				  <div class="strip_all_tour_list wow fadeIn walk wt" data-wow-delay="0.1s">
-					  <div class="row">
-					    <div class="col-lg-4 col-md-4 col-sm-4">
-					      <div class="ribbon_3 eco"><span>Eco-Tour</span> </div>
-					      <div class="img_list"> <a href="../pagina web/laguna_apoyo"><img src="../pagina web/img/lagunalist.jpg" alt="Image">
-					        <div class="short_info"><i class="icon_set_1_icon-30"></i>Walking tour </div>
-					        </a> </div>
-				        </div>
-					    <div class="clearfix visible-xs-block"></div>
-					    <div class="col-lg-6 col-md-6 col-sm-6">
-					      <div class="tour_list_desc">
-					        <div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile voted"></i><small>(100)</small> </div>
-					        <h3><strong>Laguna de Apoyo</strong> tour</h3>
-					        <p>The natural beauty of the place, the abundant flora and fauna, the calm and clean water of the lagoon and the green slopes of the crater make Apoyo an incredible destination.</p>
-					        <ul class="add_info">
-					          <li>
-					            <div class="tooltip_styled tooltip-effect-4"> <span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-					              <div class="tooltip-content">
-					                <h4>Schedule</h4>
-					                <strong>Monday to Friday</strong> 09.00 AM - 5.30 PM <br>
-					                <strong>Saturday and Sunday</strong> 09.00 AM - 5.30 PM <br>
-					                <!--													<strong>Sunday</strong> <span class="label label-danger">Closed</span>--> </div>
-				                </div>
-				              </li>
-					          <li>
-					            <div class="tooltip_styled tooltip-effect-4"> <span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
-					              <div class="tooltip-content">
-					                <h4>Address</h4>
-					                4 kilometers from Granada and 37 from Managua, on the road that joins these two cities <br>
-				                  </div>
-				                </div>
-				              </li>
-					          <li>
-					            <div class="tooltip_styled tooltip-effect-4"> <span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-					              <div class="tooltip-content">
-					                <h4>Languages</h4>
-					                English - Spanish </div>
-				                </div>
-				              </li>
-					          <li>
-					            <div class="tooltip_styled tooltip-effect-4"> <span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-					              <div class="tooltip-content">
-					                <h4>Parking</h4>
-					                Main entrance <br>
-				                  </div>
-				                </div>
-				              </li>
-				            </ul>
-				          </div>
-				        </div>
-					    <div class="col-lg-2 col-md-2 col-sm-2">
-					      <div class="price_list">
-					        <div>
-					          <sup>$</sup>25*<!--<span class="normal_price_list">$99</span>--><small>*Per person
-					          </small>
-					          <p><a href="../pagina web/laguna_apoyo" class="btn_1">Details</a> </p>
-				            </div>
-				          </div>
-				        </div>
-				      </div>
-				  </div>
+					<?php } ?>
+				 
 				
 <!--End strip -->
 					

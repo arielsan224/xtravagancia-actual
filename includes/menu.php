@@ -123,7 +123,7 @@
                                 <a href="javascript:void(0);" class="show-submenu"><?php echo $lmenu['title']?> <i class="icon-down-open-mini"></i></a>
                              
                                <ul>
-								<li><a href="all_tours_list">Todos los tours</a></li>
+								<li><a href="pagina_web/all_tours_list">Todos los tours</a></li>
 								<?php 
 								$cat = $MySQLiconn->query("SELECT distinct cat.id_categoria, cat.descripcion
 															FROM categoria cat
@@ -138,7 +138,7 @@
 								<li><a href="javascript:void(0);"><?php echo $categoria['descripcion']?> </a>
 								 <ul>
 								 <?php
-								   $dest = $MySQLiconn->query("select d.id_destino,d.nombre_dest
+								   $dest = $MySQLiconn->query("select distinct d.id_destino,d.nombre_dest
 																from destino d
 																inner join maestro_act ma on d.id_destino = ma.id_destino
 																inner join actividad a on ma.id_actividad = a.id_actividad

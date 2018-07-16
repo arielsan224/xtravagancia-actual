@@ -95,12 +95,16 @@
         </div>
         
         <div class="row">
-         <?php $dest = $MySQLiconn->query("select vd.*
+         <?php $dest = $MySQLiconn->query("select vd.*, cat.descripcion as categoria,cat.tag
 										from (
 										select id_depto, max(id_destino) as id_destino
 										from v_destinos
 										group by id_depto ) as gd
 										inner join v_destinos vd on vd.id_depto=gd.id_depto and 									vd.id_destino =gd.id_destino
+										inner join (SELECT DISTINCT cat.id_categoria, cat.descripcion,ma.id_destino,cat.tag
+										FROM categoria cat
+										INNER JOIN actividad a ON cat.id_categoria = a.id_categoria
+										INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad ) as cat	on cat.id_destino = vd.id_destino
 										where vd.id_estatus = 1
 										order by vd.id_destino
 										limit 12");
@@ -114,7 +118,7 @@
                         <a href="tour?id_dest=<?php echo $lisd['id_destino']; ?> ">
                         <img src="<?php echo $lisd['imagen']?>" class="img-responsive" alt="image">
                         <div class="short_info">
-                            <i class="icon_set_1_icon-30"></i>Walking tour <span class="price"><sup>$</sup><?php echo $lisd['precio']?></span>
+                            <i class="<?php echo $lisd['tag']?>"></i><?php echo $lisd['categoria']?> <span class="price"><sup>$</sup><?php echo $lisd['precio']?></span>
                         </div>
                         </a>
                     </div>
