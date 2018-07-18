@@ -132,13 +132,23 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
 												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 4.45 PM
+													<h4>Horarios</h4>
+										<?php 
+											$horario = $MySQLiconn->query("SELECT t.inicio,t.fin,rd.dias
+																			FROM horario_destino AS hd
+																			INNER JOIN tiempo t ON t.id_tiempo = hd.id_tiempo
+																			INNER JOIN rango_dias rd ON rd.id_rango_dias = t.id_rango_dias
+																			WHERE hd.estatus = 1 AND hd.id_destino = ".$all_tour_list['id_destino']);
+											while ($horarios = mysqli_fetch_array($horario))
+											{ 
+													
+													?>
+													<strong><?php echo $horarios['dias']?></strong> <?php echo date('h:i A',strtotime($horarios['inicio']))?> - <?php echo date('h:i A',strtotime($horarios['fin']))?>
 													<br>
-													<strong>Saturday and Sunday</strong> 09.00 AM - 4.45 PM
-													<br>
-                                                    <strong>Night</strong> 05.00 PM - 8.00 PM
-													<br>
+													
+											<?php 
+												}
+												?>
 <!--																										<strong>Sunday</strong> <span class="label label-danger">Closed</span>-->
 												</div>
 											</div>
@@ -147,7 +157,7 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
 												<div class="tooltip-content">
-													<h4>Address</h4> <?php echo $all_tour_list['direccion']?>
+													<h4>Dirección</h4> <?php echo $all_tour_list['direccion']?>
 													<br>
 												</div>
 											</div>
@@ -156,7 +166,7 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
 												<div class="tooltip-content">
-													<h4>Languages</h4> English - Spanish
+													<h4>Idiomas</h4> English - Spanish
 												</div>
 											</div>
 										</li>
@@ -164,7 +174,7 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
 												<div class="tooltip-content">
-													<h4>Parking</h4> Plaza de Oviedo
+													<h4>Parqueo</h4> <?php echo 'parqueo'?>
 													<br>
 												</div>
 											</div>
