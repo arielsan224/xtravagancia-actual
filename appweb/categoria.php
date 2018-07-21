@@ -155,12 +155,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                <tr>  
                                     <td>Id</td>  
                                     <td>Categoría</td>
+								    <td>Tag</td>
                                     <td style="text-align:center;">Acciones</td>
                                </tr>  
                           	 </thead>  
                           <?php 
 						 
-						$res = $MySQLiconn->query("SELECT * FROM categoria order by id_categoria");
+						$res = $MySQLiconn->query("SELECT cat.*,t.class FROM categoria cat 
+												   inner join tags t on cat.id_tag = t.id_tag
+												   order by cat.id_categoria");
 						while($row = mysqli_fetch_array($res))  
                           {  
                                ?>
@@ -168,6 +171,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							  <tr>
 									<td ><?php echo $row['id_categoria']; ?></td>
               						<td ><?php echo $row['descripcion']; ?></td>
+								   <td ><i class="<?php echo $row['class']; ?>"><?php echo $row['class']; ?></i></td>
 									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_categoria']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
 									   <a href="?del=<?php echo $row['id_categoria']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>

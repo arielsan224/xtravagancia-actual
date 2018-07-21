@@ -50,8 +50,9 @@
 						<ul id="cat_nav">
 							
 							<?php
-								$cat_nav=$MySQLiconn->query("SELECT count( distinct ma.id_destino) as 									cant_tours,cat.descripcion,cat.tag
+								$cat_nav=$MySQLiconn->query("SELECT count( distinct ma.id_destino) as 									cant_tours,cat.descripcion,t.descripcion as tag
 															FROM categoria cat
+															inner join tags t on cat.id_tag = t.id_tag
 															INNER JOIN actividad a ON cat.id_categoria = a.id_categoria
 															INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad
 															INNER JOIN (
@@ -99,8 +100,9 @@
 													cat.descripcion as categoria,cat.tag
 													FROM v_destinos AS vd
 													INNER JOIN (
-														SELECT DISTINCT cat.id_categoria, cat.descripcion,ma.id_destino,cat.tag
+														SELECT DISTINCT cat.id_categoria, cat.descripcion,ma.id_destino,t.descripcion as tag
 														FROM categoria cat
+														inner join tags t on cat.id_tag = t.id_tag
 														INNER JOIN actividad a ON cat.id_categoria = a.id_categoria
 														INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad) AS cat 
 														ON cat.id_destino = vd.id_destino

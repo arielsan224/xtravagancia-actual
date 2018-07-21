@@ -101,8 +101,9 @@
 										from v_destinos
 										group by id_depto ) as gd
 										inner join v_destinos vd on vd.id_depto=gd.id_depto and 									vd.id_destino =gd.id_destino
-										inner join (SELECT DISTINCT cat.id_categoria, cat.descripcion,ma.id_destino,cat.tag
+										inner join (SELECT DISTINCT cat.id_categoria, cat.descripcion,ma.id_destino,t.descripcion as tag
 										FROM categoria cat
+										inner join tags t on cat.id_tag = t.id_tag
 										INNER JOIN actividad a ON cat.id_categoria = a.id_categoria
 										INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad ) as cat	on cat.id_destino = vd.id_destino
 										where vd.id_estatus = 1

@@ -34,13 +34,14 @@ if(isset($_POST['save']))
 	
 	    
  
-		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,id_municipio,precio,dias,imagen,estatus) VALUES('$nombre_dest','$id_municipio','$precio','$dias','$imagen_ins','$id_estatus')");
+		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,desc_corta,desc_larga,id_municipio,precio,dias,imagen,estatus) VALUES('$nombre_dest','$desc_corta ','$desc_larga ',' $id_municipio','$precio','$dias','$imagen_ins','$id_estatus')");
 
 			$inserted = mysqli_insert_id($MySQLiconn);
 
 		 if(!$SQL)
 			  {
-			   echo $MySQLiconn->error;
+			   //echo $MySQLiconn->error;
+			   $_SESSION['message'] = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
 			  } 
 
 			elseif($inserted != 0 ) {
@@ -75,8 +76,9 @@ if(isset($_POST['save']))
 							// Check terminator
 							if($item1 === false ) break;
 				} 
+				$_SESSION['message'] = "Registro Guardado";
 			}
-			$_SESSION['message'] = "Registro Guardado";
+			//$_SESSION['message'] = "Registro Guardado";
 				//print_r( $_SESSION['message'] ); 
 					}
 			else{
@@ -96,11 +98,14 @@ if(isset($_GET['del']))
 {
  $SQL = $MySQLiconn->query("DELETE FROM destino WHERE id_destino=".$_GET['del']);
  $SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
- $_SESSION['message'] = "Registro Borrado";
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
+   //echo $MySQLiconn->error;
+	 $_SESSION['message'] = "Error al eliminar los registros. Error ( ".$MySQLiconn->error.")";
   } 
+ else {
+	 $_SESSION['message'] = "Registro Borrado";
+ }
  header("Location: destino.php");
  exit();
 }
@@ -123,6 +128,12 @@ if(isset($_GET['edit']))
 							inner join municipio as mun on dest.id_municipio = mun.id_municipio
 							WHERE dest.id_destino=".$_GET['edit']);
  $getROW = $SQL->fetch_array();
+ 
+ if(!$SQL)
+  {
+   //echo $MySQLiconn->error;
+	 $_SESSION['message'] = "Error al cargar los registros. Error ( ".$MySQLiconn->error.")";
+  }
 	
 
 }
@@ -186,11 +197,12 @@ if(isset($_POST['update']))
 	
 	 
 	$SQL = $MySQLiconn->query("UPDATE destino SET nombre_dest= '".$nombre_dest."',desc_corta='".$desc_corta."',desc_larga='".$desc_larga."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'  WHERE id_destino=".$id_destino);
- 	$_SESSION['message'] = "Registro Actualizado";
+ 	
  
 	if(!$SQL)
 	  {
-	   echo $MySQLiconn->error;
+	   //echo $MySQLiconn->error;
+	   $_SESSION['message'] = "Error al actualizar los registros. Error ( ".$MySQLiconn->error.")";
 	  } 
   	
  	else {
@@ -228,6 +240,7 @@ if(isset($_POST['update']))
 				    // Check terminator
 				    if($item1 === false ) break;
 		} 
+		$_SESSION['message'] = "Registro Actualizado";
 	} 
  header("Location: destino.php");
  exit();
