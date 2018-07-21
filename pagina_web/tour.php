@@ -239,7 +239,7 @@
                 </div>
             </div>
             <hr>
-            <!--<div class="row">
+            <div class="row">
                 <div class="col-md-3">
                     <h3>Schedule</h3>
                 </div>
@@ -401,7 +401,7 @@
                         </table>
                     </div>
                 </div>
-            </div>-->
+            </div>
             
 </div><!--End  single_tour_desc-->
         
