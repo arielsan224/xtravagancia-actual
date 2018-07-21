@@ -21,7 +21,7 @@
     
 
     <!-- BASE CSS -->
-    <link href="css/base.css" rel="stylesheet">
+    <link href="/xtravagancia/css/base.css" rel="stylesheet">
 
     <!-- Google web fonts -->
    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -29,8 +29,8 @@
    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
 
     <!-- REVOLUTION SLIDER CSS -->
-    <link href="rs-plugin/css/settings.css" rel="stylesheet">
-    <link href="css/extralayers.css" rel="stylesheet">
+    <link href="/xtravagancia/rs-plugin/css/settings.css" rel="stylesheet">
+    <link href="/xtravagancia/css/extralayers.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -76,7 +76,7 @@
                                             <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
                                         </div>
                                         <a id="forgot_pw" href="#">Olvidaste contaseña?</a>
-                                        <a id="forgot_pw" href="login">Eres Administrador?</a>
+                                        <a id="forgot_pw" href="/xtravagancia/login">Eres Administrador?</a>
                                         <input type="submit" name="Sign_in" value="Iniciar Sesion" id="Sign_in" class="button_drop" style="text-align: center;">
                                         <input type="submit" name="Sign_up" value="Registrate" id="Sign_up" class="button_drop outline">
                                     </div>
@@ -92,14 +92,14 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <div id="logo_home">
-                    	<h1><a href="index" title="Xtravagancia Tours">Xtravagancia Tours</a></h1>
+                    	<h1><a href="/xtravagancia/index" title="Xtravagancia Tours">Xtravagancia Tours</a></h1>
                     </div>
                 </div>
                 <nav class="col-md-9 col-sm-9 col-xs-9">
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
+                            <img src="/xtravagancia/img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
@@ -123,7 +123,7 @@
                                 <a href="javascript:void(0);" class="show-submenu"><?php echo $lmenu['title']?> <i class="icon-down-open-mini"></i></a>
                              
                                <ul>
-								<li><a href="pagina_web/all_tours_list">Todos los tours</a></li>
+								<li><a href="/xtravagancia/pagina_web/all_tours_list">Todos los tours</a></li>
 								<?php 
 								$cat = $MySQLiconn->query("SELECT distinct cat.id_categoria, cat.descripcion
 															FROM categoria cat
@@ -147,7 +147,7 @@
 									while ($destinos = mysqli_fetch_array($dest))
 									{
 								  ?>
-								  <li><a href="pagina_web/tour?id_dest=<?php echo $destinos['id_destino']?>"><?php echo $destinos['nombre_dest']?></a>
+								  <li><a href="/xtravagancia/pagina_web/tour?id_dest=<?php echo $destinos['id_destino']?>"><?php echo $destinos['nombre_dest']?></a>
 								  </li>
 								 <?php
 									}
@@ -160,7 +160,7 @@
 								elseif (!isset($_SESSION['userId']) )
 									{															
 								?>
-                           <a href="<?php echo $lmenu['url']?>" class="show-submenu"><?php echo $lmenu['title']?> <i class=""></i></a>
+                           <a href="/xtravagancia/<?php echo $lmenu['url']?>" class="show-submenu"><?php echo $lmenu['title']?> <i class=""></i></a>
                             <?php }
 								
                                else 

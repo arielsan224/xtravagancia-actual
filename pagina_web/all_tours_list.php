@@ -3,7 +3,7 @@
   
 <?php 
 	require_once '../crud/conexion.php';
-	include_once '../includes/menuw.php' ?>
+	include_once '../includes/menu.php' ?>
 
 	<section class="parallax-window" data-parallax="scroll" data-image-src="../img/home_bg_volcan.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
