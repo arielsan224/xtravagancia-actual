@@ -404,21 +404,95 @@
             </div>
             
 </div><!--End  single_tour_desc-->
-        
         <aside class="col-md-4">
-        <!--<p class="hidden-sm hidden-xs">
-            <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-        </p>-->
-<!--/box_style_1 -->
-        
-        <div class="box_style_4">
-            <i class="icon_set_1_icon-90"></i>
-            <h4><span>Book</span> by phone</h4>
-            <a href="tel://0050589603207" class="phone">+00505 8960-3207</a>
-			<!--<small>Monday to Friday 9.00am - 7.30pm</small>-->
-        </div>
-        
-        </aside>
+					<!--<p class="hidden-sm hidden-xs">
+						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
+					</p>-->
+					<div class="box_style_1 expose" style="z-index: 4;">
+						<h3 class="inner">- Booking -</h3>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label><i class="icon-calendar-7"></i> Select a date</label>
+									<input class="date-pick form-control" data-date-format="M d, D" type="text">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label><i class=" icon-clock"></i> Time</label>
+									<input class="time-pick form-control" value="12:00 AM" type="text">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Adults</label>
+									<div class="numbers-row">
+										<input type="text" value="1" id="adults" class="qty2 form-control" name="quantity">
+									<div class="inc button_inc">+</div><div class="dec button_inc">-</div></div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Children</label>
+									<div class="numbers-row">
+										<input type="text" value="0" id="children" class="qty2 form-control" name="quantity">
+									<div class="inc button_inc">+</div><div class="dec button_inc">-</div></div>
+								</div>
+							</div>
+						</div>
+						<br>
+						<table class="table table_summary">
+							<tbody>
+								<tr>
+									<td>
+										Adults
+									</td>
+									<td class="text-right">
+										2
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Children
+									</td>
+									<td class="text-right">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Total amount
+									</td>
+									<td class="text-right">
+										3x $52
+									</td>
+								</tr>
+								<tr class="total">
+									<td>
+										Total cost
+									</td>
+									<td class="text-right">
+										$154
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<a class="btn_full" href="cart.html">Book now</a>
+						<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
+					</div>
+					<!--/box_style_1 -->
+
+					<div class="box_style_4">
+						<i class="icon_set_1_icon-90"></i>
+						<h4><span>Book</span> by phone</h4>
+						<a href="tel://0050589603207" class="phone">+00505 8960-3207</a>
+						<!--<small>Monday to Friday 9.00am - 7.30pm</small>-->
+					</div>
+
+				</aside>
+
     </div><!--End row -->
     </div><!--End container -->
  
