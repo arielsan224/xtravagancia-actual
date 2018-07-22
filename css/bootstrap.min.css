@@ -1186,7 +1186,7 @@ pre code {
 	background-color: #9fcdff
 }
 .div-hover tbody tr:hover {
-	background-color: rgba(0,0,0,.075)
+	background-color: rgba(0,0,0,.075);
 	text-decoration: underline
 }
 .table-secondary, .table-secondary>td, .table-secondary>th {
