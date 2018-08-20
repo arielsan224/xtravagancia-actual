@@ -3,3 +3,5 @@
 # Example.gitignore files : https://github.com/github/gitignore
 _notes/
 /node_modules/
+/uploads/Thumbs.db
+/img/Thumbs.db
