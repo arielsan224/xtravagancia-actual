@@ -6,8 +6,8 @@
 	}
 	require_once '../crud/conexion.php';
 		
-	$dest = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,
-													vd.imagen,vd.precio,vd.direccion,
+	$dest = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,vd.desc_larga,
+													vd.imagen,vd.precio,vd.dias,vd.minimo,vd.direccion,
 													cat.descripcion as categoria,cat.tag
 													FROM v_destinos AS vd
 													INNER JOIN (
@@ -233,34 +233,55 @@
 
 					<div class="row">
 						<div class="col-md-3">
-							<h3>Description</h3>
+							<h3>Descripción</h3>
 						</div>
 						<div class="col-md-9">
-							<h4>Paris in love</h4>
+							<h4><?php echo $getDEST['nombre_dest']?></h4>
 							<p>
-								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.
+								<?php echo $getDEST['desc_larga']?>.
 							</p>
-							<h4>What's include</h4>
+							<h4>Qué incluye</h4>
 							<p>
 								Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
 							</p>
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
 									<ul class="list_ok">
-										<li>Lorem ipsum dolor sit amet</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
-										<li>Ut est saepe munere ceteros</li>
-										<li>No scripta electram necessitatibus sit</li>
-										<li>Quidam percipitur instructior an eum</li>
+										<li>Transporte privado(ida y vuelta)</li>
+										<li>Guia de turista</li>
+										<li>Entradas</li>
+										<?php 
+										$actividad = $MySQLiconn->query("select a.descripcion
+																		from maestro_act ma
+																		inner join actividad a on a.id_actividad = ma.id_actividad
+																		where ma.id_destino = ".$_GET['id_dest']);
+										while ($lactividad = mysqli_fetch_array($actividad))
+										{
+																					
+										?>
+										
+										<li><?php echo $lactividad['descripcion']?></li>
+										
+										<?php }?>
 									</ul>
 								</div>
-								<div class="col-md-6 col-sm-6">
+								<!--<div class="col-md-6 col-sm-6">
 									<ul class="list_ok">
 										<li>Lorem ipsum dolor sit amet</li>
 										<li>No scripta electram necessitatibus sit</li>
 										<li>Quidam percipitur instructior an eum</li>
 										<li>No scripta electram necessitatibus sit</li>
+									</ul>
+								</div>-->
+							</div>
+							<h4>Información Practica</h4>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<ul class="list_ok">
+										<li>Traer zapatos deportivos , agua.</li>
+										<li>Apropiado para edades: 10-65 Años.</li>
+										<li>Duración: <?php echo $getDEST['dias']?> Dias</li>
+										<li>Minimo: <?php echo $getDEST['minimo']?> Personas</li>
 									</ul>
 								</div>
 							</div>
@@ -270,7 +291,7 @@
 					<hr>
 					<div class="row">
 						<div class="col-md-3">
-							<h3>Schedule</h3>
+							<h3>Horarios</h3>
 						</div>
 						<div class="col-md-9">
 
@@ -477,7 +498,7 @@
 							<!-- End row -->
 							<hr>
 							<div class="review_strip_single">
-								<img src="../img/avatar2.jpg" alt="Image" class="img-circle">
+								<img src="../img/avatar2.jpg" width="80" height="80" alt="Image" class="img-circle">
 								<small> - 10 March 2015 -</small>
 								<h4>Jhon Doe</h4>
 								<p>
@@ -490,7 +511,7 @@
 							<!-- End review strip -->
 
 							<div class="review_strip_single">
-								<img src="../img/avatar2.jpg" alt="Image" class="img-circle">
+								<img src="../img/avatar2.jpg" width="80" height="80" alt="Image" class="img-circle">
 								<small> - 10 March 2015 -</small>
 								<h4>Jhon Doe</h4>
 								<p>
@@ -503,7 +524,7 @@
 							<!-- End review strip -->
 
 							<div class="review_strip_single last">
-								<img src="../img/avatar2.jpg" alt="Image" class="img-circle">
+								<img src="../img/avatar2.jpg" width="80" height="80" alt="Image" class="img-circle">
 								<small> - 10 March 2015 -</small>
 								<h4>Jhon Doe</h4>
 								<p>
