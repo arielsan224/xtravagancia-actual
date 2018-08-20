@@ -99,7 +99,7 @@
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="/xtravagancia/img/logo_sticky.png" width="208" height="94" alt="Eleda tours" data-retina="true">
+                            <img src="/xtravagancia/img/logo_sticky.png" width="198" height="84" alt="Eleda tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
