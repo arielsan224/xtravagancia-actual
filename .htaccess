@@ -24,4 +24,8 @@ RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html
 #RewriteRule ^([a-z]+)/?$ $1.html [NC]
 
+
+#RewriteRule ^admin/(.*)$ /pagina_web/$1 [L,P]
+#RewriteRule ^admin/miscript\$ /pagina_web/administrador/miscript.php
+
 </IfModule>

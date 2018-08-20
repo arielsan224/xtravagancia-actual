@@ -4,10 +4,8 @@
 	if (!isset($_GET['id_dest'])){
 		header('location: all_tours_list');
 	}
-		
 	require_once '../crud/conexion.php';
-	include_once '../includes/menu.php'; 
- 
+		
 	$dest = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,
 													vd.imagen,vd.precio,vd.direccion,
 													cat.descripcion as categoria,cat.tag
@@ -21,9 +19,18 @@
 														ON cat.id_destino = vd.id_destino
 													WHERE vd.id_estatus = 1
 													AND vd.id_destino=".$_GET['id_dest']);
-
-	
+  $countdest = mysqli_num_rows($dest);
+  if( $countdest == 0)
+				  {
+				   header('location: all_tours_list');
+				  }
+  	
   $getDEST = $dest->fetch_array();
+ 
+	include_once '../includes/menu.php'; 
+ 
+	
+	
 
 ?>
 	<!-- End Header -->
@@ -52,11 +59,11 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="#">Home</a>
+					<li><a href="/xtravagancia/index">Home</a>
 					</li>
 					<li><a href="#">Category</a>
 					</li>
-					<li>Page active</li>
+					<li><?php echo $getDEST['nombre_dest']?></li>
 				</ul>
 			</div>
 		</div>
@@ -72,13 +79,21 @@
 				<div class="col-md-8" id="single_tour_desc">
 					<div id="single_tour_feat">
 						<ul>
-							<li><i class="icon_set_1_icon-4"></i>Museum</li>
-							<li><i class="icon_set_1_icon-83"></i>3 Hours</li>
-							<li><i class="icon_set_1_icon-13"></i>Accessibiliy</li>
-							<li><i class="icon_set_1_icon-82"></i>144 Likes</li>
-							<li><i class="icon_set_1_icon-22"></i>Pet allowed</li>
-							<li><i class="icon_set_1_icon-97"></i>Audio guide</li>
-							<li><i class="icon_set_1_icon-29"></i>Tour guide</li>
+						<?php 
+							$contenido_d = $MySQLiconn->query("select t.class,t.descripcion
+																from maestro_contenido ma
+																inner join tags t on t.id_tag = ma.id_tag
+																where ma.id_destino = ".$_GET['id_dest']);
+							while ($l_contenido_d = mysqli_fetch_array($contenido_d))
+							{
+								
+							
+
+						?>
+							<li><i class="<?php echo $l_contenido_d['class']?>"></i><?php echo $l_contenido_d['descripcion']?></li>
+						<?php
+								}
+								?>
 						</ul>
 					</div>
 
@@ -462,7 +477,7 @@
 							<!-- End row -->
 							<hr>
 							<div class="review_strip_single">
-								<img src="img/avatar1.jpg" alt="Image" class="img-circle">
+								<img src="../img/avatar2.jpg" alt="Image" class="img-circle">
 								<small> - 10 March 2015 -</small>
 								<h4>Jhon Doe</h4>
 								<p>
@@ -475,7 +490,7 @@
 							<!-- End review strip -->
 
 							<div class="review_strip_single">
-								<img src="img/avatar3.jpg" alt="Image" class="img-circle">
+								<img src="../img/avatar2.jpg" alt="Image" class="img-circle">
 								<small> - 10 March 2015 -</small>
 								<h4>Jhon Doe</h4>
 								<p>
@@ -488,7 +503,7 @@
 							<!-- End review strip -->
 
 							<div class="review_strip_single last">
-								<img src="img/avatar2.jpg" alt="Image" class="img-circle">
+								<img src="../img/avatar2.jpg" alt="Image" class="img-circle">
 								<small> - 10 March 2015 -</small>
 								<h4>Jhon Doe</h4>
 								<p>

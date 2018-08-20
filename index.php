@@ -136,7 +136,7 @@
             
         </div><!-- End row -->
         <p class="text-center add_bottom_30">
-            <a href="all_tours_list.html" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours  </a>
+            <a href="pagina_web/all_tours_list" class="btn_1 medium"><i class="icon-eye-7"></i>View all tours  </a>
         </p>
 <!-- End row -->    </div><!-- End container -->
     <!-- End white_bg -->
