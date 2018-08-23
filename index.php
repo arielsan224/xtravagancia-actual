@@ -116,7 +116,7 @@
                 <div class="tour_container">
                 	<div class="ribbon_3 popular"><span>Top rated</span></div>
                     <div class="img_container">
-                        <a href="tour?id_dest=<?php echo $lisd['id_destino']; ?> ">
+                        <a href="pagina_web/tour?id_dest=<?php echo $lisd['id_destino']; ?> ">
                         <img src="<?php echo $lisd['imagen']?>" class="img-responsive" alt="image">
                         <div class="short_info">
                             <i class="<?php echo $lisd['tag']?>"></i><?php echo $lisd['categoria']?> <span class="price"><sup>$</sup><?php echo $lisd['precio']?></span>

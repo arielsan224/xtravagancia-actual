@@ -117,7 +117,7 @@
 								<div class="ribbon_3 popular"><span>Top rated</span>
 								</div>
 						<div class="img_list">
-						  <a href="../<?php echo $all_tour_list['imagen']?>"><img src="../<?php echo $all_tour_list['imagen']?>" alt="Image">
+						  <a href="tour?id_dest=<?php echo $all_tour_list['id_destino']?>"><img src="../<?php echo $all_tour_list['imagen']?>" alt="Image">
 						  <div class="short_info"><i class="<?php echo $all_tour_list['tag']?>"></i><?php echo $all_tour_list['categoria']?> </div>
 									</a>
 								</div>
@@ -140,12 +140,12 @@
 																			FROM horario_destino AS hd
 																			INNER JOIN tiempo t ON t.id_tiempo = hd.id_tiempo
 																			INNER JOIN rango_dias rd ON rd.id_rango_dias = t.id_rango_dias
-																			WHERE hd.estatus = 1 AND hd.id_destino = ".$all_tour_list['id_destino']);
+																			WHERE hd.estatus = 1 AND hd.id_destino = ".$all_tour_list['id_destino']." order by rd.id_rango_dias");
 											while ($horarios = mysqli_fetch_array($horario))
 											{ 
 													
 													?>
-													<strong><?php echo $horarios['dias']?></strong> <?php echo date('h:i A',strtotime($horarios['inicio']))?> - <?php echo date('h:i A',strtotime($horarios['fin']))?>
+													<strong><?php echo $horarios['dias']?></strong> <?php echo date('h:i A',strtotime($horarios['inicio'])).'-'.date('h:i A',strtotime($horarios['fin']))?>
 													<br>
 													
 											<?php 
@@ -187,7 +187,7 @@
 							<div class="col-lg-2 col-md-2 col-sm-2">
 								<div class="price_list">
 									<div><sup>$</sup><?php echo $all_tour_list['precio']?>*<span class="normal_price_list">$<?php echo $all_tour_list['precio']?></span><small>*Per person</small>
-										<p><a href="tour?id_dest=<?php echo $all_tour_list['id_destino']?>" class="btn_1">Details</a>
+										<p><a href="tour?id_dest=<?php echo $all_tour_list['id_destino']?>" class="btn_1">Detalle</a>
 										</p>
 									</div>
 

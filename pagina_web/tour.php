@@ -300,156 +300,35 @@
 									<thead>
 										<tr>
 											<th colspan="2">
-												1st March to 31st October
+												Dias
 											</th>
 										</tr>
 									</thead>
 									<tbody>
+					<?php 
+						$horarios = $MySQLiconn->query("select rd.dias,t.inicio,t.fin
+									from horario_destino as hd
+									inner join tiempo t on hd.id_tiempo = t.id_tiempo
+									inner join rango_dias rd on t.id_rango_dias = rd.id_rango_dias
+									where hd.id_destino = ".$_GET['id_dest']."
+									order by rd.id_rango_dias");
+						while ($lhorarios = mysqli_fetch_array($horarios))
+						{ 
+
+					?>
 										<tr>
 											<td>
-												Monday
+												<?php echo $lhorarios['dias']?>
 											</td>
 											<td>
-												10.00 - 17.30
+												<?php echo date('h:i A',strtotime($lhorarios['inicio'])).'-'.date('h:i A',strtotime($lhorarios['fin']))?>
 											</td>
 										</tr>
-										<tr>
-											<td>
-												Tuesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Wednesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Thursday
-											</td>
-											<td>
-												<span class="label label-danger">Closed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Friday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Saturday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Sunday
-											</td>
-											<td>
-												10.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong><em>Last Admission</em></strong>
-											</td>
-											<td>
-												<strong>17.00</strong>
-											</td>
-										</tr>
-									</tbody>
+					<?php }?>
+										</tbody>
 								</table>
 							</div>
 
-							<div class=" table-responsive">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th colspan="2">
-												1st November to 28th February
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												Monday
-											</td>
-											<td>
-												10.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Tuesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Wednesday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Thursday
-											</td>
-											<td>
-												<span class="label label-danger">Closed</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Friday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Saturday
-											</td>
-											<td>
-												09.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												Sunday
-											</td>
-											<td>
-												10.00 - 17.30
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong><em>Last Admission</em></strong>
-											</td>
-											<td>
-												<strong>17.00</strong>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
 						</div>
 					</div>
 					<hr>
@@ -497,43 +376,31 @@
 							</div>
 							<!-- End row -->
 							<hr>
+							<?php 
+							  $review = $MySQLiconn->query("select CONCAT (u.nombre,' ',u.apellido) AS n_apellidos,u.imagen,r.limpieza,r.puntualidad,
+							  r.at_cliente, r.fecha, r.Comentario from rating r
+							  inner join usuario u on r.id_usuario = u.id_usuario
+							  where r.estatus = 1
+							  and r.id_destino = ".$_GET['id_dest']);
+							
+							while ($lreview = mysqli_fetch_array($review))
+								{ 
+								 	$date = date_create($lreview['fecha']);
+									$fechaformat = date_format($date, 'd M Y');
+							?>
 							<div class="review_strip_single">
-								<img src="../img/avatar2.jpg" width="80" height="80" alt="Image" class="img-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
+								<img src="../<?php echo $lreview['imagen']?>" width="80" height="80" alt="Image" class="img-circle">
+								<small> - <?php echo $fechaformat ?> -</small>
+								<h4><?php echo $lreview['n_apellidos']?></h4>
 								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+									"<?php echo $lreview['Comentario']?>."
 								</p>
 								<div class="rating">
 									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
 								</div>
 							</div>
-							<!-- End review strip -->
-
-							<div class="review_strip_single">
-								<img src="../img/avatar2.jpg" width="80" height="80" alt="Image" class="img-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
-							<!-- End review strip -->
-
-							<div class="review_strip_single last">
-								<img src="../img/avatar2.jpg" width="80" height="80" alt="Image" class="img-circle">
-								<small> - 10 March 2015 -</small>
-								<h4>Jhon Doe</h4>
-								<p>
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
-								</p>
-								<div class="rating">
-									<i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
-								</div>
-							</div>
+							
+							<?php } ?>
 							<!-- End review strip -->
 						</div>
 					</div>
