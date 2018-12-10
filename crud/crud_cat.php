@@ -10,12 +10,15 @@ if(isset($_POST['save']))
      $descripcion = $MySQLiconn->real_escape_string($_POST['descripcion']);
  
   $SQL = $MySQLiconn->query("INSERT INTO categoria(descripcion) VALUES('$descripcion')");
-  $_SESSION['message'] = "Registro Guardado";
-  
+    
   if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Guardado";
+  }
 }
 /* code for data insert */
 
@@ -24,12 +27,16 @@ if(isset($_POST['save']))
 if(isset($_GET['del']))
 {
  $SQL = $MySQLiconn->query("DELETE FROM categoria WHERE id_categoria=".$_GET['del']);
- $SQL2 = $MySQLiconn->query("ALTER TABLE categoria AUTO_INCREMENT=1");
- $_SESSION['message'] = "Registro Borrado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al borrar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $SQL2 = $MySQLiconn->query("ALTER TABLE categoria AUTO_INCREMENT=1");
+ 	  $_SESSION['message'] = "Registro Borrado";
+  }
  header("Location: categoria.php");
  exit();
 }
@@ -47,11 +54,15 @@ if(isset($_GET['edit']))
 if(isset($_POST['update']))
 {
  $SQL = $MySQLiconn->query("UPDATE categoria SET descripcion='".$_POST['descripcion']."' WHERE id_categoria=".$_GET['edit']);
- $_SESSION['message'] = "Registro Actualizado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al actualizar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Actualizado";
+  }
  header("Location: categoria.php");
  exit();
 }

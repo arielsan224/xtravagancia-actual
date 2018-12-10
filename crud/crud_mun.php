@@ -10,12 +10,16 @@ if(isset($_POST['save']))
      $id_depto = $MySQLiconn->real_escape_string($_POST['id_depto']);
  
   $SQL = $MySQLiconn->query("INSERT INTO municipio(nombre_municipio,id_depto) VALUES('$nombre_municipio','$id_depto')");
-  $_SESSION['message'] = "Registro Guardado";
+  
   
   if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Guardado";
+  }
 }
 /* code for data insert */
 
@@ -24,12 +28,16 @@ if(isset($_POST['save']))
 if(isset($_GET['del']))
 {
  $SQL = $MySQLiconn->query("DELETE FROM municipio WHERE id_municipio=".$_GET['del']);
- $SQL2 = $MySQLiconn->query("ALTER TABLE municipio AUTO_INCREMENT=1");
- $_SESSION['message'] = "Registro Borrado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al borrar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $SQL2 = $MySQLiconn->query("ALTER TABLE municipio AUTO_INCREMENT=1");
+      $_SESSION['message'] = "Registro Borrado";
+  }
  header("Location: municipio.php");
  exit();
 }
@@ -48,11 +56,15 @@ from municipio mun inner join departamento dep on mun.id_depto = dep.id_depto WH
 if(isset($_POST['update']))
 {
  $SQL = $MySQLiconn->query("UPDATE municipio SET nombre_municipio='".$_POST['nombre_municipio']."' WHERE id_municipio=".$_GET['edit']);
- $_SESSION['message'] = "Registro Actualizado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al actualizar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Actualizado";
+  }
  header("Location: municipio.php");
  exit();
 }

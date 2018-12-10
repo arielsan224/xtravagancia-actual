@@ -6,7 +6,7 @@ session_start();
  
 if(isset($_SESSION['userId'])) {
 	if ($_SESSION['user_type'] == 1 ){
-	header('location: appweb/dashboard');	
+	header('location: appweb/admin');	
 		}
 	else header('location: index');
 }
@@ -91,6 +91,18 @@ if($_POST) {
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style type="text/css">
+	
+	  html {
+                background: url("img/login-bg.jpg") no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+	
+  </style>
+  
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -128,7 +140,7 @@ if($_POST) {
         </div>-->
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
         </div>
         <!-- /.col -->
       </div>

@@ -29,3 +29,5 @@ RewriteRule ^(.*)$ $1.html
 #RewriteRule ^admin/miscript\$ /pagina_web/administrador/miscript.php
 
 </IfModule>
+
+ErrorDocument 404 /xtravagancia/404.php

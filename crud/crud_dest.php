@@ -94,20 +94,30 @@ if(isset($_POST['save']))
 
 
 /* code for data delete */
-if(isset($_GET['del']))
+if(isset($_GET['del'], $_GET['url']))
 {
- $SQL = $MySQLiconn->query("DELETE FROM destino WHERE id_destino=".$_GET['del']);
- $SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
- if(!$SQL)
-  {
-   //echo $MySQLiconn->error;
-	 $_SESSION['message'] = "Error al eliminar los registros. Error ( ".$MySQLiconn->error.")";
-  } 
- else {
-	 $_SESSION['message'] = "Registro Borrado";
- }
- header("Location: destino.php");
- exit();
+  if(unlink($_GET['url'])) { 
+	
+	 $SQL = $MySQLiconn->query("DELETE FROM destino WHERE id_destino=".$_GET['del']);
+	 
+	 if(!$SQL)
+	  {
+	   //echo $MySQLiconn->error;
+		 $_SESSION['message'] = "Error al eliminar los registros. Error ( ".$MySQLiconn->error.")";
+	  } 
+	 else {
+		 $_SESSION['message'] = "Registro Borrado";
+		 $SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
+	 }
+	 header("Location: destino.php");
+	 exit();
+	 }
+	else {
+		$_SESSION['message'] = "No se pudo eliminar el archivo. Error ( ".$MySQLiconn->error.")";
+		header("Location: destino.php");
+		//exit();
+	}
+	 
 }
 /* code for data delete */
 

@@ -15,12 +15,16 @@ if(isset($_POST['save']))
 	 $password = md5($password);
  
   $SQL = $MySQLiconn->query("INSERT INTO usuario(password,nombre,apellido,email,id_tipo_usuario,id_estatus) VALUES('$password','$nombre','$apellido','$email','$id_tipo_usuario','$id_estatus')");
-  $_SESSION['message'] = "Registro Guardado";
+  
   
   if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Guardado";
+  }
 }
 /* code for data insert */
 
@@ -29,12 +33,16 @@ if(isset($_POST['save']))
 if(isset($_GET['del']))
 {
  $SQL = $MySQLiconn->query("DELETE FROM usuario WHERE id_usuario=".$_GET['del']);
- $SQL2 = $MySQLiconn->query("ALTER TABLE usuario AUTO_INCREMENT=1");
- $_SESSION['message'] = "Registro Borrado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al borrar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $SQL2 = $MySQLiconn->query("ALTER TABLE usuario AUTO_INCREMENT=1");
+      $_SESSION['message'] = "Registro Borrado";
+  }
  header("Location: usuario.php");
  exit();
 }
@@ -65,11 +73,15 @@ if(isset($_POST['update']))
 	 $password = md5($password);
 
  $SQL = $MySQLiconn->query("UPDATE usuario SET password= '".$password."', nombre='".$nombre."', apellido='".$apellido."', email='".$email."', id_tipo_usuario='".$id_tipo_usuario."', id_estatus= '".$id_estatus."'  WHERE id_usuario=".$_GET['edit']);
- $_SESSION['message'] = "Registro Actualizado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al actualizar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Actualizado";
+  }
  header("Location: usuario.php");
  exit();
 }

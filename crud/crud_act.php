@@ -10,12 +10,15 @@ if(isset($_POST['save']))
      $id_categoria = $MySQLiconn->real_escape_string($_POST['id_categoria']);
  
   $SQL = $MySQLiconn->query("INSERT INTO actividad(descripcion,id_categoria) VALUES('$actividad','$id_categoria')");
-  $_SESSION['message'] = "Registro Guardado";
-  
+    
   if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Guardado";
+  }
 }
 /* code for data insert */
 
@@ -24,12 +27,16 @@ if(isset($_POST['save']))
 if(isset($_GET['del']))
 {
  $SQL = $MySQLiconn->query("DELETE FROM actividad WHERE id_actividad=".$_GET['del']);
- $SQL2 = $MySQLiconn->query("ALTER TABLE actividad AUTO_INCREMENT=1");
- $_SESSION['message'] = "Registro Borrado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al borrar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $SQL2 = $MySQLiconn->query("ALTER TABLE actividad AUTO_INCREMENT=1");
+ 	  $_SESSION['message'] = "Registro Borrado";
+  }
  header("Location: actividad.php");
  exit();
 }
@@ -48,11 +55,15 @@ from actividad as act inner join categoria as cat on act.id_categoria = cat.id_c
 if(isset($_POST['update']))
 {
  $SQL = $MySQLiconn->query("UPDATE actividad SET descripcion='".$_POST['actividad']."' WHERE id_actividad=".$_GET['edit']);
- $_SESSION['message'] = "Registro Actualizado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al actualizar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Actualizado";
+  }
  header("Location: actividad.php");
  exit();
 }

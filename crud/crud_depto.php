@@ -10,12 +10,16 @@ if(isset($_POST['save']))
      $nombre_depto = $MySQLiconn->real_escape_string($_POST['nombre_depto']);
  
   $SQL = $MySQLiconn->query("INSERT INTO departamento(nombre_depto) VALUES('$nombre_depto')");
-  $_SESSION['message'] = "Registro Guardado";
+  
   
   if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Guardado";
+  }
 }
 /* code for data insert */
 
@@ -24,12 +28,17 @@ if(isset($_POST['save']))
 if(isset($_GET['del']))
 {
  $SQL = $MySQLiconn->query("DELETE FROM departamento WHERE id_depto=".$_GET['del']);
- $SQL2 = $MySQLiconn->query("ALTER TABLE departamento AUTO_INCREMENT=1");
- $_SESSION['message'] = "Registro Borrado";
+  
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
-  } 
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al borrar los registros. Error ( ".$MySQLiconn->error.")";
+	  //$_SESSION['message'] = "Error al borrar los registros. Error ( ".mysqli_error($SQL).")";
+  }
+  else {
+	  $_SESSION['message'] = "Registro Borrado";
+	  $SQL2 = $MySQLiconn->query("ALTER TABLE departamento AUTO_INCREMENT=1");
+  }
  header("Location: departamento.php");
  exit();
 }
@@ -47,11 +56,15 @@ if(isset($_GET['edit']))
 if(isset($_POST['update']))
 {
  $SQL = $MySQLiconn->query("UPDATE departamento SET nombre_depto='".$_POST['nombre_depto']."' WHERE id_depto=".$_GET['edit']);
- $_SESSION['message'] = "Registro Actualizado";
+ 
  if(!$SQL)
   {
-   echo $MySQLiconn->error;
+   //echo $MySQLiconn->error;
+	  $_SESSION['message'] = "Error al actualizar los registros. Error ( ".$MySQLiconn->error.")";
   } 
+  else {
+	  $_SESSION['message'] = "Registro Actualizado";
+  }
  header("Location: departamento.php");
  exit();
 }
