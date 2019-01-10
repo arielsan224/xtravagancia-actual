@@ -71,6 +71,33 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 														<input type="text" class="form-control" id="nombre_depto" placeholder="Nombre departamento" name="nombre_depto" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_depto'];  ?>" required>
 													</div>
 												</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Estatus</label>
+													<select class="form-control" name="id_estatus" id="id_estatus" required>
+														<option value="">Seleccione estatus</option>
+														<?php
+														$destest = $MySQLiconn->query( "SELECT * FROM estatus" );
+														while ( $row = $destest->fetch_array() ) {
+															if ( $getROW[ 'estatus' ] == $row[ 'id_estatus' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_estatus'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_estatus'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
+												</div>
+											</div>
 
 											</div>
 
@@ -150,11 +177,11 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<?php } ?>
 							<!-- /.box-header -->
 							<div class="box-body">
-							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" >
+							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" style="width:100%">
                               <thead>  
                                <tr>  
                                     <td>Id</td>  
-                                    <td>Departemanto</td>
+                                    <td>Departamento</td>
                                     <td style="text-align:center;">Acciones</td>
                                </tr>  
                           	 </thead>  
@@ -166,14 +193,14 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-									<td>
+									<td width="5%">
 										<?php echo $row['id_depto']; ?>
 									</td>
 									<td>
 										<?php echo $row['nombre_depto']; ?>
 									</td>
 									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									   <a href="?del=<?php echo $row['id_depto']; ?> " onclick="return confirm('Estas seguro que desea Inactivar el registro !'); "class="btn btn-danger btn-sm" role="button">Inactivar</a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
@@ -241,6 +268,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
             sortDescending: ": Activar para ordenar la columna de manera descendente"
         }
     }
+		
 });
 	  document.title= "AdminLTE | Catalogos";
 	  $("li").removeClass("active");

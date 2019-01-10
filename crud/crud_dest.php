@@ -94,29 +94,42 @@ if(isset($_POST['save']))
 
 
 /* code for data delete */
-if(isset($_GET['del'], $_GET['url']))
+if(isset($_GET['del'], $_GET['est']))
 {
-  if(unlink($_GET['url'])) { 
+  //if(unlink($_GET['url'])) { 
+	 if ($_GET['est']==1)
+	 {
+		 $estatus = 2;
+		 $est_text = 'inactivar';
+		 $esta_text = 'Inactivado';
+	 }
+	 else {
+		 $estatus = 1;
+		 $est_text = 'Activar';
+		 $esta_text = 'Activado';
+	 }
 	
-	 $SQL = $MySQLiconn->query("DELETE FROM destino WHERE id_destino=".$_GET['del']);
+	 //$SQL = $MySQLiconn->query("DELETE FROM destino WHERE id_destino=".$_GET['del']);
+	 $SQL = $MySQLiconn->query("UPDATE destino SET estatus= '".$estatus."'  WHERE id_destino=".$_GET['del']);
+	  
 	 
 	 if(!$SQL)
 	  {
 	   //echo $MySQLiconn->error;
-		 $_SESSION['message'] = "Error al eliminar los registros. Error ( ".$MySQLiconn->error.")";
+		 $_SESSION['message'] = "Error al '".$est_text."' los registros. Error ( ".$MySQLiconn->error.")";
 	  } 
 	 else {
-		 $_SESSION['message'] = "Registro Borrado";
-		 $SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
+		 $_SESSION['message'] = "Registro ".$esta_text;
+		 //$SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
 	 }
 	 header("Location: destino.php");
 	 exit();
-	 }
+	/*  }
 	else {
-		$_SESSION['message'] = "No se pudo eliminar el archivo. Error ( ".$MySQLiconn->error.")";
+		$_SESSION['message'] = "No se pudo inactivar el archivo. Error ( ".$MySQLiconn->error.")";
 		header("Location: destino.php");
 		//exit();
-	}
+	} */
 	 
 }
 /* code for data delete */

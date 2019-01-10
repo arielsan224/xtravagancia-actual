@@ -309,7 +309,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Descripcion Larga</label>
-													<textarea type="text" class="form-control" id="desc_larga" placeholder="Descripcion Larga" name="desc_larga" required rows="4"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
+													<textarea type="text" class="form-control" id="desc_larga" placeholder="Descripcion Larga" name="desc_larga" required rows="6"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
 												</div>
 											</div>
 
@@ -431,9 +431,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 								   <td ><?php echo $row['precio']; ?></td>
 								   <td ><?php echo $row['dias']; ?></td>
 								   <td ><?php echo $row['actividades']; ?></td>
-								   <td ><span <?php if ($row['id_estatus']==1) { ?>class="label label-success"<?php } else { ?>class="label label-danger"<?php }?>><?php echo $row['estatus']; ?></span></td>
+								   <td ><span <?php if ($row['id_estatus']==1) { ?>class="label label-success"<?php } else { ?>class="label label-danger"<?php }?> ><?php echo $row['estatus']; ?></span></td>
 									<td class= "text-center" ><a href="?edit=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php echo $row['id_destino']; ?>&url=../<?php echo $row['imagen']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									   <a href="?del=<?php echo $row['id_destino']; ?>&est=<?php echo $row['id_estatus']; ?> " onclick="return confirm('Estas seguro que desea activar/inactivar el registro !'); "class="btn <?php if ($row['id_estatus']==1){  ?> btn-danger <?php } else { ?>btn-primary <?php }?> btn-sm" role="button"><?php if ($row['id_estatus']==1){  ?> inactivar <?php } else { ?>activar <?php }?></a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
@@ -517,6 +517,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
             sortDescending: ": Activar para ordenar la columna de manera descendente"
         }
     }
+		  
 });
 	  document.title= "AdminLTE | Catalogos";
 	  $("li").removeClass("active");

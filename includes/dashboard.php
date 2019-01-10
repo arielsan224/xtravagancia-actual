@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="../bower_components/select2/dist/css/select2.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/fontello/css/all-fontello.min.css"	>				
+  <link rel="stylesheet" href="../css/icon_restaurant/css/icon_restaurants.min.css"	>		
+  <link rel="stylesheet" href="../css/new_icons/css/icon_set_all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
   <!-- jvectormap -->

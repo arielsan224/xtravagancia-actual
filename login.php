@@ -46,7 +46,7 @@ if($_POST) {
 				$_SESSION['user_type'] = $user_type;
 				$_SESSION['tiempo'] = time();
 				if ($_SESSION['user_type'] == 1 ){
-					header('location: appweb/dashboard');	
+					header('location: appweb/admin');	
 						}
 					else header('location: index');
 				/*header('location: http://localhost:9080/stock/dashboard.php');	*/
