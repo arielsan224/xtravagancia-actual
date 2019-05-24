@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -31,6 +32,11 @@
     <!-- REVOLUTION SLIDER CSS -->
     <link href="/xtravagancia/rs-plugin/css/settings.css" rel="stylesheet">
     <link href="/xtravagancia/css/extralayers.css" rel="stylesheet">
+	<!-- Theme style -->
+  <link rel="stylesheet" href="/xtravagancia/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/xtravagancia/dist/css/skins/_all-skins.min.css">
 
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -65,6 +71,37 @@
                     
                     <div class="col-md-6 col-sm-6 col-xs-6">
 						<ul id="top_links">
+							 <?php if (isset($_SESSION['userId'])){  
+			$user = $MySQLiconn->query("SELECT us.id_usuario, CONCAT (us.nombre,' ',us.apellido) AS n_apellidos, us.email, 
+						IFNULL(us.telefono,'0') AS telefono,us.fecha_creacion,us.imagen,tu.descripcion
+						FROM usuario us
+						INNER JOIN tipo_usuario tu ON tu.id_tipo_usuario = us.id_tipo_usuario
+						WHERE us.id_usuario = ".$_SESSION['userId']);
+			$usinfo = mysqli_fetch_assoc($user);
+			$date = date_create($usinfo['fecha_creacion']);
+			$fechaformat = date_format($date, 'd/m/Y');
+			
+			?>
+          
+							<li>
+                                <div class="dropdown dropdown-access">
+                                    <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="false"><?php echo $usinfo['n_apellidos']?></a>
+                                    <div class="dropdown-menu">
+                                        <div class="form-group" style="text-align: center">
+                                            <img src="/xtravagancia<?php echo $usinfo['imagen']?>" class="img-circle" alt="User Image">
+
+												<p style="padding: 40px">
+												  <?php echo $usinfo['n_apellidos']?> - <?php echo $usinfo['descripcion']?>
+												
+												  <small>Miembro desde <?php echo $fechaformat?></small>
+												</p>
+										</div>
+                                        <input onclick="window.location.href='perfil'" name="Perfil" value="Perfil" id="Perfil" class="button_drop" style="text-align: center;">
+                                        <input onclick="window.location.href='logout'" name="Sign out" value="Sign out" id="Sign out" class="button_drop outline">
+                                    </div>
+                                </div><!-- End Dropdown access -->
+                            </li>
+          <?php } else { ?>
                             <li>
                                 <div class="dropdown dropdown-access">
                                     <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="false">Iniciar Sesion</a>
@@ -82,6 +119,7 @@
                                     </div>
                                 </div><!-- End Dropdown access -->
                             </li>
+							<?php }?>
                         </ul>
 					</div>
                 </div><!-- End row -->
@@ -157,22 +195,24 @@
 								<?php }?>
 							  </ul>
                                 <?php }
-								elseif (!isset($_SESSION['userId']) )
+								else
 									{															
 								?>
                            <a href="/xtravagancia/<?php echo $lmenu['url']?>" class="show-submenu"><?php echo $lmenu['title']?> <i class=""></i></a>
                             <?php }
 								
-                               else 
-									{															
+                               															
 								?>
-                           <a href="busquedas" class="show-submenu">Busquedas <i class=""></i></a>
-                           <a href="reservaciones" class="show-submenu">Reservaciones <i class=""></i></a>
-                            <?php }?>
-                                
+                           
+                            <?php } ?>
+								
                             </li>
                             
-                            <?php }?>
+                            <?php if (isset($_SESSION['userId']) ) 
+									{
+								?>
+                              <li><a href="busquedas" class="show-submenu">Busquedas <i class=""></i></a></li>
+                           	  <li><a href="reservaciones" class="show-submenu">Reservaciones <i class=""></i></a>  </li><?php }?>
                             
 <!--
                                <li class="submenu">

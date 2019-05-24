@@ -215,6 +215,7 @@
     <script src="rs-plugin/js/jquery.themepunch.tools.min.js"></script>
     <script src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="js/revolution_func.js"></script>
+	<script src="dist/js/adminlte.min.js"></script>
     
     <script src="/xtravagancia/js/theia-sticky-sidebar.js"></script>
 	<script>

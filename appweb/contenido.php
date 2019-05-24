@@ -398,7 +398,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<?php } ?>
 							<!-- /.box-header -->
 							<div class="box-body">
-							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" >
+							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" style="width:100%">
                               <thead>  
                                <tr>  
 								  <td>Imagen</td>

@@ -398,7 +398,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<?php } ?>
 							<!-- /.box-header -->
 							<div class="box-body">
-							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" >
+							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" style="width:100%">
                               <thead>  
                                <tr>  
 								  <td>Imagen</td>
@@ -429,7 +429,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 								   <td ><?php echo $row['nombre_depto']; ?></td>
 								   <td ><?php echo $row['nombre_municipio']; ?></td>
 								   <td ><?php echo $row['precio']; ?></td>
-								   <td ><?php echo $row['dias']; ?></td>
+								   <td width="5%"><?php echo $row['dias']; ?></td>
 								   <td ><?php echo $row['actividades']; ?></td>
 								   <td ><span <?php if ($row['id_estatus']==1) { ?>class="label label-success"<?php } else { ?>class="label label-danger"<?php }?> ><?php echo $row['estatus']; ?></span></td>
 									<td class= "text-center" ><a href="?edit=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>

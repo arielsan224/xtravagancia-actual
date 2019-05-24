@@ -150,7 +150,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<?php } ?>
 							<!-- /.box-header -->
 							<div class="box-body">
-							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" >
+							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" style="width:100%">
                               <thead>  
                                <tr>  
                                     <td>Id</td>  
@@ -169,7 +169,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-									<td ><?php echo $row['id_categoria']; ?></td>
+									<td width="5%"><?php echo $row['id_categoria']; ?></td>
               						<td ><?php echo $row['descripcion']; ?></td>
 								   <td ><i class="<?php echo $row['class']; ?>"><?php echo $row['class']; ?></i></td>
 									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_categoria']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>

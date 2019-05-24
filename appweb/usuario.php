@@ -226,7 +226,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<?php } ?>
 							<!-- /.box-header -->
 							<div class="box-body">
-							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" >
+							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" style="width:100%">
                               <thead>  
                                <tr>  
 								  <td>Id</td>
@@ -252,7 +252,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-									  <td ><?php echo $row['id_usuario']; ?></td>
+									  <td width="5%"><?php echo $row['id_usuario']; ?></td>
 									  <td ><?php echo $row['nombre']; ?></td>
 									  <td ><?php echo $row['apellido']; ?></td>
 <!--									  <td ><?php echo $row['password']; ?></td>-->
