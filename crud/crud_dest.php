@@ -13,6 +13,8 @@ if(isset($_POST['save']))
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
      $dias = $MySQLiconn->real_escape_string($_POST['dias']);
 	 $id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
+	 $minimo = $MySQLiconn->real_escape_string($_POST['minimo']);
+	 $direccion = $MySQLiconn->real_escape_string($_POST['direccion']);
 //     $imagen = $MySQLiconn->real_escape_string($_POST['imagen']);
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
@@ -34,7 +36,7 @@ if(isset($_POST['save']))
 	
 	    
  
-		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,desc_corta,desc_larga,id_municipio,precio,dias,imagen,estatus) VALUES('$nombre_dest','$desc_corta ','$desc_larga ',' $id_municipio','$precio','$dias','$imagen_ins','$id_estatus')");
+		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,desc_corta,desc_larga,id_municipio,precio,dias,imagen,estatus,minimo, direccion) VALUES('$nombre_dest','$desc_corta ','$desc_larga ',' $id_municipio','$precio','$dias','$imagen_ins','$id_estatus','$minimo','$direccion')");
 
 			$inserted = mysqli_insert_id($MySQLiconn);
 
@@ -93,13 +95,13 @@ if(isset($_POST['save']))
 /* code for data insert */
 
 
-/* code for data delete */
+/* code for data delete or inactive */
 if(isset($_GET['del'], $_GET['est']))
 {
   //if(unlink($_GET['url'])) { 
 	 if ($_GET['est']==1)
 	 {
-		 $estatus = 2;
+		 $estatus = 0;
 		 $est_text = 'inactivar';
 		 $esta_text = 'Inactivado';
 	 }
@@ -139,13 +141,13 @@ if(isset($_GET['del'], $_GET['est']))
 /* code for data update */
 if(isset($_GET['edit']))
 {
- $SQL = $MySQLiconn->query("SELECT dest.id_destino,dest.nombre_dest,dest.desc_corta,dest.desc_larga, mun.id_depto, dest.id_municipio, 
+ $SQL = $MySQLiconn->query("SELECT dest.id_destino,dest.nombre_dest, 																dest.direccion,dest.desc_corta,dest.desc_larga, mun.id_depto, 											dest.id_municipio, 
 								   (SELECT ac.id_categoria
 									FROM maestro_act as ma
 									inner join actividad as ac on ma.id_actividad = ac.id_actividad
 									where ma.id_destino = dest.id_destino
 									group by ac.id_categoria) as id_categoria,
-								   dest.precio,dest.dias,
+								   dest.precio,dest.dias,dest.minimo,
 								   dest.imagen,dest.estatus
 							from destino as dest
 							inner join municipio as mun on dest.id_municipio = mun.id_municipio
@@ -170,6 +172,8 @@ if(isset($_POST['update']))
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
      $dias = $MySQLiconn->real_escape_string($_POST['dias']);
 	 $id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
+	 $minimo = $MySQLiconn->real_escape_string($_POST['minimo']);
+	 $direccion = $MySQLiconn->real_escape_string($_POST['direccion']);
 //     $imagen = $MySQLiconn->real_escape_string($_POST['imagen']);
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
@@ -219,7 +223,8 @@ if(isset($_POST['update']))
 //	}  en la actualizacion si no se cargo imagen es porque no se actualizo la imagen
 	
 	 
-	$SQL = $MySQLiconn->query("UPDATE destino SET nombre_dest= '".$nombre_dest."',desc_corta='".$desc_corta."',desc_larga='".$desc_larga."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'  WHERE id_destino=".$id_destino);
+	$SQL = $MySQLiconn->query("UPDATE destino SET nombre_dest= '".$nombre_dest."',desc_corta='".$desc_corta."',desc_larga='".$desc_larga."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'
+	, minimo ='".$minimo."', direccion = '".$direccion."' WHERE id_destino=".$id_destino);
  	
  
 	if(!$SQL)

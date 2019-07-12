@@ -27,21 +27,33 @@ if(isset($_POST['save']))
 /* code for data delete */
 if(isset($_GET['del']))
 {
- 	//$SQL = $MySQLiconn->query("DELETE FROM departamento WHERE id_depto=".$_GET['del']);
-	$SQL = $MySQLiconn->query("UPDATE departamento set estatus = 2 WHERE id_depto=".$_GET['del']);
-  
- if(!$SQL)
-  {
-   //echo $MySQLiconn->error;
-	  $_SESSION['message'] = "Error al inactivar los registros. Error ( ".$MySQLiconn->error.")";
-	  //$_SESSION['message'] = "Error al borrar los registros. Error ( ".mysqli_error($SQL).")";
-  }
-  else {
-	  $_SESSION['message'] = "Registro Inactivado";
-	  //$SQL2 = $MySQLiconn->query("ALTER TABLE departamento AUTO_INCREMENT=1");
-  }
- header("Location: departamento.php");
- exit();
+ 	if ($_GET['est']==1)
+	 {
+		 $estatus = 0;
+		 $est_text = 'inactivar';
+		 $esta_text = 'Inactivado';
+	 }
+	 else {
+		 $estatus = 1;
+		 $est_text = 'Activar';
+		 $esta_text = 'Activado';
+	 }
+	
+	 //$SQL = $MySQLiconn->query("DELETE FROM departamento WHERE id_destino=".$_GET['del']);
+	 $SQL = $MySQLiconn->query("UPDATE departamento SET estatus= '".$estatus."'  WHERE id_destino=".$_GET['del']);
+	  
+	 
+	 if(!$SQL)
+	  {
+	   //echo $MySQLiconn->error;
+		 $_SESSION['message'] = "Error al '".$est_text."' los registros. Error ( ".$MySQLiconn->error.")";
+	  } 
+	 else {
+		 $_SESSION['message'] = "Registro ".$esta_text;
+		 //$SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
+	 }
+	 header("Location: departamento.php");
+	 exit();
 }
 /* code for data delete */
 

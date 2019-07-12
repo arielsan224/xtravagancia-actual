@@ -202,29 +202,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Estatus</label>
-													<select class="form-control" name="id_estatus" id="id_estatus" required>
-														<option value="">Seleccione estatus</option>
-														<?php
-														$destest = $MySQLiconn->query( "SELECT * FROM estatus" );
-														while ( $row = $destest->fetch_array() ) {
-															if ( $getROW[ 'estatus' ] == $row[ 'id_estatus' ] ) {
-																?>
-														<option selected value="<?php echo $row['id_estatus'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-
-														<?php
-														} else {
-															?>
-														<option value="<?php echo $row['id_estatus'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-														<?php
-														}
-														}
-														?>
-													</select>
+													<label>Mínimo de personas</label>
+													<input type="number" class="form-control" id="minimo" placeholder="Mínimo de personas" name="minimo" value="<?php if(isset($_GET['edit'])) echo $getROW['minimo'];  ?>" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -299,6 +278,12 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 //												var_dump ($selected_ids);
 			   									echo $row['id_actividad'];
 			   									?>
+											</div>
+											<div class="col-md-12 col-sm-6">
+												<div class="form-group">
+													<label>Dirección</label>
+													<textarea type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" required rows="2"><?php if(isset($_GET['edit'])) echo $getROW['direccion'];  ?></textarea>
+												</div>
 											</div>
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
