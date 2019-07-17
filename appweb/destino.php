@@ -126,7 +126,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Nombre del destino</label>
-													<input type="text" class="form-control" id="nombre_dest" placeholder="Nombre del destino" name="nombre_dest" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_dest'];  ?>" required>
+													<input type="text" class="form-control"  id="nombre_dest" placeholder="Nombre del destino" name="nombre_dest" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_dest'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -203,7 +203,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Mínimo de personas</label>
-													<input type="number" class="form-control" id="minimo" placeholder="Mínimo de personas" name="minimo" value="<?php if(isset($_GET['edit'])) echo $getROW['minimo'];  ?>" required>
+													<input type="number" class="form-control" id="minimo" placeholder="Mínimo de personas" name="minimo" value="<?php if(isset($_GET['edit'])) echo $getROW['minimo']; else echo '2';  ?>" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -282,19 +282,19 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Dirección</label>
-													<textarea type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" required rows="2"><?php if(isset($_GET['edit'])) echo $getROW['direccion'];  ?></textarea>
+													<textarea type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['direccion'];  ?></textarea>
 												</div>
 											</div>
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Descrpcion Corta</label>
-													<textarea type="text" class="form-control" id="desc_corta" placeholder="Descripcion Corta" name="desc_corta" required rows="2"><?php if(isset($_GET['edit'])) echo $getROW['desc_corta'];  ?></textarea>
+													<textarea type="text" class="form-control" id="desc_corta" placeholder="Descripcion Corta" name="desc_corta" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_corta'];  ?></textarea>
 												</div>
 											</div>
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Descripcion Larga</label>
-													<textarea type="text" class="form-control" id="desc_larga" placeholder="Descripcion Larga" name="desc_larga" required rows="6"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
+													<textarea type="text" class="form-control" id="desc_larga" placeholder="Descripcion Larga" name="desc_larga" required rows="6" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
 												</div>
 											</div>
 
@@ -473,6 +473,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Datatable responsive -->
 <script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
 <script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+
 
 
 

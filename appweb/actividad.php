@@ -95,7 +95,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Nombre de actividad</label>
-													<input type="text" class="form-control" id="actividad" placeholder="Nombre actividad" name="actividad" value="<?php if(isset($_GET['edit'])) echo $getROW['actividad'];  ?>" required>
+													<input type="text" class="form-control" id="actividad" placeholder="Nombre actividad" name="actividad" value="<?php if(isset($_GET['edit'])) echo $getROW['actividad'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
 												</div>
 											</div>
 										</div>

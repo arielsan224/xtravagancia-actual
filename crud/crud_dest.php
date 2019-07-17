@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once 'conexion.php';
+include_once '../function/comunes.php';
 
 /* code for data insert */
 if(isset($_POST['save']))
@@ -12,7 +13,7 @@ if(isset($_POST['save']))
      $id_municipio = $MySQLiconn->real_escape_string($_POST['id_municipio']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
      $dias = $MySQLiconn->real_escape_string($_POST['dias']);
-	 $id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
+	 //$id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
 	 $minimo = $MySQLiconn->real_escape_string($_POST['minimo']);
 	 $direccion = $MySQLiconn->real_escape_string($_POST['direccion']);
 //     $imagen = $MySQLiconn->real_escape_string($_POST['imagen']);
@@ -36,7 +37,7 @@ if(isset($_POST['save']))
 	
 	    
  
-		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,desc_corta,desc_larga,id_municipio,precio,dias,imagen,estatus,minimo, direccion) VALUES('$nombre_dest','$desc_corta ','$desc_larga ',' $id_municipio','$precio','$dias','$imagen_ins','$id_estatus','$minimo','$direccion')");
+		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,desc_corta,desc_larga,id_municipio,precio,dias,imagen,minimo, direccion) VALUES('$nombre_dest','$desc_corta ','$desc_larga ',' $id_municipio','$precio','$dias','$imagen_ins','$minimo','$direccion')");
 
 			$inserted = mysqli_insert_id($MySQLiconn);
 
@@ -79,6 +80,8 @@ if(isset($_POST['save']))
 							if($item1 === false ) break;
 				} 
 				$_SESSION['message'] = "Registro Guardado";
+				header("Location: destino");
+	 			exit();
 			}
 			//$_SESSION['message'] = "Registro Guardado";
 				//print_r( $_SESSION['message'] ); 
@@ -171,7 +174,7 @@ if(isset($_POST['update']))
      $id_municipio = $MySQLiconn->real_escape_string($_POST['id_municipio']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
      $dias = $MySQLiconn->real_escape_string($_POST['dias']);
-	 $id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
+	 //$id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
 	 $minimo = $MySQLiconn->real_escape_string($_POST['minimo']);
 	 $direccion = $MySQLiconn->real_escape_string($_POST['direccion']);
 //     $imagen = $MySQLiconn->real_escape_string($_POST['imagen']);
@@ -223,8 +226,7 @@ if(isset($_POST['update']))
 //	}  en la actualizacion si no se cargo imagen es porque no se actualizo la imagen
 	
 	 
-	$SQL = $MySQLiconn->query("UPDATE destino SET nombre_dest= '".$nombre_dest."',desc_corta='".$desc_corta."',desc_larga='".$desc_larga."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', estatus='".$id_estatus."'
-	, minimo ='".$minimo."', direccion = '".$direccion."' WHERE id_destino=".$id_destino);
+	$SQL = $MySQLiconn->query("UPDATE destino SET nombre_dest= '".$nombre_dest."',desc_corta='".$desc_corta."',desc_larga='".$desc_larga."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', minimo ='".$minimo."', direccion = '".$direccion."' WHERE id_destino=".$id_destino);
  	
  
 	if(!$SQL)

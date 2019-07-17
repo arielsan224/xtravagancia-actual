@@ -19,6 +19,8 @@ if(isset($_POST['save']))
   }
   else {
 	  $_SESSION['message'] = "Registro Guardado";
+	  header("Location: departamento");
+	  exit();
   }
 }
 /* code for data insert */
@@ -52,7 +54,7 @@ if(isset($_GET['del']))
 		 $_SESSION['message'] = "Registro ".$esta_text;
 		 //$SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
 	 }
-	 header("Location: departamento.php");
+	 header("Location: departamento");
 	 exit();
 }
 /* code for data delete */
@@ -78,7 +80,7 @@ if(isset($_POST['update']))
   else {
 	  $_SESSION['message'] = "Registro Actualizado";
   }
- header("Location: departamento.php");
+ header("Location: departamento");
  exit();
 }
 /* code for data update */

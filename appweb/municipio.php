@@ -67,9 +67,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 										<div class="row">
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Municipios</label>
+													<label>Departamento</label>
 													<select class="form-control" name="id_depto" id="id_depto" required>
-														<option value="">Seleccione Municipios</option>
+														<option value="">Seleccione Departamento</option>
 														<?php
 														$dep = $MySQLiconn->query( "SELECT * FROM departamento" );
 														while ( $row = $dep->fetch_array() ) {
@@ -95,7 +95,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Nombre de municipio</label>
-													<input type="text" class="form-control" id="nombre_depto" placeholder="Nombre municipio" name="nombre_municipio" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_municipio'];  ?>" required>
+													<input type="text" class="form-control" id="nombre_municipio" placeholder="Nombre municipio" name="nombre_municipio" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_municipio'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
 												</div>
 											</div>
 										</div>
@@ -180,7 +180,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                               <thead>  
                                <tr>  
 								  <td>Id</td>
-								  <td>Municipios</td>
+								  <td>Departamento</td>
 								  <td>Municipio</td>
                                   <td style="text-align:center;">Acciones</td>
                                </tr>  

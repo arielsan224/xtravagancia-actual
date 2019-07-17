@@ -31,6 +31,8 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+	
+  <script src="../js/to-title-case.js"></script>
   <!-- input file style -->
 <!--  <link rel="stylesheet" href="../bower_components/fileinput/css/fileinput.min.css">-->
 <!--    <link rel="stylesheet" href="../bower_components/bootstrap-fileinput-4.4.6/css/fileinput.min.css">-->
