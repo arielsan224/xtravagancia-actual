@@ -349,7 +349,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 						  <button type="button" class="btn btn-primary" data-dismiss="modal" <?php
 								if(isset($_GET['edit'])){
 							?>
-							onclick="location='destino.php'"
+							onclick="location='destino'"
 							<?php
 								}
 							?>
@@ -435,6 +435,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									<td class= "text-center" ><a href="?edit=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
 									   <a href="?del=<?php echo $row['id_destino']; ?>&url=../<?php echo $row['imagen']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
 									</td>
+								  
 							 </tr>  
 <!--                        		</tbody>-->
                          <?php

@@ -53,7 +53,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header bg-modal">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" class="close" data-dismiss="modal" 
+							<?php
+								if(isset($_GET['edit'])){
+							?>
+							onclick="location='departamento'"
+							<?php
+								}
+							?>
+							>&times;</button>
 							<h4 class="modal-title">Departamentos</h4>
 						</div>
 						<div class="modal-body">
@@ -71,34 +79,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 														<input type="text" class="form-control" id="nombre_depto" placeholder="Nombre departamento" name="nombre_depto" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_depto'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
 													</div>
 												</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Estatus</label>
-													<select class="form-control" name="id_estatus" id="id_estatus" required>
-														<option value="">Seleccione estatus</option>
-														<?php
-														$destest = $MySQLiconn->query( "SELECT * FROM estatus" );
-														while ( $row = $destest->fetch_array() ) {
-															if ( $getROW[ 'estatus' ] == $row[ 'id_estatus' ] ) {
-																?>
-														<option selected value="<?php echo $row['id_estatus'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-
-														<?php
-														} else {
-															?>
-														<option value="<?php echo $row['id_estatus'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-														<?php
-														}
-														}
-														?>
-													</select>
-												</div>
-											</div>
-
+											
 											</div>
 
 											<div class="row"> </div>
@@ -132,7 +113,14 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 						</form>
 					</div>
 						<div class="modal-footer bg-modal-footer">
-						  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						  <button type="button" class="btn btn-primary" data-dismiss="modal" <?php
+								if(isset($_GET['edit'])){
+							?>
+							onclick="location='departamento'"
+							<?php
+								}
+							?>
+							>Close</button>
 						</div>
 								</div>
 				</div>
@@ -182,6 +170,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                <tr>  
                                     <td>Id</td>  
                                     <td>Departamento</td>
+								    <td>Estatus</td>
                                     <td style="text-align:center;">Acciones</td>
                                </tr>  
                           	 </thead>  

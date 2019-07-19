@@ -42,7 +42,7 @@ if(isset($_GET['del']))
 	 }
 	
 	 //$SQL = $MySQLiconn->query("DELETE FROM departamento WHERE id_destino=".$_GET['del']);
-	 $SQL = $MySQLiconn->query("UPDATE departamento SET estatus= '".$estatus."'  WHERE id_destino=".$_GET['del']);
+	 $SQL = $MySQLiconn->query("UPDATE departamento SET estatus= '".$estatus."'  WHERE id_depto=".$_GET['del']);
 	  
 	 
 	 if(!$SQL)

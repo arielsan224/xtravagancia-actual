@@ -18,6 +18,8 @@ if(isset($_POST['save']))
   }
   else {
 	  $_SESSION['message'] = "Registro Guardado";
+	  header("Location: categoria");
+	  exit();
   }
 }
 /* code for data insert */
@@ -26,19 +28,33 @@ if(isset($_POST['save']))
 /* code for data delete */
 if(isset($_GET['del']))
 {
- $SQL = $MySQLiconn->query("DELETE FROM categoria WHERE id_categoria=".$_GET['del']);
- 
- if(!$SQL)
-  {
-   //echo $MySQLiconn->error;
-	  $_SESSION['message'] = "Error al borrar los registros. Error ( ".$MySQLiconn->error.")";
-  }
-  else {
-	  $SQL2 = $MySQLiconn->query("ALTER TABLE categoria AUTO_INCREMENT=1");
- 	  $_SESSION['message'] = "Registro Borrado";
-  }
- header("Location: categoria.php");
- exit();
+ 	if ($_GET['est']==1)
+	 {
+		 $estatus = 0;
+		 $est_text = 'inactivar';
+		 $esta_text = 'Inactivado';
+	 }
+	 else {
+		 $estatus = 1;
+		 $est_text = 'Activar';
+		 $esta_text = 'Activado';
+	 }
+	
+	 //$SQL = $MySQLiconn->query("DELETE FROM departamento WHERE id_destino=".$_GET['del']);
+	 $SQL = $MySQLiconn->query("UPDATE categoria SET id_estatus= '".$estatus."'  WHERE id_categoria=".$_GET['del']);
+	  
+	 
+	 if(!$SQL)
+	  {
+	   //echo $MySQLiconn->error;
+		 $_SESSION['message'] = "Error al '".$est_text."' los registros. Error ( ".$MySQLiconn->error.")";
+	  } 
+	 else {
+		 $_SESSION['message'] = "Registro ".$esta_text;
+		 //$SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
+	 }
+	 header("Location: categoria");
+	 exit();
 }
 /* code for data delete */
 

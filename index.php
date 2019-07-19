@@ -108,7 +108,7 @@
 										INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad ) as cat	on cat.id_destino = vd.id_destino
 										where vd.id_estatus = 1
 										order by vd.id_destino
-										limit 12");
+										limit 16");
 		     while ($lisd = mysqli_fetch_array($dest))
 			 {
 			?>

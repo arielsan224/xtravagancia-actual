@@ -420,6 +420,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									<td class= "text-center" ><a href="?edit=<?php echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
 									   <a href="?del=<?php echo $row['id_destino']; ?>&est=<?php echo $row['id_estatus']; ?> " onclick="return confirm('Estas seguro que desea activar/inactivar el registro !'); "class="btn <?php if ($row['id_estatus']==1){  ?> btn-danger <?php } else { ?>btn-primary <?php }?> btn-sm" role="button"><?php if ($row['id_estatus']==1){  ?> inactivar <?php } else { ?>activar <?php }?></a>
 									</td>
+								   <td>
+								<select class="form-control" name="cmbo_accion" id="cmbo_accion" onchange="return confirm('Estas seguro que desea editar!')&& (window.location.href=this.value)">
+									<option value="">Seleccione</option>
+									<option value="?edit=<?php echo $row['id_destino']; ?>">Editar</option>
+									<option value="?edit=<?php echo $row['id_destino']; ?>">Administrar</option>
+									<option value="?del=<?php echo $row['id_destino']; ?>&est=<?php echo $row['id_estatus']; ?> "onclick="return confirm('Estas seguro que desea activar/inactivar el registro !'); ">Inactivar</option>
+									
+								</select>
+								  </td>
 							 </tr>  
 <!--                        		</tbody>-->
                          <?php

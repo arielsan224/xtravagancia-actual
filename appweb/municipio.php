@@ -53,7 +53,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header bg-modal">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" class="close" data-dismiss="modal" 
+							<?php
+								if(isset($_GET['edit'])){
+							?>
+							onclick="location='municipio'"
+							<?php
+								}
+							?>
+							>&times;</button>
 							<h4 class="modal-title">Municipios</h4>
 						</div>
 						<div class="modal-body">
@@ -131,7 +139,14 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 						</form>
 					</div>
 						<div class="modal-footer bg-modal-footer">
-						  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						  <button type="button" class="btn btn-primary" data-dismiss="modal" <?php
+								if(isset($_GET['edit'])){
+							?>
+							onclick="location='municipio'"
+							<?php
+								}
+							?>
+							>Close</button>
 						</div>
 								</div>
 				</div>
@@ -182,13 +197,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 								  <td>Id</td>
 								  <td>Departamento</td>
 								  <td>Municipio</td>
+								  <td>Estatus</td>
                                   <td style="text-align:center;">Acciones</td>
                                </tr>  
                           	 </thead>  
                           <?php 
 						 
-						$res = $MySQLiconn->query("SELECT mun.id_municipio,dep.nombre_depto, mun.nombre_municipio 
+						$res = $MySQLiconn->query("SELECT mun.id_municipio,dep.nombre_depto, mun.nombre_municipio,e.id_estatus,e.descripcion as estatus 
 												FROM municipio mun inner join departamento dep on mun.id_depto = dep.id_depto 
+												INNER JOIN estatus e ON e.id_estatus = mun.id_estatus
 												order by mun.Id_municipio ");
 						while($row = mysqli_fetch_array($res))  
                           {  
@@ -198,8 +215,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									  <td width="5%"><?php echo $row['id_municipio']; ?></td>
 									  <td ><?php echo $row['nombre_depto']; ?></td>
 									  <td ><?php echo $row['nombre_municipio']; ?></td>
-									<td class= "text-center" width="20%"><a href="?edit=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea borrar el registro !'); "class="btn btn-danger btn-sm" role="button">borrar</a>
+									<td ><span <?php if ($row['id_estatus']==1) { ?>class="label label-success"<?php } else { ?>class="label label-danger"<?php }?> ><?php echo $row['estatus']; ?></span></td>
+									<td class= "text-center" ><a href="?edit=<?php echo $row['id_municipio']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
+									   <a href="?del=<?php echo $row['id_municipio']; ?>&est=<?php echo $row['id_estatus']; ?> " onclick="return confirm('Estas seguro que desea activar/inactivar el registro !'); "class="btn <?php if ($row['id_estatus']==1){  ?> btn-danger <?php } else { ?>btn-primary <?php }?> btn-sm" role="button"><?php if ($row['id_estatus']==1){  ?> inactivar <?php } else { ?>activar <?php }?></a>
 									</td>
 							 </tr>  
 <!--                        		</tbody>-->
