@@ -198,7 +198,7 @@
 								else
 									{															
 								?>
-                           <a href="/xtravagancia/<?php echo $lmenu['url']?>" class="show-submenu"><?php echo $lmenu['title']?> <i class=""></i></a>
+                           <a href="<?php echo $lmenu['url']?>" class="show-submenu"><?php echo $lmenu['title']?> <i class=""></i></a>
                             <?php }
 								
                                															
@@ -211,8 +211,8 @@
                             <?php if (isset($_SESSION['userId']) ) 
 									{
 								?>
-                              <li><a href="busquedas" class="show-submenu">Busquedas <i class=""></i></a></li>
-                           	  <li><a href="reservaciones" class="show-submenu">Reservaciones <i class=""></i></a>  </li><?php }?>
+                              <li><a href="/xtravagancia/pagina_web/busquedas" class="show-submenu">Busquedas <i class=""></i></a></li>
+                           	  <li><a href="/xtravagancia/pagina_web/reservaciones" class="show-submenu">Reservaciones <i class=""></i></a>  </li><?php }?>
                             
 <!--
                                <li class="submenu">
