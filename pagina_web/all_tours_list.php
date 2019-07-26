@@ -45,7 +45,7 @@
 					<!--<p>
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p>-->
-
+					<?php if(!isset($_GET['desc'])) {?>
 				  <div class="box_style_cat">
 						<ul id="cat_nav">
 							
@@ -84,6 +84,7 @@
 							?>
 						</ul>
 					</div>
+					<?php } ?>
 <!--End filters col-->
 					<div class="box_style_2">
 						<i class="icon_set_1_icon-57"></i>
@@ -95,9 +96,10 @@
 				<!--End aside -->
 				<div class="col-lg-9 col-md-9" id="parent"> <!--/tools -->
 				<?php 
-					$tour_list = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,
+					
+					$query = "SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,
 													vd.imagen,vd.precio,vd.direccion,
-													cat.descripcion as categoria,cat.tag
+													cat.descripcion as categoria,cat.tag,ifnull(b.`desc`,'comun') AS `desc`
 													FROM v_destinos AS vd
 													INNER JOIN (
 														SELECT DISTINCT cat.id_categoria, cat.descripcion,ma.id_destino,t.descripcion as tag
@@ -106,7 +108,29 @@
 														INNER JOIN actividad a ON cat.id_categoria = a.id_categoria
 														INNER JOIN maestro_act ma ON a.id_actividad = ma.id_actividad) AS cat 
 														ON cat.id_destino = vd.id_destino
-													WHERE vd.id_estatus = 1");	
+													LEFT JOIN (SELECT g.id_destino,
+														CASE 
+															WHEN g.conteo >= 5 THEN 'mvistos'
+															WHEN g.conteo >= 3 THEN 'hot'  
+															ELSE 'comun'
+															END AS 'desc'
+														FROM (
+														SELECT b.id_usuario,b.id_destino, COUNT(b.id_destino) conteo
+														FROM busquedas b
+														GROUP BY b.id_usuario,b.id_destino) AS g) b ON b.id_destino = vd.id_destino
+														WHERE vd.id_estatus = 1";
+					if (isset($_GET['desc'])){
+						$where = $_GET['desc'];
+						if($where=='hot') {
+							$query = $query." AND ifnull(b.`desc`,'comun') = 'hot'";
+						} elseif ($where=='vistos'){
+							$query = $query." AND ifnull(b.`desc`,'comun') = 'mvistos'";
+						} else {
+							$query = $query.' ';
+						}
+						
+					}
+					$tour_list = $MySQLiconn->query($query);	
 					while ($all_tour_list=mysqli_fetch_array($tour_list))
 					{ 
 				
