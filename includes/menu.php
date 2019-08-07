@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php if(!isset($_SESSION)) session_start();?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -96,8 +96,8 @@
 												  <small>Miembro desde <?php echo $fechaformat?></small>
 												</p>
 										</div>
-                                        <input onclick="window.location.href='perfil'" name="Perfil" value="Perfil" id="Perfil" class="button_drop" style="text-align: center;">
-                                        <input onclick="window.location.href='logout'" name="Sign out" value="Sign out" id="Sign out" class="button_drop outline">
+                                        <input onclick="window.location.href='/xtravagancia/setting'" name="Perfil" value="Perfil" id="Perfil" class="button_drop" style="text-align: center;">
+                                        <input onclick="window.location.href='/xtravagancia/logout'" name="Sign out" value="Sign out" id="Sign out" class="button_drop outline">
                                     </div>
                                 </div><!-- End Dropdown access -->
                             </li>
