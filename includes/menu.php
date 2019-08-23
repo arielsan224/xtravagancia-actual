@@ -51,7 +51,7 @@
 
 <body>
 
-	<!--<div id="preloader">
+	<div id="preloader">
         <div class="sk-spinner sk-spinner-wave">
             <div class="sk-rect1"></div>
             <div class="sk-rect2"></div>
@@ -59,7 +59,7 @@
             <div class="sk-rect4"></div>
             <div class="sk-rect5"></div>
         </div>
-    </div>-->
+    </div>
     <div class="layer"></div>
     <!-- Mobile menu overlay mask -->
 <!-- Header================================================== -->
@@ -115,7 +115,7 @@
                                         <a id="forgot_pw" href="#">Olvidaste contaseña?</a>
                                         <a id="forgot_pw" href="../login">Eres Administrador?</a>
                                         <input type="submit" name="Sign_in" value="Iniciar Sesion" id="Sign_in" class="button_drop" style="text-align: center;">
-                                        <input type="submit" name="Sign_up" value="Registrate" id="Sign_up" class="button_drop outline">
+                                        <input onclick="window.location.href='../register'" name="Sign_up" value="Registrate" id="Sign out" class="button_drop outline">
                                     </div>
                                 </div><!-- End Dropdown access -->
                             </li>

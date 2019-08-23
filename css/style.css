@@ -340,13 +340,13 @@ header.sticky #logo .logo_sticky {
 	padding: 0
 }
 #logo_home h1 a, header#colored #logo_home h1 a, header#plain #logo_home h1 a, header.sticky #logo_home h1 a {
-	width: 198px;
-	height: 55px;
+	width: 160px;
+	height: 34px;
 	display: block;
 	background-image: url(../img/logo.png);
 	background-repeat: no-repeat;
 	background-position: left top;
-	background-size: 198px 64px;
+	background-size: 160px 34px;
 	text-indent: -9999px
 }
 header.sticky #logo_home h1 {
@@ -1858,7 +1858,7 @@ ul#contact-info {
 	top: -20px;
 	height: 45px;
 	width: 100%;
-	background: url(/xtravagancia/img/tape.png) center top no-repeat
+	background: url(../img/tape.png) center top no-repeat
 }
 .loader {
 	margin-left: 5px
@@ -1875,7 +1875,7 @@ ul#contact-info {
 	background: url(../img/bg_login.jpg) center center no-repeat;
 	background-size: cover
 }
-#login {
+#login_23 {
 	margin: 170px 0 60px;
 	color: #333;
 	text-align: left;
@@ -1884,6 +1884,16 @@ ul#contact-info {
 	-webkit-box-shadow: 0 0 5 rgba(0,0,0,.4);
 	box-shadow: 0 0 5px rgba(0,0,0,.4);
 	padding: 30px
+}
+#login {
+    margin: 170px 0 60px;
+    color: #333;
+    text-align: left;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,.2);
+    -moz-box-shadow: 0 0 15px 0 rgba(0,0,0,.2);
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.2);
+    padding: 30px;
 }
 #pass-info, #score_detail span, #tour_guide, .marker_info_2, .score span, .wishlist_close {
 	text-align: center
