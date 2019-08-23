@@ -11,7 +11,7 @@
     <title>XTRAVAGANCIA TOURS - Nicaragua tours</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="/xtravagancia/img/icons8-traveler-64.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/icons8-traveler-64.ico" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
@@ -22,7 +22,7 @@
     
 
     <!-- BASE CSS -->
-    <link href="/xtravagancia/css/base.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
 
     <!-- Google web fonts -->
    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -30,13 +30,13 @@
    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet" type="text/css">
 
     <!-- REVOLUTION SLIDER CSS -->
-    <link href="/xtravagancia/rs-plugin/css/settings.css" rel="stylesheet">
-    <link href="/xtravagancia/css/extralayers.css" rel="stylesheet">
+    <link href="../rs-plugin/css/settings.css" rel="stylesheet">
+    <link href="../css/extralayers.css" rel="stylesheet">
 	<!-- Theme style -->
-  <link rel="stylesheet" href="/xtravagancia/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="/xtravagancia/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -88,7 +88,7 @@
                                     <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="false"><?php echo $usinfo['n_apellidos']?></a>
                                     <div class="dropdown-menu">
                                         <div class="form-group" style="text-align: center">
-                                            <img src="/xtravagancia<?php echo $usinfo['imagen']?>" class="img-circle" alt="User Image">
+                                            <img src="..<?php echo $usinfo['imagen']?>" class="img-circle" alt="User Image">
 
 												<p style="padding: 40px">
 												  <?php echo $usinfo['n_apellidos']?> - <?php echo $usinfo['descripcion']?>
@@ -96,8 +96,8 @@
 												  <small>Miembro desde <?php echo $fechaformat?></small>
 												</p>
 										</div>
-                                        <input onclick="window.location.href='/xtravagancia/setting'" name="Perfil" value="Perfil" id="Perfil" class="button_drop" style="text-align: center;">
-                                        <input onclick="window.location.href='/xtravagancia/logout'" name="Sign out" value="Sign out" id="Sign out" class="button_drop outline">
+                                        <input onclick="window.location.href='../setting'" name="Perfil" value="Perfil" id="Perfil" class="button_drop" style="text-align: center;">
+                                        <input onclick="window.location.href='../logout'" name="Sign out" value="Sign out" id="Sign out" class="button_drop outline">
                                     </div>
                                 </div><!-- End Dropdown access -->
                             </li>
@@ -113,7 +113,7 @@
                                             <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
                                         </div>
                                         <a id="forgot_pw" href="#">Olvidaste contaseña?</a>
-                                        <a id="forgot_pw" href="/xtravagancia/login">Eres Administrador?</a>
+                                        <a id="forgot_pw" href="../login">Eres Administrador?</a>
                                         <input type="submit" name="Sign_in" value="Iniciar Sesion" id="Sign_in" class="button_drop" style="text-align: center;">
                                         <input type="submit" name="Sign_up" value="Registrate" id="Sign_up" class="button_drop outline">
                                     </div>
@@ -130,14 +130,14 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <div id="logo_home">
-                    	<h1><a href="/xtravagancia/index" title="Xtravagancia Tours">Xtravagancia Tours</a></h1>
+                    	<h1><a href="../index" title="Xtravagancia Tours">Xtravagancia Tours</a></h1>
                     </div>
                 </div>
                 <nav class="col-md-9 col-sm-9 col-xs-9">
                     <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
                     <div class="main-menu">
                         <div id="header_menu">
-                            <img src="/xtravagancia/img/logo_sticky.png" width="198" height="84" alt="Eleda tours" data-retina="true">
+                            <img src="../img/logo_sticky.png" width="198" height="84" alt="Eleda tours" data-retina="true">
                         </div>
                         <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                         <ul>
@@ -161,7 +161,7 @@
                                 <a href="javascript:void(0);" class="show-submenu"><?php echo $lmenu['title']?> <i class="icon-down-open-mini"></i></a>
                              
                                <ul>
-								<li><a href="/xtravagancia/pagina_web/all_tours_list">Todos los tours</a></li>
+								<li><a href="../pagina_web/all_tours_list">Todos los tours</a></li>
 								<?php 
 								$cat = $MySQLiconn->query("SELECT distinct cat.id_categoria, cat.descripcion
 															FROM categoria cat
@@ -185,7 +185,7 @@
 									while ($destinos = mysqli_fetch_array($dest))
 									{
 								  ?>
-								  <li><a href="/xtravagancia/pagina_web/tour?id_dest=<?php echo $destinos['id_destino']?>"><?php echo $destinos['nombre_dest']?></a>
+								  <li><a href="../pagina_web/tour?id_dest=<?php echo $destinos['id_destino']?>"><?php echo $destinos['nombre_dest']?></a>
 								  </li>
 								 <?php
 									}
@@ -211,8 +211,8 @@
                             <?php if (isset($_SESSION['userId']) ) 
 									{
 								?>
-                              <li><a href="/xtravagancia/pagina_web/busquedas" class="show-submenu">Busquedas <i class=""></i></a></li>
-                           	  <li><a href="/xtravagancia/pagina_web/reservaciones" class="show-submenu">Reservaciones <i class=""></i></a>  </li><?php }?>
+                              <li><a href="../pagina_web/busquedas" class="show-submenu">Busquedas <i class=""></i></a></li>
+                           	  <li><a href="../pagina_web/reservaciones" class="show-submenu">Reservaciones <i class=""></i></a>  </li><?php }?>
                             
 <!--
                                <li class="submenu">

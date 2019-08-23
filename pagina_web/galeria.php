@@ -3,7 +3,7 @@ require_once '../crud/conexion.php';
 include_once '../includes/menu.php'; 
 ?>
 
-	<section class="parallax-window" data-parallax="scroll" data-image-src="/xtravagancia/img/home_bg_ometepe.jpg" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax-window" data-parallax="scroll" data-image-src="../img/home_bg_ometepe.jpg" data-natural-width="1400" data-natural-height="470">
 		<div class="parallax-content-1">
 			<div class="animated fadeInDown">
 				<h1>Galeria</h1>
@@ -17,7 +17,7 @@ include_once '../includes/menu.php';
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="/xtravagancia/index">Home</a></li>
+					<li><a href="../index">Home</a></li>
                     <li>Galeria</li>
 				</ul>
 			</div>
@@ -44,7 +44,7 @@ include_once '../includes/menu.php';
 				<div class="col-md-4 col-sm-4">
 					<div class="img_wrapper_gallery">
 						<div class="img_container_gallery">
-							<a href="/xtravagancia/<?php echo $all_image_list['imagen']?>" title="Photo title"><img src="/xtravagancia/<?php echo $all_image_list['imagen']?>" alt="Image" class="img-responsive">
+							<a href="../<?php echo $all_image_list['imagen']?>" title="Photo title"><img src="../<?php echo $all_image_list['imagen']?>" alt="Image" class="img-responsive">
 								<i class="icon-resize-full-2"></i>
 							</a>
 						</div>
@@ -64,7 +64,7 @@ include_once '../includes/menu.php';
 				<div class="col-md-4 col-sm-4">
 					<div class="img_wrapper_gallery">
 						<div class="img_container_gallery">
-							<a href="https://www.youtube.com/watch?v=8nhcqKII-pQ" class="video" title="Video Youtube"><img src="/xtravagancia/img/slider_single_tour/isletas/7_medium.jpg" alt="Image" class="img-responsive"><i class="icon-resize-full-2"></i>
+							<a href="https://www.youtube.com/watch?v=8nhcqKII-pQ" class="video" title="Video Youtube"><img src="../img/slider_single_tour/isletas/7_medium.jpg" alt="Image" class="img-responsive"><i class="icon-resize-full-2"></i>
 							</a>
 						</div>
 					</div>

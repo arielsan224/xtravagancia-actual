@@ -217,7 +217,7 @@
     <script src="js/revolution_func.js"></script>
 	<script src="dist/js/adminlte.min.js"></script>
     
-    <script src="/xtravagancia/js/theia-sticky-sidebar.js"></script>
+    <script src="../js/theia-sticky-sidebar.js"></script>
 	<script>
 		jQuery('#sidebar').theiaStickySidebar({
 			additionalMarginTop: 80

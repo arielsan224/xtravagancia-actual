@@ -59,7 +59,7 @@
 		<div id="position">
 			<div class="container">
 				<ul>
-					<li><a href="/xtravagancia/index">Home</a>
+					<li><a href="../index">Home</a>
 					</li>
 					<li><a href="#">Category</a>
 					</li>
@@ -622,12 +622,12 @@
 
 	<!-- Common scripts -->
 	<!--<script data-cfasync="false" src="/cdn-cgi/scripts/f2bf09f8/cloudflare-static/email-decode.min.js"></script>-->
-    <script src="/xtravagancia/js/jquery-2.2.4.min.js"></script>
-	<script src="/xtravagancia/js/common_scripts_min.js"></script>
-	<script src="/xtravagancia/js/functions.js"></script>
+    <script src="../js/jquery-2.2.4.min.js"></script>
+	<script src="../js/common_scripts_min.js"></script>
+	<script src="../js/functions.js"></script>
 
 	<!-- Specific scripts -->
-	<script src="/xtravagancia/js/icheck.js"></script>
+	<script src="../js/icheck.js"></script>
 	<script>
 		$('input').iCheck({
 			checkboxClass: 'icheckbox_square-grey',
@@ -635,7 +635,7 @@
 		});
 	</script>
 	<!-- Date and time pickers -->
-	<script src="/xtravagancia/js/jquery.sliderPro.min.js"></script>
+	<script src="../js/jquery.sliderPro.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function ($) {
 			$('#Img_carousel').sliderPro({
@@ -656,8 +656,8 @@
 	</script>
 
 	<!-- Date and time pickers -->
-	<script src="/xtravagancia/js/bootstrap-datepicker.js"></script>
-	<script src="/xtravagancia/js/bootstrap-timepicker.js"></script>
+	<script src="../js/bootstrap-datepicker.js"></script>
+	<script src="../js/bootstrap-timepicker.js"></script>
 	<script>
 		$('input.date-pick').datepicker('setDate', 'today');
 		$('input.time-pick').timepicker({
@@ -667,16 +667,16 @@
 	</script>
 
 	<!--Review modal validation -->
-	<script src="/xtravagancia/assets/validate.js"></script>
+	<script src="../assets/validate.js"></script>
 
 	<!-- Map -->
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAUQKuq-IHkzCt4VoGq2z4XYJ_ip7ZRkws"></script>
                                    
-	<script src="/xtravagancia/js/map.js"></script>
-	<script src="/xtravagancia/js/infobox.js"></script>
+	<script src="../js/map.js"></script>
+	<script src="../js/infobox.js"></script>
 
 	<!-- Fixed sidebar -->
-	<script src="/xtravagancia/js/theia-sticky-sidebar.js"></script>
+	<script src="../js/theia-sticky-sidebar.js"></script>
 	<script>
 		jQuery('#sidebar').theiaStickySidebar({
 			additionalMarginTop: 80

@@ -17,7 +17,7 @@ $result = $query->fetch_assoc();
 $MySQLiconn->close();
 ?>
 
-<section class="parallax-window-1" data-parallax="scroll" data-image-src="/xtravagancia/img/home_bg_granada.jpg" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window-1" data-parallax="scroll" data-image-src="../img/home_bg_granada.jpg" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-10">
             <div class="animated fadeInDown">
             <h1>Perfil</h1>
@@ -29,7 +29,7 @@ $MySQLiconn->close();
     <div id="position">
     	<div class="container">
                 	<ul>
-                    <li><a href="/xtravagancia/index">Home</a></li>
+                    <li><a href="../index">Home</a></li>
                         <li>Perfil</li>
                     </ul>
         </div>

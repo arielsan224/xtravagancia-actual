@@ -5,7 +5,7 @@
  */
 session_start();
 if(!isset($_SESSION['userId'])) {
-	header('location: /xtravagancia/index');
+	header('location: ../index');
 	//exit();
 }
 //include_once '../crud/conexion.php';

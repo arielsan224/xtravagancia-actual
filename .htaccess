@@ -11,6 +11,7 @@ php_value display_errors 1
 #RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
 <IfModule mod_rewrite.c>
+
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -28,6 +29,12 @@ RewriteRule ^(.*)$ $1.html
 #RewriteRule ^admin/(.*)$ /pagina_web/$1 [L,P]
 #RewriteRule ^admin/miscript\$ /pagina_web/administrador/miscript.php
 
-</IfModule>
 
-ErrorDocument 404 /xtravagancia/404.php
+
+
+</IfModule>
+Options +FollowSymLinks
+RewriteEngine on
+RewriteRule ^tour/([0-9]+)$ /pagina_web/tour.php?id_dest=$1
+
+ErrorDocument 404 ../404.php

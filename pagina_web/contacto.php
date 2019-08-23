@@ -3,7 +3,7 @@ require_once '../crud/conexion.php';
 include_once '../includes/menu.php'; 
 ?>
     
-    <section class="parallax-window-1" data-parallax="scroll" data-image-src="/xtravagancia/img/home_bg_granada.jpg" data-natural-width="1400" data-natural-height="470">
+    <section class="parallax-window-1" data-parallax="scroll" data-image-src="../img/home_bg_granada.jpg" data-natural-width="1400" data-natural-height="470">
         <div class="parallax-content-10">
             <div class="animated fadeInDown">
             <h1>Contact us</h1>
@@ -15,7 +15,7 @@ include_once '../includes/menu.php';
     <div id="position">
     	<div class="container">
                 	<ul>
-                    <li><a href="/xtravagancia/index">Home</a></li>
+                    <li><a href="../index">Home</a></li>
                         <li>Contacto</li>
                     </ul>
         </div>
