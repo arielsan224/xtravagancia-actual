@@ -61,16 +61,20 @@ if(isset($_POST['login'])) {
 				$_SESSION['user_type'] = $user_type;
 				$_SESSION['tiempo'] = time();
 				if ($_SESSION['user_type'] == 1 ){
-					header('location: appweb/admin');	
+					header('location: appweb/admin');
+					//exit();
 						}
 					else header('location: index');
+					exit();
 				/*header('location: http://localhost:9080/stock/dashboard.php');	*/
 			} else{
 				
 				$errors[] = "usuario/password Incorrecto";
+				//exit();
 			} // /else
 		} else {		
-			$errors[] = "Usuario no existe o inactivo";		
+			$errors[] = "Usuario no existe o inactivo";	
+			//exit();
 		} // /else
 	} // /else not empty username // password
 	

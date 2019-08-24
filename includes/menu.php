@@ -71,16 +71,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6"><i class="icon-phone"></i><strong>00505 8960-3207</strong></div>
-					<div class="messages">
-							<?php if($errors) {
-								foreach ($errors as $key => $value) {
-									echo '<div class="alert alert-warning" role="alert">
-									<i class="glyphicon glyphicon-exclamation-sign"></i>
-									'.$value.'</div>';										
-									}
-								} ?>
-						</div>
-                    
+					
                     <div class="col-md-6 col-sm-6 col-xs-6">
 						<ul id="top_links">
 							 <?php if (isset($_SESSION['userId'])){  
@@ -115,9 +106,20 @@
                             </li>
           <?php } else { ?>
                             <li>
-                                <div class="dropdown dropdown-access">
-                                    <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="false">Iniciar Sesion</a>
-                                    <div class="dropdown-menu">
+                                <div class="dropdown dropdown-access <?php if($errors){ ?>open <?php } ?>">
+                                    <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="<?php if($errors) { ?>true   <?php } else {?>false <?php } ?>">Iniciar Sesion</a>
+                                    <div class="dropdown-menu <?php if($errors){ ?>show_normal <?php } ?>">
+										<div class="messages">
+							<?php if($errors) {
+								foreach ($errors as $key => $value) {
+									echo '<div class="alert alert-warning" role="alert">
+									<i class="glyphicon glyphicon-exclamation-sign"></i>
+									'.$value.'</div>';										
+									}
+									$errors=null;
+								
+								} ?>
+						</div>
 										<form method="post">
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="email" name="email" placeholder="Correo electrónico" required>
