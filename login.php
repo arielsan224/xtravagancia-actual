@@ -15,8 +15,8 @@ $errors = array();
 
 if($_POST) {		
 
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+	$email = $MySQLiconn->real_escape_string($_POST['email']);
+	$password = $MySQLiconn->real_escape_string($_POST['password']);
 
 	if(empty($email) || empty($password)) {
 		if($username == "") {

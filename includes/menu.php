@@ -1,4 +1,7 @@
-<?php if(!isset($_SESSION)) session_start();?>
+<?php if(!isset($_SESSION)) session_start();
+	$errors = array();
+	include_once 'crud/crud_register_user.php';
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -68,6 +71,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6"><i class="icon-phone"></i><strong>00505 8960-3207</strong></div>
+					<div class="messages">
+							<?php if($errors) {
+								foreach ($errors as $key => $value) {
+									echo '<div class="alert alert-warning" role="alert">
+									<i class="glyphicon glyphicon-exclamation-sign"></i>
+									'.$value.'</div>';										
+									}
+								} ?>
+						</div>
                     
                     <div class="col-md-6 col-sm-6 col-xs-6">
 						<ul id="top_links">
@@ -106,16 +118,18 @@
                                 <div class="dropdown dropdown-access">
                                     <a href="#" class="show-submenu" data-toggle="dropdown" id="access_link" aria-expanded="false">Iniciar Sesion</a>
                                     <div class="dropdown-menu">
+										<form method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="inputUsernameEmail" placeholder="Correo electrónico">
+                                            <input type="text" class="form-control" id="email" name="email" placeholder="Correo electrónico" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
                                         </div>
                                         <a id="forgot_pw" href="#">Olvidaste contaseña?</a>
                                         <a id="forgot_pw" href="../login">Eres Administrador?</a>
-                                        <input type="submit" name="Sign_in" value="Iniciar Sesion" id="Sign_in" class="button_drop" style="text-align: center;">
+                                        <input type="submit" name="login" value="Iniciar Sesion" id="Sign_in" class="button_drop" style="text-align: center;">
                                         <input onclick="window.location.href='../register'" name="Sign_up" value="Registrate" id="Sign out" class="button_drop outline">
+										</form>
                                     </div>
                                 </div><!-- End Dropdown access -->
                             </li>

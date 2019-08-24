@@ -1,38 +1,57 @@
 <?php 
 require_once 'crud/conexion.php';
 include_once 'includes/menu.php'; 
+include_once 'crud/crud_register_user.php';
+if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
+	$mensajito = $_SESSION[ 'message' ];
+
+}
 ?>
 <main>
     <section id="hero" class="login">
     	<div class="container">
         	<div class="row justify-content-center">
             	<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
+							<!-- /.box-header -->
                 	<div id="login">
                     		<div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
+						<?php if (isset($mensajito)) {?>
+							<div class="alert alert-info alert-dismissible text-center" role="alert">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<?php 
+								echo $mensajito; 
+								$mensajito=null;
+								/*$_SESSION['message'] = false;*/
+								unset($_SESSION['message']);
+
+								?>
+								
+							</div>
+							<?php } ?>
                             <hr>
-                           <form>
+                           <form method="post">
                                 <div class="form-group">
                                 	<label>Nombres</label>
-                                    <input type="text" class=" form-control"  placeholder="Nombres">
+                                    <input type="text" class=" form-control"  placeholder="Nombres" id="nombres" name="nombres">
                                 </div>
 							    <div class="form-group">
                                 	<label>Apellidos</label>
-                                    <input type="text" class=" form-control"  placeholder="Apellidos">
+                                    <input type="text" class=" form-control"  placeholder="Apellidos" id="apellidos" name="apellidos">
                                 </div>
                                 <div class="form-group">
                                 	<label>Email</label>
-                                    <input type="email" class=" form-control" placeholder="Email">
+                                    <input type="email" class=" form-control" placeholder="Email" id="email" name="email">
                                 </div>
                                 <div class="form-group">
                                 	<label>Password</label>
-                                    <input type="password" class=" form-control" id="password1" placeholder="Password">
+                                    <input type="password" class=" form-control" id="password1" placeholder="Password" name="password1">
                                 </div>
                                 <div class="form-group">
                                 	<label>Confirme password</label>
-                                    <input type="password" class=" form-control" id="password2" placeholder="Confirm password">
+                                    <input type="password" class=" form-control" id="password2" placeholder="Confirm password" name="password2">
                                 </div>
                                 <div id="pass-info" class="clearfix"></div>
-                                <button class="btn_full">Crear cuenta</button>
+                                <button class="btn_full" name="save">Crear cuenta</button>
                             </form>
                         </div>
                 </div>
