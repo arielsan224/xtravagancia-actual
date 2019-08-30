@@ -1,6 +1,6 @@
 <?php if(!isset($_SESSION)) session_start();
 	$errors = array();
-	include_once $_SERVER['DOCUMENT_ROOT'].'crud/crud_register_user.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/crud/crud_register_user.php';
 ?>
 <!doctype html>
 <html lang="es">

@@ -1,5 +1,7 @@
 <?php
-include_once '../function/charts.php';
+//include_once '../function/charts.php';
+session_start();
+include_once '../crud/conexion.php';
 
 ?>
   
@@ -255,7 +257,7 @@ include_once '../function/charts.php';
                         <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
                       </div>
                       <!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                      <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image">
                       <!-- /.direct-chat-img -->
                       <div class="direct-chat-text">
                         Is this template really for free? That's unbelievable!
@@ -271,7 +273,7 @@ include_once '../function/charts.php';
                         <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
                       </div>
                       <!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                      <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image">
                       <!-- /.direct-chat-img -->
                       <div class="direct-chat-text">
                         You better believe it!
@@ -287,7 +289,7 @@ include_once '../function/charts.php';
                         <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
                       </div>
                       <!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                      <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image">
                       <!-- /.direct-chat-img -->
                       <div class="direct-chat-text">
                         Working with AdminLTE on a great new app! Wanna join?
@@ -303,7 +305,7 @@ include_once '../function/charts.php';
                         <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
                       </div>
                       <!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                      <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image">
                       <!-- /.direct-chat-img -->
                       <div class="direct-chat-text">
                         I would love to.
@@ -320,7 +322,7 @@ include_once '../function/charts.php';
                     <ul class="contacts-list">
                       <li>
                         <a href="#">
-                          <img class="contacts-list-img" src="dist/img/user1-128x128.jpg" alt="User Image">
+                          <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
 
                           <div class="contacts-list-info">
                                 <span class="contacts-list-name">
@@ -335,7 +337,7 @@ include_once '../function/charts.php';
                       <!-- End Contact Item -->
                       <li>
                         <a href="#">
-                          <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Image">
+                          <img class="contacts-list-img" src="../dist/img/user7-128x128.jpg" alt="User Image">
 
                           <div class="contacts-list-info">
                                 <span class="contacts-list-name">
@@ -350,7 +352,7 @@ include_once '../function/charts.php';
                       <!-- End Contact Item -->
                       <li>
                         <a href="#">
-                          <img class="contacts-list-img" src="dist/img/user3-128x128.jpg" alt="User Image">
+                          <img class="contacts-list-img" src="../dist/img/user3-128x128.jpg" alt="User Image">
 
                           <div class="contacts-list-info">
                                 <span class="contacts-list-name">
@@ -365,7 +367,7 @@ include_once '../function/charts.php';
                       <!-- End Contact Item -->
                       <li>
                         <a href="#">
-                          <img class="contacts-list-img" src="dist/img/user5-128x128.jpg" alt="User Image">
+                          <img class="contacts-list-img" src="../dist/img/user5-128x128.jpg" alt="User Image">
 
                           <div class="contacts-list-info">
                                 <span class="contacts-list-name">
@@ -380,7 +382,7 @@ include_once '../function/charts.php';
                       <!-- End Contact Item -->
                       <li>
                         <a href="#">
-                          <img class="contacts-list-img" src="dist/img/user6-128x128.jpg" alt="User Image">
+                          <img class="contacts-list-img" src="../dist/img/user6-128x128.jpg" alt="User Image">
 
                           <div class="contacts-list-info">
                                 <span class="contacts-list-name">
@@ -395,7 +397,7 @@ include_once '../function/charts.php';
                       <!-- End Contact Item -->
                       <li>
                         <a href="#">
-                          <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Image">
+                          <img class="contacts-list-img" src="../dist/img/user8-128x128.jpg" alt="User Image">
 
                           <div class="contacts-list-info">
                                 <span class="contacts-list-name">
@@ -435,6 +437,7 @@ include_once '../function/charts.php';
               <div class="box box-danger">
                 <div class="box-header with-border">
                 <?php
+				 $locate = $MySQLiconn->query("SET lc_time_names = 'es_ES'");
                  $list_us = $MySQLiconn->query("SELECT us.id_usuario,CONCAT (us.nombre,' ',us.apellido) AS n_apellidos,us.email,us.imagen,
 															 case 
 																when date(us.fecha_creacion) = CURDATE() then 'Hoy'
@@ -449,7 +452,7 @@ include_once '../function/charts.php';
 													LIMIT 10");
 					  $cant_user= $list_us->num_rows;
 					?>
-                  <h3 class="box-title">Latest Members</h3>
+                  <h3 class="box-title">Ultimos Miembros</h3>
 
                   <div class="box-tools pull-right">
                     <span class="label label-danger"><?php echo $cant_user?> Nuevos Miembros</span>
@@ -496,7 +499,7 @@ include_once '../function/charts.php';
           <!-- TABLE: LATEST ORDERS -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Latest Orders</h3>
+              <h3 class="box-title">Ultimas Reservaciones</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -507,72 +510,40 @@ include_once '../function/charts.php';
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
+				  <?php 
+					$res = $MySQLiconn->query('SELECT r.idreservacion, d.id_destino,d.nombre_dest, 								e.descripcion AS est_reserva ,DATE_FORMAT(r.fecha_reservacion,"%d %b %Y") AS fecha_reserva
+												FROM v_destinos d
+												INNER JOIN reservacion r ON r.id_destino = d.id_destino
+												INNER JOIN estatus e ON e.id_estatus = r.estatus
+												ORDER BY r.fecha_reservacion DESC
+												LIMIT 8');
+				  ?>
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>Order ID</th>
-                    <th>Item</th>
-                    <th>Status</th>
-                    <th>Popularity</th>
+                    <th>Id Reserva</th>
+                    <th>Destino</th>
+                    <th>Estatus</th>
+                    <th>Fecha de Reserva</th>
                   </tr>
                   </thead>
                   <tbody>
+					  <?php
+					  	while ($list_res= mysqli_fetch_array($res))
+						{
+							
+						
+					  ?>
                   <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>Call of Duty IV</td>
-                    <td><span class="label label-success">Shipped</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                    </td>
+					<td><a href="pages/examples/invoice.html"><?php echo $list_res['idreservacion']?></a></td>
+                    <td><?php echo $list_res['nombre_dest']?></td>
+                    <td><span class="label label-success"><?php echo $list_res['est_reserva']?></span></td>
+					  <td><?php echo $list_res['fecha_reserva']?></td>
+                      <!--<div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>-->
+						
+					  
                   </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="label label-warning">Pending</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>iPhone 6 Plus</td>
-                    <td><span class="label label-danger">Delivered</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="label label-info">Processing</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="label label-warning">Pending</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>iPhone 6 Plus</td>
-                    <td><span class="label label-danger">Delivered</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>Call of Duty IV</td>
-                    <td><span class="label label-success">Shipped</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                    </td>
-                  </tr>
+					  <?php } ?>
                   </tbody>
                 </table>
               </div>
@@ -580,8 +551,8 @@ include_once '../function/charts.php';
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Nueva Reserva</a>
+              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas las Reservas</a>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -679,7 +650,7 @@ include_once '../function/charts.php';
               <ul class="products-list product-list-in-box">
                 <li class="item">
                   <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">Samsung TV
@@ -692,7 +663,7 @@ include_once '../function/charts.php';
                 <!-- /.item -->
                 <li class="item">
                   <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">Bicycle
@@ -705,7 +676,7 @@ include_once '../function/charts.php';
                 <!-- /.item -->
                 <li class="item">
                   <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">Xbox One <span
@@ -718,7 +689,7 @@ include_once '../function/charts.php';
                 <!-- /.item -->
                 <li class="item">
                   <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">PlayStation 4
@@ -777,7 +748,7 @@ include_once '../function/charts.php';
 <script src="../bower_components/chart.js/Chart2.js"></script>
 <!--<script src="../js/mycharts.js"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!-- <script src="../dist/js/pages/dashboard2.js"></script>-->
+<script src="../dist/js/pages/dashboard2.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
