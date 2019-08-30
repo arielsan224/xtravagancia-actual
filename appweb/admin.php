@@ -1,11 +1,14 @@
 <?php
-include_once '../crud/crud_cat.php';
+include_once '../function/charts.php';
 
 ?>
   
 <div class="layer"></div>
  
-  <?php include("../includes/dashboard.php");?>
+  <?php 
+	include("../includes/dashboard.php");
+	//include_once '../crud/conexion.php';
+	?>
 
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -221,54 +224,7 @@ include_once '../crud/crud_cat.php';
         <!-- Left col -->
         <div class="col-md-8">
           <!-- MAP & BOX PANE -->
-          <div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">Visitors Report</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="row">
-                <div class="col-md-9 col-sm-8">
-                  <div class="pad">
-                    <!-- Map will be created here -->
-                    <div id="world-map-markers" style="height: 325px;"></div>
-                  </div>
-                </div>
-                <!-- /.col -->
-                <div class="col-md-3 col-sm-4">
-                  <div class="pad box-pane-right bg-green" style="min-height: 280px">
-                    <div class="description-block margin-bottom">
-                      <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                      <h5 class="description-header">8390</h5>
-                      <span class="description-text">Visits</span>
-                    </div>
-                    <!-- /.description-block -->
-                    <div class="description-block margin-bottom">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">30%</h5>
-                      <span class="description-text">Referrals</span>
-                    </div>
-                    <!-- /.description-block -->
-                    <div class="description-block">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">70%</h5>
-                      <span class="description-text">Organic</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-body -->
-          </div>
+          
           <!-- /.box -->
           <div class="row">
             <div class="col-md-6">
@@ -478,10 +434,25 @@ include_once '../crud/crud_cat.php';
               <!-- USERS LIST -->
               <div class="box box-danger">
                 <div class="box-header with-border">
+                <?php
+                 $list_us = $MySQLiconn->query("SELECT us.id_usuario,CONCAT (us.nombre,' ',us.apellido) AS n_apellidos,us.email,us.imagen,
+															 case 
+																when date(us.fecha_creacion) = CURDATE() then 'Hoy'
+																when date(us.fecha_creacion) = DATE_ADD(CURDATE(),INTERVAL -1 DAY) then 'Ayer'
+																ELSE DATE_FORMAT(us.fecha_creacion,'%d %b %Y')  END as t_fecha, 
+															 tu.descripcion AS tipo,es.descripcion AS estatus,us.id_estatus
+													FROM usuario AS us
+													INNER JOIN tipo_usuario AS tu ON us.id_tipo_usuario = tu.id_tipo_usuario
+													INNER JOIN estatus AS es ON us.id_estatus=es.id_estatus
+													WHERE us.id_tipo_usuario = 2
+													ORDER BY us.fecha_creacion
+													LIMIT 10");
+					  $cant_user= $list_us->num_rows;
+					?>
                   <h3 class="box-title">Latest Members</h3>
 
                   <div class="box-tools pull-right">
-                    <span class="label label-danger">8 New Members</span>
+                    <span class="label label-danger"><?php echo $cant_user?> Nuevos Miembros</span>
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
@@ -491,53 +462,29 @@ include_once '../crud/crud_cat.php';
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                   <ul class="users-list clearfix">
+                   <?php 
+					  
+					  while ($u_list = mysqli_fetch_array($list_us))
+					  {
+						  
+					  
+					  
+					  ?>
                     <li>
-                      <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander Pierce</a>
-                      <span class="users-list-date">Today</span>
+                      <img class="user-image" src="..<?php echo $u_list['imagen']?>" alt="User Image">
+                      <a class="users-list-name" href="#"><?php echo $u_list['n_apellidos']?></a>
+                      <span class="users-list-date"><?php echo $u_list['t_fecha']?></span>
                     </li>
-                    <li>
-                      <img src="dist/img/user8-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Norman</a>
-                      <span class="users-list-date">Yesterday</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user7-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Jane</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user6-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">John</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user2-160x160.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander</a>
-                      <span class="users-list-date">13 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user5-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Sarah</a>
-                      <span class="users-list-date">14 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user4-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nora</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
-                    <li>
-                      <img src="dist/img/user3-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nadia</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
+                    <?php } ?>
                   </ul>
                   <!-- /.users-list -->
                 </div>
                 <!-- /.box-body -->
+                <?php if($_SESSION['userId']==1) { ?>
                 <div class="box-footer text-center">
-                  <a href="javascript:void(0)" class="uppercase">View All Users</a>
+                  <a href="usuario" class="uppercase">Ver Usuarios</a>
                 </div>
+                <?php } ?>
                 <!-- /.box-footer -->
               </div>
               <!--/.box -->
@@ -713,53 +660,7 @@ include_once '../crud/crud_cat.php';
           </div>
           <!-- /.info-box -->
 
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Browser Usage</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="chart-responsive">
-                    <canvas id="pieChart" height="150"></canvas>
-                  </div>
-                  <!-- ./chart-responsive -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                    <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                    <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                    <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                    <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                    <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                  </ul>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">United States of America
-                  <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a>
-                </li>
-                <li><a href="#">China
-                  <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-              </ul>
-            </div>
-            <!-- /.footer -->
-          </div>
+          
           <!-- /.box -->
 
           <!-- PRODUCT LIST -->
@@ -872,9 +773,11 @@ include_once '../crud/crud_cat.php';
 <!-- SlimScroll -->
 <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS -->
-<script src="../bower_components/chart.js/Chart.js"></script>
+<!--<script src="../bower_components/chart.js/Chart.js"></script>-->
+<script src="../bower_components/chart.js/Chart2.js"></script>
+<!--<script src="../js/mycharts.js"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../dist/js/pages/dashboard2.js"></script>
+<!-- <script src="../dist/js/pages/dashboard2.js"></script>-->
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
@@ -888,6 +791,72 @@ include_once '../crud/crud_cat.php';
 <!-- Datatable responsive -->
 <script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
 <script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+
+<script type="text/javascript">
+//$.get( "../function/charts.php?data=mes" );
+	
+		
+	  var id = 1;	
+	  $.ajax({
+      type: 'POST',
+      url: '../function/charts.php',
+      data: {'data': id},
+	  dataType: 'json'
+    })
+    .done(function(lista_data){
+      //$('#id_municipio').html(lista_data)
+		  //alert("Data: " + lista_data)
+		var mes = [];
+		var cant_dest = [];
+		
+
+		for (var i in lista_data) {
+			mes.push(lista_data[i].mes);
+			cant_dest.push(lista_data[i].cant_dest);
+			//alert("i:" + lista_data[i].mes)
+		}
+		  //alert("Data: " + mes);
+		  	var ctx = document.getElementById('salesChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+
+			// The data for our dataset
+			data: {
+				labels: mes,
+				datasets: [{
+					label: 'Cant. de Tours',
+					//backgroundColor: 'rgba(200, 200, 200, 0.75)',
+					//borderColor: 'rgba(200, 200, 200, 0.75)',
+					//hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+					//hoverBorderColor: 'rgba(200, 200, 200, 1)',
+					fillColor           : 'rgb(210, 214, 222)',
+					strokeColor         : 'rgb(210, 214, 222)',
+					pointColor          : 'rgb(210, 214, 222)',
+					pointStrokeColor    : '#c1c7d1',
+					pointHighlightFill  : '#fff',
+					pointHighlightStroke: 'rgb(220,220,220)',
+					data: cant_dest
+				}]
+			},
+
+			// Configuration options go here
+			options: {}
+			});
+		  
+    })
+    .fail(function(){
+      alert('Hubo un errror al cargar los Municipios')
+	  
+    })
+		
+
+</script>
+
+
+
+
+
   
   
 
