@@ -27,6 +27,16 @@ include_once '../crud/conexion.php';
 
     <!-- Main content -->
     <section class="content">
+     <?php   
+		
+		// General info 
+		$res = $MySQLiconn->query('SELECT COUNT(*) AS cantidad,YEAR(CURDATE()) AS year FROM reservacion r WHERE YEAR (r.fecha_reservacion)=YEAR(CURDATE())');
+		$get_res = mysqli_fetch_assoc($res);
+		$mem = $MySQLiconn->query(' SELECT COUNT(*) AS cantidad,YEAR(CURDATE()) AS year FROM usuario AS us WHERE us.id_tipo_usuario = 2 AND YEAR (us.fecha_creacion)=YEAR(CURDATE()) ORDER BY us.fecha_creacion');
+		$get_mem = mysqli_fetch_assoc($mem);
+		
+		
+		?>
       <!-- Info boxes -->
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -35,7 +45,7 @@ include_once '../crud/conexion.php';
 
             <div class="info-box-content">
               <span class="info-box-text">CPU Traffic</span>
-              <span class="info-box-number">90<small>%</small></span>
+              <span class="info-box-number"><?php  ?><small>%</small></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -64,8 +74,8 @@ include_once '../crud/conexion.php';
             <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Sales</span>
-              <span class="info-box-number">760</span>
+              <span class="info-box-text">Reservas <?php echo $get_res['year'] ?></span>
+              <span class="info-box-number"><?php echo $get_res['cantidad'] ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -77,8 +87,8 @@ include_once '../crud/conexion.php';
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">New Members</span>
-              <span class="info-box-number">2,000</span>
+              <span class="info-box-text">Nuevos miembros <?php echo $get_mem['year'] ?></span>
+              <span class="info-box-number"><?php echo $get_mem['cantidad'] ?></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -637,7 +647,7 @@ include_once '../crud/conexion.php';
           <!-- PRODUCT LIST -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Recently Added Products</h3>
+              <h3 class="box-title">Ultimos destinos agregados</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -648,63 +658,37 @@ include_once '../crud/conexion.php';
             <!-- /.box-header -->
             <div class="box-body">
               <ul class="products-list product-list-in-box">
+               
+               <?php  
+				  	$dest = $MySQLiconn->query('SELECT d.id_destino,d.nombre_dest,d.desc_corta, d.imagen,d.precio,d.fecha_creacion
+												FROM v_destinos d
+												WHERE d.id_estatus = 1
+												ORDER BY d.fecha_creacion DESC
+												LIMIT 8');
+				  while ($list_dest = mysqli_fetch_array($dest))
+				  {
+				  
+				  ?>
+               
                 <li class="item">
                   <div class="product-img">
-                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
+                    <img src="../<?php echo $list_dest['imagen'] ?>" alt="Product Image">
                   </div>
                   <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Samsung TV
-                      <span class="label label-warning pull-right">$1800</span></a>
+                    <a href="javascript:void(0)" class="product-title"><?php echo $list_dest['nombre_dest'] ?>
+                      <span class="label label-warning pull-right">$<?php echo $list_dest['precio']?></span></a>
                     <span class="product-description">
-                          Samsung 32" 1080p 60Hz LED Smart HDTV.
+                          <?php echo $list_dest['desc_corta']?>
                         </span>
                   </div>
                 </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Bicycle
-                      <span class="label label-info pull-right">$700</span></a>
-                    <span class="product-description">
-                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">Xbox One <span
-                        class="label label-danger pull-right">$350</span></a>
-                    <span class="product-description">
-                          Xbox One Console Bundle with Halo Master Chief Collection.
-                        </span>
-                  </div>
-                </li>
-                <!-- /.item -->
-                <li class="item">
-                  <div class="product-img">
-                    <img src="../dist/img/default-50x50.gif" alt="Product Image">
-                  </div>
-                  <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">PlayStation 4
-                      <span class="label label-success pull-right">$399</span></a>
-                    <span class="product-description">
-                          PlayStation 4 500GB Console (PS4)
-                        </span>
-                  </div>
-                </li>
+                <?php } ?>
                 <!-- /.item -->
               </ul>
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-center">
-              <a href="javascript:void(0)" class="uppercase">View All Products</a>
+              <a href="destino" class="uppercase">Ver todos los destinos</a>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -748,7 +732,7 @@ include_once '../crud/conexion.php';
 <script src="../bower_components/chart.js/Chart2.js"></script>
 <!--<script src="../js/mycharts.js"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../dist/js/pages/dashboard2.js"></script>
+<!--<script src="../dist/js/pages/dashboard2.js"></script>-->
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
