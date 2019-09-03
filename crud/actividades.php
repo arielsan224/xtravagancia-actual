@@ -29,4 +29,20 @@ echo $municipio;
 	
 }
 
+if(isset($_POST['id_municipio']))
+{
+$id_municipio = $_POST['id_municipio'];
+
+$dest = $MySQLiconn->query( "SELECT d.id_destino,d.nombre_dest
+FROM destino d
+WHERE d.id_municipio = $id_depto" );
+
+$destino = '<option value="0">Seleccione destino</option>';
+while ( $row = $dest->fetch_array() ){
+    $destino .= "<option value='$row[id_destino]'>$row[nombre_dest]</option>";
+  }
+echo $destino;
+	
+}
+
   ?>                        					

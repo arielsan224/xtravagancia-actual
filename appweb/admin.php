@@ -2,6 +2,10 @@
 //include_once '../function/charts.php';
 session_start();
 include_once '../crud/conexion.php';
+if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
+	$mensajito = $_SESSION[ 'message' ];
+
+}
 
 ?>
   
@@ -12,6 +16,295 @@ include_once '../crud/conexion.php';
 	//include_once '../crud/conexion.php';
 	?>
 
+<!-- Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header bg-modal">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Reservas</h4>
+						</div>
+						<div class="modal-body">
+
+							<form method="post" enctype="multipart/form-data" id=formModal>
+								<div class="row">
+
+									<div class="col-md-12 add_bottom_15">
+										<div>
+
+										<div class="row">
+	
+<!--
+											<div class="col-md-12 col-sm-6">
+  											<div class="form-group">
+   											<input id="input-es" name="input-es[]" type="file" class="file" multiple 
+    											data-show-upload="false" data-show-caption="true" data-msg-placeholder="Seleccione archivo a cargar..." data-allowed-file-extensions='["jpg", "png"]' >
+    										</div>
+    										</div>
+-->
+											<?php
+											if(isset($_GET['edit'])){
+											?>
+											<input type="hidden" name="id_destino" value="<?php echo $getROW['id_destino']; ?>">
+											<?php
+												}
+											?>
+											<?php
+											
+											if(isset($_GET['edit'])){
+											?>
+											<div class="col-md-6">
+											<div class="form-group">
+												<label for="img_cargada" class="col-sm-3 control-label">Imagen de destino: </label>
+												<label class="col-sm-1 control-label">: </label>
+													<div class="col-sm-8">							    				   
+													  <img src="../<?php echo $getROW['imagen']; ?>" id="img_cargada" class="thumbnail" style="width:250px; height:200px;"  alt="../<?php echo $getROW['imagen']; ?>"/>
+													</div>
+											</div>
+											</div>
+											<?php
+											}
+											?>
+											<div class="col-md-6">
+											<div class="col-xs-12 text-center " >
+												<div class="kv-avatar center-block" >
+													<div class="file-loading" >
+														<input id="img_dest" name="img_dest" type="file" 
+														<?php if(!isset($_GET['edit'])) {  
+														?>
+														required
+														<?php
+															}
+														?>
+														>
+													</div>
+												</div>
+												<div class="kv-avatar-hint"><small>Archivos < 1500 KB</small></div>
+												<div id="kv-avatar-errors-1" class="center-block" style="width:400px;display:none"></div>
+											</div>
+											
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Nombre del destino</label>
+													<input type="text" class="form-control"  id="nombre_dest" placeholder="Nombre del destino" name="nombre_dest" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_dest'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Departamento</label>
+													<select class="form-control" name="id_depto" id="id_depto" required>
+														<option value="">Seleccione departamento</option>
+														<?php
+														$mun = $MySQLiconn->query( "SELECT * FROM departamento" );
+														while ( $row = $mun->fetch_array() ) {
+															if ( $getROW[ 'id_depto' ] == $row[ 'id_depto' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_depto'];  ?>">
+															<?php echo $row['nombre_depto'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_depto'];  ?>">
+															<?php echo $row['nombre_depto'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Municipio</label>
+													<select class="form-control" name="id_municipio" id="id_municipio" required placeholder="Seleccione municipio">
+
+														<option value="">Seleccione municipio</option>
+														
+														<?php
+														if(isset($_GET['edit'])){
+														$mun = $MySQLiconn->query( "SELECT * FROM municipio where id_depto=".$getROW[ 'id_depto' ] );
+														while ( $row = $mun->fetch_array() ) {
+															if ( $getROW[ 'id_municipio' ] == $row[ 'id_municipio' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_municipio'];  ?>">
+															<?php echo $row['nombre_municipio'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_municipio'];  ?>">
+															<?php echo $row['nombre_municipio'];  ?>
+														</option>
+														<?php
+														}
+														}
+															}
+														?>
+													</select>
+
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Precio</label>
+													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="<?php if(isset($_GET['edit'])) echo $getROW['precio'];  ?>" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Dias</label>
+													<input type="number" class="form-control" id="dias" placeholder="Cant. de dias" name="dias" value="<?php if(isset($_GET['edit'])) echo $getROW['dias'];  ?>" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Mínimo de personas</label>
+													<input type="number" class="form-control" id="minimo" placeholder="Mínimo de personas" name="minimo" value="<?php if(isset($_GET['edit'])) echo $getROW['minimo']; else echo '2';  ?>" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Categoria</label>
+													<select class="form-control" name="id_categoria" id="id_categoria" required>
+														<option value="">Seleccione Categoria</option>
+														<?php
+														$destest = $MySQLiconn->query( "SELECT * FROM categoria" );
+														while ( $row = $destest->fetch_array() ) {
+															if ( $getROW[ 'id_categoria' ] == $row[ 'id_categoria' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_categoria'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_categoria'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Actividades</label>
+													<select id="actividad" name="actividad[]" class="form-control select2 " multiple="multiple" data-placeholder="Actividades"
+                        							style="width: 100%;">
+                        							<?php
+														if(isset($_GET['edit'])){
+														$act = $MySQLiconn->query( "SELECT * FROM actividad where id_categoria=".$getROW['id_categoria'] );
+														$selected_ids = array();
+														$result1 =$MySQLiconn->query("SELECT id_actividad from maestro_act where id_destino = ".$getROW['id_destino']);
+														while($row1 = mysqli_fetch_assoc($result1))
+														{
+															$selected_ids[] = $row1['id_actividad'];
+															
+														}
+														
+														while ( $row = mysqli_fetch_assoc($act) ) {
+																															
+//															if ( $getROW2[ 'id_actividad' ] == $row[ 'id_actividad' ] ) 
+															if(in_array($row['id_actividad'], $selected_ids))
+															{
+																?>
+														<option selected value="<?php echo $row['id_actividad'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+
+														<?php
+																
+														} else {
+															?>
+														<option value="<?php echo $row['id_actividad'];  ?>">
+															<?php echo $row['descripcion'];  ?>
+														</option>
+														<?php
+														}
+																
+														}
+															}
+														?>
+                        							</select>
+												</div>
+												<?php
+//												var_dump ($selected_ids);
+			   									echo $row['id_actividad'];
+			   									?>
+											</div>
+											<div class="col-md-12 col-sm-6">
+												<div class="form-group">
+													<label>Dirección</label>
+													<textarea type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['direccion'];  ?></textarea>
+												</div>
+											</div>
+											<div class="col-md-12 col-sm-6">
+												<div class="form-group">
+													<label>Descrpcion Corta</label>
+													<textarea type="text" class="form-control" id="desc_corta" placeholder="Descripcion Corta" name="desc_corta" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_corta'];  ?></textarea>
+												</div>
+											</div>
+											<div class="col-md-12 col-sm-6">
+												<div class="form-group">
+													<label>Descripcion Larga</label>
+													<textarea type="text" class="form-control" id="desc_larga" placeholder="Descripcion Larga" name="desc_larga" required rows="6" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
+												</div>
+											</div>
+
+										</div>
+
+									    <div class="row"> </div>
+										</div>
+										<!--End step -->
+										<!--End step -->
+										<!--End step -->
+
+										<!--<div id="policy">
+								<h4>Cancellation policy</h4>-->
+										<!--<div class="form-group">
+									<label>
+										<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
+								</div>-->
+										<?php
+										if ( isset( $_GET[ 'edit' ] ) ) {
+											?>
+										<button class="btn btn-warning" name="update">Editar</a>
+
+										<?php
+										}
+										else
+										{
+										?>
+										<button class="btn btn-primary" name="save">Aceptar</a>
+										<?php
+										}
+										?>
+									</div>
+							</div>
+						</form>
+					</div>
+						<div class="modal-footer bg-modal-footer">
+						  <button type="button" class="btn btn-primary" data-dismiss="modal" <?php
+								if(isset($_GET['edit'])){
+							?>
+							onclick="location='destino'"
+							<?php
+								}
+							?>
+							>Close</button>
+						</div>
+								</div>
+				</div>
+			</div>
+			
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -30,10 +323,16 @@ include_once '../crud/conexion.php';
      <?php   
 		
 		// General info 
-		$res = $MySQLiconn->query('SELECT COUNT(*) AS cantidad,YEAR(CURDATE()) AS year FROM reservacion r WHERE YEAR (r.fecha_reservacion)=YEAR(CURDATE())');
+			$res = $MySQLiconn->query('SELECT FORMAT(COUNT(*),0) AS cantidad, YEAR(CURDATE()) AS 							year,format(sum(r.total),2) AS total,
+										FORMAT((sum(r.total)/1.30),2) AS costo,format((sum(r.total))-(sum(r.total)/1.30),2) AS ganancia
+										FROM reservacion r
+										WHERE YEAR (r.fecha_reservacion)= YEAR(CURDATE())');
 		$get_res = mysqli_fetch_assoc($res);
-		$mem = $MySQLiconn->query(' SELECT COUNT(*) AS cantidad,YEAR(CURDATE()) AS year FROM usuario AS us WHERE us.id_tipo_usuario = 2 AND YEAR (us.fecha_creacion)=YEAR(CURDATE()) ORDER BY us.fecha_creacion');
+		$mem = $MySQLiconn->query(' SELECT FORMAT(COUNT(*),0) AS cantidad,YEAR(CURDATE()) AS year FROM usuario AS us WHERE us.id_tipo_usuario = 2 AND YEAR (us.fecha_creacion)=YEAR(CURDATE()) ORDER BY us.fecha_creacion');
 		$get_mem = mysqli_fetch_assoc($mem);
+		$busc = $MySQLiconn->query('SELECT FORMAT(COUNT(*),0) AS cantidad,YEAR(CURDATE()) AS year FROM busquedas AS b WHERE YEAR (b.fecha_busqueda)=YEAR(CURDATE()) ORDER BY b.fecha_busqueda');
+		$get_busc = mysqli_fetch_assoc($busc);
+		
 		
 		
 		?>
@@ -44,8 +343,8 @@ include_once '../crud/conexion.php';
             <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">CPU Traffic</span>
-              <span class="info-box-number"><?php  ?><small>%</small></span>
+              <span class="info-box-text">Busquedas <?php echo $get_busc['year'] ?></span>
+              <span class="info-box-number"><?php echo $get_busc['cantidad'] ?><small></small></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -74,7 +373,7 @@ include_once '../crud/conexion.php';
             <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Reservas <?php echo $get_res['year'] ?></span>
+              <span class="info-box-text">Reservas <?php echo $get_res['year']?></span>
               <span class="info-box-number"><?php echo $get_res['cantidad'] ?></span>
             </div>
             <!-- /.info-box-content -->
@@ -87,7 +386,7 @@ include_once '../crud/conexion.php';
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Nuevos miembros <?php echo $get_mem['year'] ?></span>
+              <span class="info-box-text">Miembros <?php echo $get_mem['year']?></span>
               <span class="info-box-number"><?php echo $get_mem['cantidad'] ?></span>
             </div>
             <!-- /.info-box-content -->
@@ -102,12 +401,12 @@ include_once '../crud/conexion.php';
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Monthly Recap Report</h3>
+              <h3 class="box-title">Resumen de reservas</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-                <div class="btn-group">
+                <!--<div class="btn-group">
                   <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-wrench"></i></button>
                   <ul class="dropdown-menu" role="menu">
@@ -117,7 +416,7 @@ include_once '../crud/conexion.php';
                     <li class="divider"></li>
                     <li><a href="#">Separated link</a></li>
                   </ul>
-                </div>
+                </div>-->
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
@@ -126,7 +425,7 @@ include_once '../crud/conexion.php';
               <div class="row">
                 <div class="col-md-8">
                   <p class="text-center">
-                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                    <strong>Ventas: Año <?php echo $get_busc['year'] ?></strong>
                   </p>
 
                   <div class="chart">
@@ -188,8 +487,8 @@ include_once '../crud/conexion.php';
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
                     <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header">$35,210.43</h5>
-                    <span class="description-text">TOTAL REVENUE</span>
+                    <h5 class="description-header">$<?php echo $get_res['total'] ?></h5>
+                    <span class="description-text">TOTAL PAGADO</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -197,8 +496,8 @@ include_once '../crud/conexion.php';
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
                     <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">$10,390.90</h5>
-                    <span class="description-text">TOTAL COST</span>
+                    <h5 class="description-header">$<?php echo $get_res['costo'] ?></h5>
+                    <span class="description-text">COSTO TOTAL</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -206,8 +505,8 @@ include_once '../crud/conexion.php';
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
                     <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">$24,813.53</h5>
-                    <span class="description-text">TOTAL PROFIT</span>
+                    <h5 class="description-header">$<?php echo $get_res['ganancia'] ?></h5>
+                    <span class="description-text">GANANCIA TOTAL</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -561,7 +860,7 @@ include_once '../crud/conexion.php';
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Nueva Reserva</a>
+              <a href="" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#myModal">Nueva Reserva</a>
               <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas las Reservas</a>
             </div>
             <!-- /.box-footer -->
@@ -805,7 +1104,40 @@ include_once '../crud/conexion.php';
 	  
     })
 		
+	 $('#id_depto').on('change', function(){
+    var id = $('#id_depto').val()
+    $.ajax({
+      type: 'POST',
+      url: '../crud/actividades.php',
+      data: {'id_depto': id}
+    })
+    .done(function(lista_mun){
+      $('#id_municipio').html(lista_mun)
+    })
+    .fail(function(){
+      alert('Hubo un errror al cargar los Municipios')
+    })
+  });
+	 $('#id_municipio').on('change', function(){
+    var id = $('#id_municipio').val()
+    $.ajax({
+      type: 'POST',
+      url: '../crud/actividades.php',
+      data: {'id_municipio': id}
+    })
+    .done(function(lista_dest){
+      $('#id_dest').html(lista_dest)
+    })
+    .fail(function(){
+      alert('Hubo un errror al cargar los Municipios')
+    })
+  });
+	
+	$("#myModal").on('hidden.bs.modal', function (e) { 
+        $("#formModal")[0].reset();
+        $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
 
+      });	
 </script>
 
 
