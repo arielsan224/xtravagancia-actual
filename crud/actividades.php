@@ -35,13 +35,26 @@ $id_municipio = $_POST['id_municipio'];
 
 $dest = $MySQLiconn->query( "SELECT d.id_destino,d.nombre_dest
 FROM destino d
-WHERE d.id_municipio = $id_depto" );
+WHERE d.id_municipio = $id_municipio" );
 
 $destino = '<option value="0">Seleccione destino</option>';
 while ( $row = $dest->fetch_array() ){
     $destino .= "<option value='$row[id_destino]'>$row[nombre_dest]</option>";
   }
 echo $destino;
+	
+}
+
+if(isset($_POST['id_dest']))
+{
+$id_dest = $_POST['id_dest'];
+
+$dest_precio = $MySQLiconn->query( "SELECT d.precio
+FROM destino d
+WHERE d.id_destino = $id_dest" );
+
+$precio = mysqli_fetch_assoc($dest_precio);
+echo $precio['precio'] ;
 	
 }
 

@@ -34,60 +34,23 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 
 										<div class="row">
 	
-<!--
-											<div class="col-md-12 col-sm-6">
-  											<div class="form-group">
-   											<input id="input-es" name="input-es[]" type="file" class="file" multiple 
-    											data-show-upload="false" data-show-caption="true" data-msg-placeholder="Seleccione archivo a cargar..." data-allowed-file-extensions='["jpg", "png"]' >
-    										</div>
-    										</div>
--->
-											<?php
-											if(isset($_GET['edit'])){
-											?>
-											<input type="hidden" name="id_destino" value="<?php echo $getROW['id_destino']; ?>">
-											<?php
-												}
-											?>
-											<?php
-											
-											if(isset($_GET['edit'])){
-											?>
-											<div class="col-md-6">
-											<div class="form-group">
-												<label for="img_cargada" class="col-sm-3 control-label">Imagen de destino: </label>
-												<label class="col-sm-1 control-label">: </label>
-													<div class="col-sm-8">							    				   
-													  <img src="../<?php echo $getROW['imagen']; ?>" id="img_cargada" class="thumbnail" style="width:250px; height:200px;"  alt="../<?php echo $getROW['imagen']; ?>"/>
-													</div>
-											</div>
-											</div>
-											<?php
-											}
-											?>
-											<div class="col-md-6">
-											<div class="col-xs-12 text-center " >
-												<div class="kv-avatar center-block" >
-													<div class="file-loading" >
-														<input id="img_dest" name="img_dest" type="file" 
-														<?php if(!isset($_GET['edit'])) {  
-														?>
-														required
-														<?php
-															}
-														?>
-														>
-													</div>
+
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Nombres</label>
+													<input type="text" class="form-control"  id="nombres" placeholder="Nombres" name="nombres" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
 												</div>
-												<div class="kv-avatar-hint"><small>Archivos < 1500 KB</small></div>
-												<div id="kv-avatar-errors-1" class="center-block" style="width:400px;display:none"></div>
-											</div>
-											
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Nombre del destino</label>
-													<input type="text" class="form-control"  id="nombre_dest" placeholder="Nombre del destino" name="nombre_dest" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre_dest'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
+													<label>Apellidos</label>
+													<input type="text" class="form-control"  id="nombre_dest" placeholder="Nombre del destino" name="nombre_dest" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Email</label>
+													<input type="text" class="form-control" id="email" placeholder="Email" name="email" value="" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -98,20 +61,13 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 														<?php
 														$mun = $MySQLiconn->query( "SELECT * FROM departamento" );
 														while ( $row = $mun->fetch_array() ) {
-															if ( $getROW[ 'id_depto' ] == $row[ 'id_depto' ] ) {
-																?>
-														<option selected value="<?php echo $row['id_depto'];  ?>">
-															<?php echo $row['nombre_depto'];  ?>
-														</option>
-
-														<?php
-														} else {
+														
 															?>
 														<option value="<?php echo $row['id_depto'];  ?>">
 															<?php echo $row['nombre_depto'];  ?>
 														</option>
 														<?php
-														}
+														
 														}
 														?>
 													</select>
@@ -124,141 +80,53 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 
 														<option value="">Seleccione municipio</option>
 														
-														<?php
-														if(isset($_GET['edit'])){
-														$mun = $MySQLiconn->query( "SELECT * FROM municipio where id_depto=".$getROW[ 'id_depto' ] );
-														while ( $row = $mun->fetch_array() ) {
-															if ( $getROW[ 'id_municipio' ] == $row[ 'id_municipio' ] ) {
-																?>
-														<option selected value="<?php echo $row['id_municipio'];  ?>">
-															<?php echo $row['nombre_municipio'];  ?>
-														</option>
-
-														<?php
-														} else {
-															?>
-														<option value="<?php echo $row['id_municipio'];  ?>">
-															<?php echo $row['nombre_municipio'];  ?>
-														</option>
-														<?php
-														}
-														}
-															}
-														?>
 													</select>
 
 												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Tour</label>
+													<select class="form-control" name="id_dest" id="id_dest" required placeholder="Seleccione destino">
+
+														<option value="">Seleccione destino</option>
+														
+													</select>
+
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Date:</label>
+
+													<div class="input-group date">
+													  <div class="input-group-addon">
+														<i class="fa fa-calendar"></i>
+													  </div>
+													  <input class="form-control pull-right" id="datepicker" type="text">
+													</div>
+													<!-- /.input group -->
+												  </div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Precio</label>
-													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="<?php if(isset($_GET['edit'])) echo $getROW['precio'];  ?>" required>
+													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="" disabled>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Dias</label>
-													<input type="number" class="form-control" id="dias" placeholder="Cant. de dias" name="dias" value="<?php if(isset($_GET['edit'])) echo $getROW['dias'];  ?>" required>
+													<label>Cant. de personas</label>
+													<input type="number" class="form-control" id="personas" placeholder="Cant. de personas" name="personas" value="" required min="2">
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
-													<label>Mínimo de personas</label>
-													<input type="number" class="form-control" id="minimo" placeholder="Mínimo de personas" name="minimo" value="<?php if(isset($_GET['edit'])) echo $getROW['minimo']; else echo '2';  ?>" required>
+													<label>Total</label>
+													<input type="number" class="form-control" id="total" placeholder="Total" name="total" disabled>
 												</div>
 											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Categoria</label>
-													<select class="form-control" name="id_categoria" id="id_categoria" required>
-														<option value="">Seleccione Categoria</option>
-														<?php
-														$destest = $MySQLiconn->query( "SELECT * FROM categoria" );
-														while ( $row = $destest->fetch_array() ) {
-															if ( $getROW[ 'id_categoria' ] == $row[ 'id_categoria' ] ) {
-																?>
-														<option selected value="<?php echo $row['id_categoria'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-
-														<?php
-														} else {
-															?>
-														<option value="<?php echo $row['id_categoria'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-														<?php
-														}
-														}
-														?>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Actividades</label>
-													<select id="actividad" name="actividad[]" class="form-control select2 " multiple="multiple" data-placeholder="Actividades"
-                        							style="width: 100%;">
-                        							<?php
-														if(isset($_GET['edit'])){
-														$act = $MySQLiconn->query( "SELECT * FROM actividad where id_categoria=".$getROW['id_categoria'] );
-														$selected_ids = array();
-														$result1 =$MySQLiconn->query("SELECT id_actividad from maestro_act where id_destino = ".$getROW['id_destino']);
-														while($row1 = mysqli_fetch_assoc($result1))
-														{
-															$selected_ids[] = $row1['id_actividad'];
-															
-														}
-														
-														while ( $row = mysqli_fetch_assoc($act) ) {
-																															
-//															if ( $getROW2[ 'id_actividad' ] == $row[ 'id_actividad' ] ) 
-															if(in_array($row['id_actividad'], $selected_ids))
-															{
-																?>
-														<option selected value="<?php echo $row['id_actividad'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-
-														<?php
-																
-														} else {
-															?>
-														<option value="<?php echo $row['id_actividad'];  ?>">
-															<?php echo $row['descripcion'];  ?>
-														</option>
-														<?php
-														}
-																
-														}
-															}
-														?>
-                        							</select>
-												</div>
-												<?php
-//												var_dump ($selected_ids);
-			   									echo $row['id_actividad'];
-			   									?>
-											</div>
-											<div class="col-md-12 col-sm-6">
-												<div class="form-group">
-													<label>Dirección</label>
-													<textarea type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['direccion'];  ?></textarea>
-												</div>
-											</div>
-											<div class="col-md-12 col-sm-6">
-												<div class="form-group">
-													<label>Descrpcion Corta</label>
-													<textarea type="text" class="form-control" id="desc_corta" placeholder="Descripcion Corta" name="desc_corta" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_corta'];  ?></textarea>
-												</div>
-											</div>
-											<div class="col-md-12 col-sm-6">
-												<div class="form-group">
-													<label>Descripcion Larga</label>
-													<textarea type="text" class="form-control" id="desc_larga" placeholder="Descripcion Larga" name="desc_larga" required rows="6" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
-												</div>
-											</div>
-
+											
 										</div>
 
 									    <div class="row"> </div>
@@ -1006,6 +874,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
   <!--<script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>-->
 <!-- Bootstrap 3.3.7 -->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--<script src="../js/bootstrap-datepicker.js"></script>-->
+
 
 <script src="../bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
 <script src="../bower_components/bootstrap-fileinput/js/locales/es.js"></script>
@@ -1015,8 +885,23 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- DataTables -->
 <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/input-mask/jquery.inputmask.js"></script>
+<script src="../../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="../../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- date-range-picker -->
+<script src="../../bower_components/moment/min/moment.min.js"></script>
+<script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- FastClick -->
 <script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="../../plugins/iCheck/icheck.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
 <!-- Sparkline -->
@@ -1035,8 +920,6 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 <!-- Datatable responsive -->
-<script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
-<script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <!--<script src="bower_components/fileinput/js/fileinput.min.js"></script>-->
 <!--<script src="bower_components/bootstrap-fileinput-4.4.6/js/fileinput.min.js"></script>-->
 
@@ -1045,6 +928,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Datatable responsive -->
 <script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
 <script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+
 
 <script type="text/javascript">
 //$.get( "../function/charts.php?data=mes" );
@@ -1103,7 +987,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
       alert('Hubo un errror al cargar los Municipios')
 	  
     })
-		
+	/* Carga de municipio segun depto selecciondo */
+	  
 	 $('#id_depto').on('change', function(){
     var id = $('#id_depto').val()
     $.ajax({
@@ -1118,27 +1003,170 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
       alert('Hubo un errror al cargar los Municipios')
     })
   });
+	
+	/* Carga de destinos segun municipio selecciondo */
+	
 	 $('#id_municipio').on('change', function(){
     var id = $('#id_municipio').val()
     $.ajax({
       type: 'POST',
       url: '../crud/actividades.php',
       data: {'id_municipio': id}
+	  //dataType: 'json'
     })
     .done(function(lista_dest){
-      $('#id_dest').html(lista_dest)
+      $('#id_dest').html(lista_dest);
+	  limpia_montos();
+	  //alert(response.value)
     })
     .fail(function(){
-      alert('Hubo un errror al cargar los Municipios')
+      alert('Hubo un errror al cargar los Destinos')
     })
   });
+	
+	/* Carga de destinos segun municipio selecciondo */
+	
+	 $('#id_dest').on('change', function(){
+		var id = $('#id_dest').val()
+		$.ajax({
+		  type: 'POST',
+		  url: '../crud/actividades.php',
+		  data: {'id_dest': id}
+		  //dataType: 'json'
+		})
+		.done(function(precio){
+		  $('#precio').val(parseFloat(precio));
+			actualiza_sub_total();
+		  //alert(precio)
+		})
+		.fail(function(){
+		  alert('Hubo un errror al cargar los Destinos')
+		})
+	  });
+	
+	
+	 $('#personas').on('change',function(){
+		 if(!isNaN(this.value))
+			 {
+				if(this.value.length > 0 && this.value < 2){ 
+					alert ('El minimo de Personas es de 2');
+					$('#personas').val('');
+					$('#personas').focus();
+					$('#total').val('');
+				}
+				else 
+				actualiza_sub_total(); 
+			 }
+		 	
+		  else 
+			$('#total').val(0);
+		 
+	 });
+		 
+	
+	$('#id_dest').on('change',function(){
+		if(this.value != '0')
+		 actualiza_sub_total();
+		else 
+			$('#total').val(0);
+	 })
+	
+	
+	/* Limpieza de modal cada vez que se cierra */
 	
 	$("#myModal").on('hidden.bs.modal', function (e) { 
         $("#formModal")[0].reset();
         $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
 
-      });	
+      });
+	
+	var actualiza_sub_total=function(){
+		var precio = $('#precio').val();
+		 var personas = $('#personas').val();
+		 var total = precio * personas;
+		 //alert (total)
+		 $('#total').val(total);
+	};
+	
+	var limpia_montos = function(){
+		$('#precio').val('');
+		$('#total').val('');
+	};
+	
+	
+	
+	
+	//$('.datepicker').datepicker();
+	
 </script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
+  })
+</script>
+
 
 
 
