@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminXtravagancia  | Main</title>
+	<!-- Favicons-->
+  <link rel="shortcut icon" href="../../img/icons8-traveler-64.ico" type="image/x-icon">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -385,6 +387,7 @@
           </ul>
 -->
         </li>
+		<li><a href="../index" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> <span>Pagina Web</span></a></li>
         <?php 
 			$menu = $MySQLiconn->query("select distinct m.*
 										from r_menu m

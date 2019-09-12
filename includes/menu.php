@@ -11,7 +11,7 @@
     
     <meta name="description" content="EledaTours - Tours & Transportations.">
     <meta name="author" content="Arlo Productions">
-    <title>XTRAVAGANCIA TOURS - Nicaragua tours</title>
+    <title>Xtravagancia Tours - Nicaragua tours</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="../img/icons8-traveler-64.ico" type="image/x-icon">
