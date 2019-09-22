@@ -2,16 +2,10 @@
 //include_once '../function/charts.php';
 session_start();
 include_once '../crud/conexion.php';
-
+include("../includes/dashboard.php");
 
 ?>
-  
 
- 
-  <?php 
-	include("../includes/dashboard.php");
-	//include_once '../crud/conexion.php';
-	?>
 
 <div class="layer"></div>
 			
@@ -530,7 +524,11 @@ include_once '../crud/conexion.php';
             <div class="box-body">
               <div class="table-responsive">
 				  <?php 
-					$res = $MySQLiconn->query('SELECT r.idreservacion, d.id_destino,d.nombre_dest, 								e.descripcion AS est_reserva ,DATE_FORMAT(r.fecha_reservacion,"%d %b %Y") AS fecha_reserva,r.estatus as id_estatus
+					$res = $MySQLiconn->query('SELECT r.idreservacion, d.id_destino,d.nombre_dest, 								e.descripcion AS est_reserva ,DATE_FORMAT(r.fecha_reservacion,"%d %b %Y") AS fecha_reserva,
+					 CASE 
+						WHEN r.estatus = 2 THEN "primary"
+						WHEN r.estatus = 4 THEN "success"
+						ELSE "danger" END AS class
 												FROM v_destinos d
 												INNER JOIN reservacion r ON r.id_destino = d.id_destino
 												INNER JOIN estatus e ON e.id_estatus = r.estatus
@@ -556,7 +554,7 @@ include_once '../crud/conexion.php';
                   <tr>
 					<td><a href="pages/examples/invoice.html"><?php echo $list_res['idreservacion']?></a></td>
                     <td><?php echo $list_res['nombre_dest']?></td>
-                    <td><span <?php if ($list_res['id_estatus']==2) { ?>class="label label-primary"<?php }elseif ($list_res['id_estatus']==4){ ?>class="label label-success" <?php }else { ?>class="label label-danger"<?php }?>><?php echo $list_res['est_reserva']?></span></td>
+                    <td><span class="label label-<?php echo $list_res['class']?>"><?php echo $list_res['est_reserva']?></span></td>
 					  <td><?php echo $list_res['fecha_reserva']?></td>
                       <!--<div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>-->
 						
@@ -773,7 +771,6 @@ include_once '../crud/conexion.php';
 
 
 <script type="text/javascript">
-//$.get( "../function/charts.php?data=mes" );
 	
 		
 	  var id = 1;	
@@ -829,10 +826,7 @@ include_once '../crud/conexion.php';
       alert('Hubo un errror al cargar los datos')
 	 })
 	  
-    })
-	
-	
-	
+   
 	/* Limpieza de modal cada vez que se cierra */
 	
 	$("#myModal").on('hidden.bs.modal', function (e) { 
@@ -910,12 +904,3 @@ include_once '../crud/conexion.php';
     })
   })
 </script>
-
-
-
-
-
-
-  
-  
-

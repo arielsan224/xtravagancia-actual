@@ -34,8 +34,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 
 
 
-<div class="layer"></div>
-<!-- Mobile menu overlay mask -->
+
 
 <!-- Menu================================================== -->
 <?php include("../includes/dashboard.php");?>
@@ -46,7 +45,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- End position -->
 
 <!--		<div class="container margin_40">-->
-
+<div class="layer"></div>
+<!-- Mobile menu overlay mask -->
 
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" role="dialog">

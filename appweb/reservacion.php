@@ -1,5 +1,5 @@
 <?php
-include_once '../crud/crud_dest.php';
+include_once '../crud/crud_res.php';
 
 if(isset($_GET['edit']))
 {
@@ -34,8 +34,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 
 
 
-<div class="layer"></div>
-<!-- Mobile menu overlay mask -->
+
 
 <!-- Menu================================================== -->
 <?php include("../includes/dashboard.php");?>
@@ -46,7 +45,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- End position -->
 
 <!--		<div class="container margin_40">-->
-
+<div class="layer"></div>
+<!-- Mobile menu overlay mask -->
 
 <!-- Modal -->
 			<div class="modal fade" id="myModal" role="dialog">
@@ -76,7 +76,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Apellidos</label>
-													<input type="text" class="form-control"  id="nombre_dest" placeholder="Nombre del destino" name="nombre_dest" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
+													<input type="text" class="form-control"  id="apellidos" placeholder="Apellidos" name="apellidos" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -210,16 +210,16 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		<div class="content-wrapper">
 			<section class="content-header">
 						<h1>
-						Catalogos
-						<small>Destinos</small>
+						Registro
+						<small>Reservaciones</small>
 						</h1>
 
 						<ol class="breadcrumb">
 							<li><a href="admin"><i class="fa fa-dashboard"></i> Home</a>
 							</li>
-							<li><a href="">Catalogos</a>
+							<li><a href="">Registro</a>
 							</li>
-							<li class="active">Destinos</li>
+							<li class="active">Reservaciones</li>
 						</ol>
 			</section>
 			<section class="content">
@@ -227,7 +227,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">Listado de Destinos</h3>
+								<h3 class="box-title">Reservaciones</h3>
 								<button type="button" class="btn btn-info btn-md pull-right" data-toggle="modal" data-target="#myModal">Agregar</button>
 							</div>
 							<?php if (isset($mensajito)) {?>
@@ -248,47 +248,48 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<table id="dtatable" class="table table-bordered table-hover dataTable dt-responsive nowrap" style="width:100%">
                               <thead>  
                                <tr>  
-								  <td>Imagen</td>
+								  <td>Id reservacion</td>
 <!--								  <td>Id</td>-->
 								  <td>Destino</td>
-								  <td>Departamento</td>
-								  <td>Municipio</td>
+								  <td>Fecha reserva</td>
 								  <td>Precio</td>
-								  <td>Dias</td>
-								  <td>Actividades</td>
+								  <td>Cant. Personas</td>
+								  <td>Total</td>
 								  <td>Estatus</td>
                                   <td style="text-align:center;">Acciones</td>
                                </tr>  
                           	 </thead>  
                           <?php 
 						 
-						$res = $MySQLiconn->query("select dest.id_destino,dest.nombre_dest, dest.id_depto, 							   dest.nombre_depto,
-													dest.id_municipio, dest.nombre_municipio,dest.precio,dest.dias,			dest.imagen,dest.id_estatus,dest.estatus,dest.actividades
-													from v_destinos as dest");
+						$res = $MySQLiconn->query('SELECT r.idreservacion,                            d.id_destino,d.nombre_dest, 								e.descripcion    AS     est_reserva, DATE_FORMAT(r.fecha_reservacion,"%d %b %Y") AS         fecha_reserva,r.precio,r.cant_personas,r.total,r.estatus AS           id_estatus,
+							CASE 
+							WHEN r.estatus = 2 THEN "primary"
+							WHEN r.estatus = 4 THEN "success"
+							ELSE "danger" END AS class
+							FROM v_destinos d
+							INNER JOIN reservacion r ON r.id_destino = d.id_destino
+							INNER JOIN estatus e ON e.id_estatus = r.estatus
+							ORDER BY r.fecha_reservacion DESC');
 						while($row = mysqli_fetch_array($res))  
                           {  
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-								   <td ><img src="../<?php echo $row['imagen']; ?>" class="rounded" alt="<?php echo $row['imagen']; ?>" width="50" height="30"></td>
-<!--								   <td ><?php echo $row['id_destino']; ?></td>-->
+								   <td ><?php echo $row['idreservacion']; ?></td>
 								   <td ><?php echo $row['nombre_dest']; ?></td>
-								   <td ><?php echo $row['nombre_depto']; ?></td>
-								   <td ><?php echo $row['nombre_municipio']; ?></td>
+								   <td ><?php echo $row['fecha_reserva']; ?></td>
 								   <td ><?php echo $row['precio']; ?></td>
-								   <td width="5%"><?php echo $row['dias']; ?></td>
-								   <td ><?php echo $row['actividades']; ?></td>
-								   <td ><span <?php if ($row['id_estatus']==1) { ?>class="label label-success"<?php } else { ?>class="label label-danger"<?php }?> ><?php echo $row['estatus']; ?></span></td>
+								   <td ><?php echo $row['cant_personas']; ?></td>
+								   <td ><?php echo $row['total']; ?></td>
+								   <td ><span class="label label-<?php echo $row['class']; ?>"><?php echo $row['est_reserva']; ?></span></td>
 									<td class= "text-center" >
-										<!--<a href="?edit=<?php //echo $row['id_destino']; ?> " onclick="return confirm('Estas seguro que desea editar!'); "class="btn btn-warning btn-sm" role="button">editar</a>
-									   <a href="?del=<?php //echo $row['id_destino']; ?>&est=<?php //echo $row['id_estatus']; ?> " onclick="return confirm('Estas seguro que desea activar/inactivar el registro !'); "class="btn <?php //if ($row['id_estatus']==1){  ?> btn-danger <?php //} else { ?>btn-primary <?php //}?> btn-sm" role="button"><?php //if ($row['id_estatus']==1){  ?> inactivar <?php //} else { ?>activar <?php //}?></a>-->
-										
 								<select name="cmbo_accion" id="cmbo_accion" onchange="return confirm('Estas seguro que desea modificar el registro!')&& (window.location.href=this.value)">
 									<option value="">Seleccione</option>
 									<option value="?edit=<?php echo $row['id_destino']; ?>">Editar</option>
 									<option value="?adm=<?php echo $row['id_destino']; ?>">Administrar</option>
-									<option value="?del=<?php echo $row['id_destino']; ?>&est=<?php echo $row['id_estatus']; ?> "><?php if ($row['id_estatus']==1){  ?> Inactivar <?php } else { ?>Activar <?php }?></option>
-									
+									<?php if ($row['id_estatus']==2) {?>
+									<option value="?del=<?php echo $row['id_destino']; ?>&est=<?php echo $row['id_estatus']; ?> "> Cancelar </option>
+									<?php }  ?>
 								</select>
 								  </td>
 							 </tr>  
@@ -358,7 +359,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS -->
 <!--<script src="../bower_components/chart.js/Chart.js"></script>-->
-<script src="../bower_components/chart.js/Chart2.js"></script>
+<script src="../../bower_components/chart.js/Chart2.js"></script>
 <!--<script src="../js/mycharts.js"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!--<script src="../dist/js/pages/dashboard2.js"></script>-->
@@ -408,80 +409,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	  document.title= "AdminLTE | Catalogos";
 	  $("li").removeClass("active");
 	  $(".Registro").addClass("active");
-      $(".destino").addClass("active");
+      $(".reservacion").addClass("active");
 	  //$(".destino").removeClass("active");
-	  
-		  
-
-	  
-//$("#input-es").fileinput(
-////	{
-////	language: "es",
-////    uploadUrl: "uploads/",
-////    allowedFileExtensions: ["jpg", "png", "gif"]
-//////	language: {
-//////		browseLabel: "Navegar",
-//////	}
-////}	
-//);
-	  
-var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
-    'onclick="alert(\'Call your custom code here.\')">' +
-    '<i class="glyphicon glyphicon-tag"></i>' +
-    '</button>'; 
-$("#img_dest").fileinput({
-    language: "es",
-	overwriteInitial: true,
-    maxFileSize: 1500,
-    showClose: false,
-    showCaption: false,
-    browseLabel: '',
-    removeLabel: '',
-    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-    removeTitle: 'Cancel or reset changes',
-    elErrorContainer: '#kv-avatar-errors-1',
-    msgErrorClass: 'alert alert-block alert-danger',
-    defaultPreviewContent: '<img src="../uploads/default_avatar_male.jpg" alt="Your Avatar">',
-    layoutTemplates: {main2: '{preview} ' +  /*btnCust +*/ ' {remove} {browse}'},
-//	uploadUrl: "/uploads/",
-	maxImageWidth: 1000,
-    maxImageHeight: 667,
-	minImageWidth: 1000,
-    minImageHeight: 667,
-    allowedFileExtensions: ["jpg", "png", "gif"]
-});
-
-	$('#id_categoria').on('change', function(){
-    var id = $('#id_categoria').val()
-    $.ajax({
-      type: 'POST',
-      url: '../crud/actividades.php',
-      data: {'id_act': id}
-    })
-    .done(function(lista_act){
-      $('#actividad').html(lista_act)
-    })
-    .fail(function(){
-      alert('Hubo un errror al cargar las actividades')
-    })
-  });  
-	
-	 $('#id_depto').on('change', function(){
-    var id = $('#id_depto').val()
-    $.ajax({
-      type: 'POST',
-      url: '../crud/actividades.php',
-      data: {'id_depto': id}
-    })
-    .done(function(lista_mun){
-      $('#id_municipio').html(lista_mun)
-    })
-    .fail(function(){
-      alert('Hubo un errror al cargar los Municipios')
-    })
-  });   
-	 
   });
 	
 	$("#myModal").on('hidden.bs.modal', function (e) { 
@@ -495,7 +424,7 @@ $("#img_dest").fileinput({
 <script type="text/javascript">
 //$.get( "../function/charts.php?data=mes" );
 	
-		
+	/*	
 	  var id = 1;	
 	  $.ajax({
       type: 'POST',
@@ -548,7 +477,7 @@ $("#img_dest").fileinput({
     .fail(function(){
       alert('Hubo un errror al cargar los Municipios')
 	  
-    })
+    })*/
 	/* Carga de municipio segun depto selecciondo */
 	  
 	 $('#id_depto').on('change', function(){
@@ -663,9 +592,7 @@ $("#img_dest").fileinput({
 </script>
 <script>
   $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
+    
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
     //Datemask2 mm/dd/yyyy
