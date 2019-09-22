@@ -2,176 +2,18 @@
 //include_once '../function/charts.php';
 session_start();
 include_once '../crud/conexion.php';
-if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
-	$mensajito = $_SESSION[ 'message' ];
 
-}
 
 ?>
   
-<div class="layer"></div>
+
  
   <?php 
 	include("../includes/dashboard.php");
 	//include_once '../crud/conexion.php';
 	?>
 
-<!-- Modal -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header bg-modal">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Reservas</h4>
-						</div>
-						<div class="modal-body">
-
-							<form method="post" enctype="multipart/form-data" id=formModal>
-								<div class="row">
-
-									<div class="col-md-12 add_bottom_15">
-										<div>
-
-										<div class="row">
-	
-
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Nombres</label>
-													<input type="text" class="form-control"  id="nombres" placeholder="Nombres" name="nombres" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Apellidos</label>
-													<input type="text" class="form-control"  id="nombre_dest" placeholder="Nombre del destino" name="nombre_dest" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Email</label>
-													<input type="text" class="form-control" id="email" placeholder="Email" name="email" value="" required>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Departamento</label>
-													<select class="form-control" name="id_depto" id="id_depto" required>
-														<option value="">Seleccione departamento</option>
-														<?php
-														$mun = $MySQLiconn->query( "SELECT * FROM departamento" );
-														while ( $row = $mun->fetch_array() ) {
-														
-															?>
-														<option value="<?php echo $row['id_depto'];  ?>">
-															<?php echo $row['nombre_depto'];  ?>
-														</option>
-														<?php
-														
-														}
-														?>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Municipio</label>
-													<select class="form-control" name="id_municipio" id="id_municipio" required placeholder="Seleccione municipio">
-
-														<option value="">Seleccione municipio</option>
-														
-													</select>
-
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Tour</label>
-													<select class="form-control" name="id_dest" id="id_dest" required placeholder="Seleccione destino">
-
-														<option value="">Seleccione destino</option>
-														
-													</select>
-
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Date:</label>
-
-													<div class="input-group date">
-													  <div class="input-group-addon">
-														<i class="fa fa-calendar"></i>
-													  </div>
-													  <input class="form-control pull-right" id="datepicker" type="text">
-													</div>
-													<!-- /.input group -->
-												  </div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Precio</label>
-													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="" disabled>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Cant. de personas</label>
-													<input type="number" class="form-control" id="personas" placeholder="Cant. de personas" name="personas" value="" required min="2">
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Total</label>
-													<input type="number" class="form-control" id="total" placeholder="Total" name="total" disabled>
-												</div>
-											</div>
-											
-										</div>
-
-									    <div class="row"> </div>
-										</div>
-										<!--End step -->
-										<!--End step -->
-										<!--End step -->
-
-										<!--<div id="policy">
-								<h4>Cancellation policy</h4>-->
-										<!--<div class="form-group">
-									<label>
-										<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
-								</div>-->
-										<?php
-										if ( isset( $_GET[ 'edit' ] ) ) {
-											?>
-										<button class="btn btn-warning" name="update">Editar</a>
-
-										<?php
-										}
-										else
-										{
-										?>
-										<button class="btn btn-primary" name="save">Aceptar</a>
-										<?php
-										}
-										?>
-									</div>
-							</div>
-						</form>
-					</div>
-						<div class="modal-footer bg-modal-footer">
-						  <button type="button" class="btn btn-primary" data-dismiss="modal" <?php
-								if(isset($_GET['edit'])){
-							?>
-							onclick="location='destino'"
-							<?php
-								}
-							?>
-							>Close</button>
-						</div>
-								</div>
-				</div>
-			</div>
+<div class="layer"></div>
 			
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -728,8 +570,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <a href="" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#myModal">Nueva Reserva</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas las Reservas</a>
+              <!--<a href="" class="btn btn-sm btn-info btn-flat pull-left" data-toggle="modal" data-target="#myModal">Nueva Reserva</a>-->
+              <a href="reservacion" class="btn btn-sm btn-default btn-flat pull-right">Ver Todas las Reservas</a>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -984,92 +826,11 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		  
     })
     .fail(function(){
-      alert('Hubo un errror al cargar los Municipios')
-	  
-    })
-	/* Carga de municipio segun depto selecciondo */
-	  
-	 $('#id_depto').on('change', function(){
-    var id = $('#id_depto').val()
-    $.ajax({
-      type: 'POST',
-      url: '../crud/actividades.php',
-      data: {'id_depto': id}
-    })
-    .done(function(lista_mun){
-      $('#id_municipio').html(lista_mun)
-    })
-    .fail(function(){
-      alert('Hubo un errror al cargar los Municipios')
-    })
-  });
-	
-	/* Carga de destinos segun municipio selecciondo */
-	
-	 $('#id_municipio').on('change', function(){
-    var id = $('#id_municipio').val()
-    $.ajax({
-      type: 'POST',
-      url: '../crud/actividades.php',
-      data: {'id_municipio': id}
-	  //dataType: 'json'
-    })
-    .done(function(lista_dest){
-      $('#id_dest').html(lista_dest);
-	  limpia_montos();
-	  //alert(response.value)
-    })
-    .fail(function(){
-      alert('Hubo un errror al cargar los Destinos')
-    })
-  });
-	
-	/* Carga de destinos segun municipio selecciondo */
-	
-	 $('#id_dest').on('change', function(){
-		var id = $('#id_dest').val()
-		$.ajax({
-		  type: 'POST',
-		  url: '../crud/actividades.php',
-		  data: {'id_dest': id}
-		  //dataType: 'json'
-		})
-		.done(function(precio){
-		  $('#precio').val(parseFloat(precio));
-			actualiza_sub_total();
-		  //alert(precio)
-		})
-		.fail(function(){
-		  alert('Hubo un errror al cargar los Destinos')
-		})
-	  });
-	
-	
-	 $('#personas').on('change',function(){
-		 if(!isNaN(this.value))
-			 {
-				if(this.value.length > 0 && this.value < 2){ 
-					alert ('El minimo de Personas es de 2');
-					$('#personas').val('');
-					$('#personas').focus();
-					$('#total').val('');
-				}
-				else 
-				actualiza_sub_total(); 
-			 }
-		 	
-		  else 
-			$('#total').val(0);
-		 
-	 });
-		 
-	
-	$('#id_dest').on('change',function(){
-		if(this.value != '0')
-		 actualiza_sub_total();
-		else 
-			$('#total').val(0);
+      alert('Hubo un errror al cargar los datos')
 	 })
+	  
+    })
+	
 	
 	
 	/* Limpieza de modal cada vez que se cierra */
@@ -1080,23 +841,6 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 
       });
 	
-	var actualiza_sub_total=function(){
-		var precio = $('#precio').val();
-		 var personas = $('#personas').val();
-		 var total = precio * personas;
-		 //alert (total)
-		 $('#total').val(total);
-	};
-	
-	var limpia_montos = function(){
-		$('#precio').val('');
-		$('#total').val('');
-	};
-	
-	
-	
-	
-	//$('.datepicker').datepicker();
 	
 </script>
 <script>
