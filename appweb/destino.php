@@ -349,14 +349,14 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		<div class="content-wrapper">
 			<section class="content-header">
 						<h1>
-						Catalogos
+						Registro
 						<small>Destinos</small>
 						</h1>
 
 						<ol class="breadcrumb">
 							<li><a href="admin"><i class="fa fa-dashboard"></i> Home</a>
 							</li>
-							<li><a href="">Catalogos</a>
+							<li><a href="">Registro</a>
 							</li>
 							<li class="active">Destinos</li>
 						</ol>

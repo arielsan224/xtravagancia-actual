@@ -66,7 +66,12 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 
 										<div class="row">
 	
-
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Email</label>
+													<input type="text" class="form-control" id="email" placeholder="Email" name="email" value="" required>
+												</div>
+											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Nombres</label>
@@ -77,12 +82,6 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												<div class="form-group">
 													<label>Apellidos</label>
 													<input type="text" class="form-control"  id="apellidos" placeholder="Apellidos" name="apellidos" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
-												</div>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="form-group">
-													<label>Email</label>
-													<input type="text" class="form-control" id="email" placeholder="Email" name="email" value="" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -406,7 +405,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
     }
 		  
 });
-	  document.title= "AdminLTE | Catalogos";
+	  document.title= "AdminLTE | Registro";
 	  $("li").removeClass("active");
 	  $(".Registro").addClass("active");
       $(".reservacion").addClass("active");
