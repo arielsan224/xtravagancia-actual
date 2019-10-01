@@ -58,4 +58,21 @@ echo $precio['precio'] ;
 	
 }
 
+if (isset($_POST['email'])){
+	$email = $MySQLiconn->real_escape_string($_POST['email']);
+	$json_array = array();
+	$info_user = $MySQLiconn->query("SELECT u.nombre, u.apellido
+									FROM usuario u
+									WHERE u.email = '$email'");
+	
+	while($row = mysqli_fetch_assoc($info_user))  
+           {  
+                $json_array[] = $row;
+           }  
+           echo json_encode($json_array);
+			//var_dump($json_array);
+			//var_dump($email);
+	
+}
+
   ?>                        					

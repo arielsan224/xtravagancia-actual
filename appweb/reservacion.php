@@ -58,7 +58,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 						</div>
 						<div class="modal-body">
 
-							<form method="post" enctype="multipart/form-data" id=formModal>
+							<form method="post"  id=formModal>
 								<div class="row">
 
 									<div class="col-md-12 add_bottom_15">
@@ -477,6 +477,45 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
       alert('Hubo un errror al cargar los Municipios')
 	  
     })*/
+	
+	/* Carga de datos de usuario segun email escrito */
+	
+	$('#email').on('blur',function(){
+		var id = $('#email').val();
+		//alert(id);
+		
+		$.ajax({
+			type:'POST',
+			url:'../crud/actividades.php',
+			data:{'email':id},
+			dataType: 'json'
+		})
+		.done(function(info_user){
+			var nombres;
+			var apellidos;
+			//nombres.push(info_user[0].mes);
+			if(info_user && info_user.length > 0){ 
+			nombres   = info_user[0].nombre;
+			apellidos =info_user[0].apellido;
+			//alert(info_user[0].nombre);
+			$('#nombres').attr('disabled',true);
+			$('#apellidos').attr('disabled',true);
+			$('#nombres').val(nombres);
+			$('#apellidos').val(apellidos);
+			$('#id_depto').focus();
+			}
+			else {
+				$('#nombres').focus();
+			}
+		})
+		.fail(function(){
+			alert('Hubo un error al cargar usuarios ')
+		})
+			  
+			 
+	});
+	
+	
 	/* Carga de municipio segun depto selecciondo */
 	  
 	 $('#id_depto').on('change', function(){
@@ -490,7 +529,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
       $('#id_municipio').html(lista_mun)
     })
     .fail(function(){
-      alert('Hubo un errror al cargar los Municipios')
+      alert('Hubo un error al cargar los Municipios')
     })
   });
 	
@@ -510,7 +549,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	  //alert(response.value)
     })
     .fail(function(){
-      alert('Hubo un errror al cargar los Destinos')
+      alert('Hubo un error al cargar los Destinos')
     })
   });
 	
@@ -530,7 +569,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		  //alert(precio)
 		})
 		.fail(function(){
-		  alert('Hubo un errror al cargar los Destinos')
+		  alert('Hubo un error al cargar los Destinos')
 		})
 	  });
 	
@@ -566,6 +605,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	
 	$("#myModal").on('hidden.bs.modal', function (e) { 
         $("#formModal")[0].reset();
+		$('#nombres').attr('disabled',false);
+		$('#apellidos').attr('disabled',false);
         $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
 
       });
