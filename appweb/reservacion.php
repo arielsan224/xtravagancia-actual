@@ -69,7 +69,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Email</label>
-													<a id="info" name="info" href="#" data-toggle="tooltip" data-placement="right" title="Formato de correo invalido!"></a>
+													<a id="info" name="info" href="#" data-toggle="tooltip" data-placement="right" title="Formato de correo invalido!" class="ttwarning"></a>
 													<input type="email" class="form-control" id="email" placeholder="Email" name="email" value="" required>
 												</div>
 											</div>
