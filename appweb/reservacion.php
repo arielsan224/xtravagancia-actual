@@ -69,7 +69,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Email</label>
-													<input type="text" class="form-control" id="email" placeholder="Email" name="email" value="" required>
+													<a id="info" name="info" href="#" data-toggle="tooltip" data-placement="right" title="Formato de correo invalido!"></a>
+													<input type="email" class="form-control" id="email" placeholder="Email" name="email" value="" required>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -415,6 +416,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	$("#myModal").on('hidden.bs.modal', function (e) { 
         $("#formModal")[0].reset();
         $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
+		$("[data-toggle='tooltip']").tooltip('hide');
 
       });
 
@@ -482,8 +484,25 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	
 	$('#email').on('blur',function(){
 		var id = $('#email').val();
+		var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		var incorrecto = false;
+		if (!(regex.test(id)) && id.length > 0 ) {
+			
+			//alert('Formato de correo invalido');
+			$("[data-toggle='tooltip']").tooltip('show');
+			$('#email').val('');
+			$('#nombres').val('');
+			$('#apellidos').val('');
+			$('#nombres').attr('disabled',false);
+			$('#apellidos').attr('disabled',false);
+			//$('#info').show();
+			$('#email').focus();
+			
+			
+		}
 		//alert(id);
-		
+		else {
+		$("[data-toggle='tooltip']").tooltip('hide');
 		$.ajax({
 			type:'POST',
 			url:'../crud/actividades.php',
@@ -493,16 +512,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		.done(function(info_user){
 			var nombres;
 			var apellidos;
-			//nombres.push(info_user[0].mes);
 			if(info_user && info_user.length > 0){ 
-			nombres   = info_user[0].nombre;
-			apellidos =info_user[0].apellido;
-			//alert(info_user[0].nombre);
-			$('#nombres').attr('disabled',true);
-			$('#apellidos').attr('disabled',true);
-			$('#nombres').val(nombres);
-			$('#apellidos').val(apellidos);
-			$('#id_depto').focus();
+				nombres   = info_user[0].nombre;
+				apellidos =info_user[0].apellido;
+				//alert(info_user[0].nombre);
+				$('#nombres').attr('disabled',true);
+				$('#apellidos').attr('disabled',true);
+				$('#nombres').val(nombres);
+				$('#apellidos').val(apellidos);
+				$('#id_depto').focus();
 			}
 			else {
 				$('#nombres').focus();
@@ -511,7 +529,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		.fail(function(){
 			alert('Hubo un error al cargar usuarios ')
 		})
-			  
+		}	  
 			 
 	});
 	
@@ -623,6 +641,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		$('#precio').val('');
 		$('#total').val('');
 	};
+	
 	
 	
 	
