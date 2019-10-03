@@ -684,7 +684,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 
     //Date picker
     $('#datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+	  min: new Date()
     })
 
     //iCheck for checkbox and radio inputs

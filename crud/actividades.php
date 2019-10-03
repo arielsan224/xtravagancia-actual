@@ -58,6 +58,30 @@ echo $precio['precio'] ;
 	
 }
 
+
+if(isset($_POST['fecha']))
+{
+	$id_dest = $_POST['fecha'];
+	$json_array = array();
+    $locate = $MySQLiconn->query("SET lc_time_names = 'es_ES'");
+	$dest_info = $MySQLiconn->query( "SELECT vd.precio,rd.dias,t.inicio,t.fin
+									FROM v_destinos vd
+									LEFT JOIN horario_destino hd ON hd.id_destino = vd.id_destino
+									INNER JOIN rango_dias rd ON rd.id_rango_dias = hd.id_rango_dias
+									INNER JOIN tiempo t ON t.id_tiempo=hd.id_tiempo
+									WHERE vd.id_estatus=1
+									AND hd.estatus=1
+									AND vd.id_destino =  $id_dest" );
+
+	while($row = mysqli_fetch_assoc($dest_info))  
+			   {  
+					$json_array[] = $row;
+			   }  
+			   echo json_encode($json_array);
+	
+}
+
+
 if (isset($_POST['email'])){
 	$email = $MySQLiconn->real_escape_string($_POST['email']);
 	$json_array = array();
