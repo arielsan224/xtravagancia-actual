@@ -275,7 +275,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
                                ?>
 <!--                               <tbody>-->
 							  <tr>
-								   <td ><?php echo $row['idreservacion']; ?></td>
+								  <td ><a href="../jreports/lanzador_reports?id_reserva=<?php echo $row['idreservacion']; ?>&jreport=MiReserva.jrxml" target="_blank"><?php echo $row['idreservacion']; ?></a></td>
 								   <td ><?php echo $row['nombre_dest']; ?></td>
 								   <td ><?php echo $row['fecha_reserva']; ?></td>
 								   <td ><?php echo $row['precio']; ?></td>

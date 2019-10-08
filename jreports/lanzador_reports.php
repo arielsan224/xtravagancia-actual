@@ -9,8 +9,8 @@ if(!isset($_SESSION['userId'])) {
 	//exit();
 }
 //include_once '../crud/conexion.php';
-$id_reserva=$_POST['id_reserva'];
-$jreport=$_POST['jreport'];
+$id_reserva=$_GET['id_reserva'];
+$jreport=$_GET['jreport'];
 /*
 $report = $MySQLiconn->query("SELECT sm.id_sub_menu,sm.nombre_sub_menu,sm.id_menu,sm.url
 		FROM r_menu_sub sm
