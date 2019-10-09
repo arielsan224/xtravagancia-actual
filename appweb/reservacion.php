@@ -309,7 +309,24 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 				<!-- /.row -->
 			</section>
 		</div>
-		<?php include("../includes/footeradmin.php");?>
+		<?php include("../includes/footeradmin.php");
+			
+	  
+			$delete_val = array(0,3,6);
+	  		$semanas = array(0,1,2,3,4,5,6);
+			//var_dump($semanas);
+
+			// Search for the array key and unset   
+			foreach($delete_val as $key){
+				$keyToDelete = array_search($key, $semanas);
+				unset($semanas[$keyToDelete]);
+				$semanas = array_values($semanas);
+			}
+			$semanas = implode(",", $semanas);
+			//var_dump($semanas);
+			
+			
+		?>
 	</div>
 
 
@@ -660,6 +677,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
     $('[data-mask]').inputmask()
 
     //Date range picker
+	
+	  
     $('#reservation').daterangepicker()
     //Date range picker with time picker
     $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
@@ -683,9 +702,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
     )
 
     //Date picker
+	  var rango=<?php echo "'".$semanas."'"?>;
+	  //console.log(rango);
     $('#datepicker').datepicker({
-      autoclose: true,
-	  min: new Date()
+      locale: 'es',
+	  autoclose: true,
+	  format: "dd/mm/yyyy",
+	  min: new Date(),
+	  startDate: new Date(),
+	  daysOfWeekDisabled: rango
     })
 
     //iCheck for checkbox and radio inputs
