@@ -99,4 +99,42 @@ if (isset($_POST['email'])){
 	
 }
 
+if (isset($_POST['id_dest_sem'])){
+	$id_dest = $MySQLiconn->real_escape_string($_POST['id_dest_sem']);
+	$delete_val = array();
+	$t_sem =0;
+	$sem =$MySQLiconn->query("SELECT distinct hd.id_rango_dias AS dias
+							FROM horario_destino hd
+							WHERE hd.id_destino = ".$id_dest);
+	//var_dump($sem);
+	while ($array_sem = mysqli_fetch_assoc($sem)){
+		if(!($array_sem['dias']==8)){ 
+		$delete_val []= $array_sem['dias'];
+			}
+		else {
+			$t_sem =1;
+		}
+	}
+	//var_dump($t_sem);
+	//var_dump($id_dest);
+	       if($t_sem == 0){ 
+	  		$semanas = array(0,1,2,3,4,5,6);
+			//var_dump($delete_val);
+
+			// Search for the array key and unset   
+			foreach($delete_val as $key){
+				$keyToDelete = array_search($key, $semanas);
+				unset($semanas[$keyToDelete]);
+				$semanas = array_values($semanas);
+			}
+			$semanas = "'".implode(",", $semanas)."'";
+			}
+			else {
+				$semanas = '[]';//array();
+			}
+			//var_dump($semanas);
+			echo $semanas;
+	
+}
+
   ?>                        					

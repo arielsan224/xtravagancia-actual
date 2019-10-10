@@ -310,22 +310,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			</section>
 		</div>
 		<?php include("../includes/footeradmin.php");
-			
-	  
-			$delete_val = array(0,3,6);
-	  		$semanas = array(0,1,2,3,4,5,6);
-			//var_dump($semanas);
-
-			// Search for the array key and unset   
-			foreach($delete_val as $key){
-				$keyToDelete = array_search($key, $semanas);
-				unset($semanas[$keyToDelete]);
-				$semanas = array_values($semanas);
-			}
-			$semanas = implode(",", $semanas);
-			//var_dump($semanas);
-			
-			
+						
 		?>
 	</div>
 
@@ -434,6 +419,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
         $("#formModal")[0].reset();
         $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
 		$("[data-toggle='tooltip']").tooltip('hide');
+		$('#datepicker').datepicker('destroy');
 
       });
 
@@ -601,6 +587,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		.done(function(precio){
 		  $('#precio').val(parseFloat(precio));
 			actualiza_sub_total();
+			dias_semanas(id);
 		  //alert(precio)
 		})
 		.fail(function(){
@@ -657,6 +644,35 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	var limpia_montos = function(){
 		$('#precio').val('');
 		$('#total').val('');
+		$('#datepicker').datepicker('destroy');
+	};
+	
+	var dias_semanas = function(id){
+		var dest= id;
+		$.ajax({
+		  type: 'POST',
+		  url: '../crud/actividades.php',
+		  data: {'id_dest_sem': dest}
+		  //dataType: 'json'
+		})
+		.done(function(semanas){
+		  //Date picker
+			  var rango=semanas;
+			  console.log(rango);
+			$('#datepicker').datepicker({
+			  locale: 'es',
+			  autoclose: true,
+			  format: "dd/mm/yyyy",
+			  min: new Date(),
+			  startDate: new Date(),
+			  daysOfWeekDisabled: rango
+			})
+		  
+		  //alert(precio)
+		})
+		.fail(function(){
+		  alert('Hubo un error al cargar los Destinos')
+		})
 	};
 	
 	
@@ -700,9 +716,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
         $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
       }
     )
-
+/*
     //Date picker
-	  var rango=<?php echo "'".$semanas."'"?>;
+	  var rango=;
 	  //console.log(rango);
     $('#datepicker').datepicker({
       locale: 'es',
@@ -711,7 +727,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	  min: new Date(),
 	  startDate: new Date(),
 	  daysOfWeekDisabled: rango
-    })
+    })*/
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
