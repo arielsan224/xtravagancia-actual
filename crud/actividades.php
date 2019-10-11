@@ -102,25 +102,26 @@ if (isset($_POST['email'])){
 if (isset($_POST['id_dest_sem'])){
 	$id_dest = $MySQLiconn->real_escape_string($_POST['id_dest_sem']);
 	$delete_val = array();
-	$t_sem =0;
-	$sem =$MySQLiconn->query("SELECT distinct hd.id_rango_dias AS dias
+	$id =0;
+	$t_sem ='';
+	$sem =$MySQLiconn->query("SELECT DISTINCT rd.cod AS dias, hd.id_rango_dias
 							FROM horario_destino hd
+							INNER JOIN rango_dias rd ON rd.id_rango_dias = hd.id_rango_dias
 							WHERE hd.id_destino = ".$id_dest);
-	//var_dump($sem);
 	while ($array_sem = mysqli_fetch_assoc($sem)){
-		if(!($array_sem['dias']==8)){ 
-		$delete_val []= $array_sem['dias'];
+		$id = $array_sem['id_rango_dias'];
+		if(($id<7)){ 
+			$delete_val []= $array_sem['dias'];
 			}
 		else {
-			$t_sem =1;
+			$t_sem =$array_sem['dias'];
 		}
-	}
+		}
 	//var_dump($t_sem);
-	//var_dump($id_dest);
-	       if($t_sem == 0){ 
+	       if(($id > 7)){ 
+			   $delete_val = explode("," , $t_sem);
+		   }
 	  		$semanas = array(0,1,2,3,4,5,6);
-			//var_dump($delete_val);
-
 			// Search for the array key and unset   
 			foreach($delete_val as $key){
 				$keyToDelete = array_search($key, $semanas);
@@ -128,13 +129,22 @@ if (isset($_POST['id_dest_sem'])){
 				$semanas = array_values($semanas);
 			}
 			$semanas = "'".implode(",", $semanas)."'";
-			}
-			else {
-				$semanas = '[]';//array();
-			}
-			//var_dump($semanas);
 			echo $semanas;
 	
+}
+
+if(isset($_POST['id_dest_hor'])){
+	$id_dest = $MySQLiconn->real_escape_string($_POST['id_dest_hor']);
+	$horario_list = $MySQLiconn->query("SELECT t.id_tiempo, CONCAT (TIME_FORMAT(t.inicio, '%H:%i'),'-', 									TIME_FORMAT(t.fin, '%H:%i')) as horario
+								FROM horario_destino hd
+								INNER JOIN tiempo t ON t.id_tiempo = hd.id_tiempo
+								WHERE hd.id_destino = ".$id_dest);
+	$cmbo_horarios = '<option value="0">Seleccione horario</option>';
+	while($horarios = $horario_list->fetch_array()){
+		$cmbo_horarios .= "<option value='$horarios[id_tiempo]'>$horarios[horario]</option>";
+	}
+	echo $cmbo_horarios;
+	//var_dump($cmbo_horarios);
 }
 
   ?>                        					

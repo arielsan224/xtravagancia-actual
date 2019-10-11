@@ -142,6 +142,18 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
+													<label>Horario</label>
+													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario">
+
+														<option value="">Seleccione horario</option>
+														
+													</select>
+
+												</div>
+											</div>
+											
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
 													<label>Precio</label>
 													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="" disabled>
 												</div>
@@ -588,6 +600,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		  $('#precio').val(parseFloat(precio));
 			actualiza_sub_total();
 			dias_semanas(id);
+			busca_horarios(id);
+			
 		  //alert(precio)
 		})
 		.fail(function(){
@@ -658,7 +672,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		.done(function(semanas){
 		  //Date picker
 			  var rango=semanas;
-			  console.log(rango);
+			  //console.log(rango);
 			$('#datepicker').datepicker({
 			  locale: 'es',
 			  autoclose: true,
@@ -666,13 +680,34 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			  min: new Date(),
 			  startDate: new Date(),
 			  daysOfWeekDisabled: rango
-			})
-		  
+			});
+					  
 		  //alert(precio)
 		})
 		.fail(function(){
-		  alert('Hubo un error al cargar los Destinos')
+		  alert('Hubo un error al cargar las semanas')
 		})
+	};
+	
+	var busca_horarios = function(id){
+		var dest= id;
+		$.ajax({
+		  type: 'POST',
+		  url: '../crud/actividades.php',
+		  data: {'id_dest_hor': dest}
+		  //dataType: 'json'
+		})
+		.done(function(horario){
+		  //combo horario
+			console.log(horario);
+			  $('#horario').html(horario);
+			
+		  //alert(precio)
+		})
+		.fail(function(){
+		  alert('Hubo un error al cargar los horarios')
+		})
+		
 	};
 	
 	
