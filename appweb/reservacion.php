@@ -388,6 +388,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Datatable responsive -->
 <script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
 <script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+<script src="../../bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
 
 
 
@@ -634,6 +635,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		 actualiza_sub_total();
 		else 
 			$('#total').val(0);
+			//limpia_montos();
+		    $('#datepicker').datepicker('destroy');
 	 })
 	
 	
@@ -674,7 +677,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			  var rango=semanas;
 			  //console.log(rango);
 			$('#datepicker').datepicker({
-			  locale: 'es',
+			  language: 'es',
 			  autoclose: true,
 			  format: "dd/mm/yyyy",
 			  min: new Date(),
