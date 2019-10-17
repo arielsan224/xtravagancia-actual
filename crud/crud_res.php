@@ -10,31 +10,45 @@ if(isset($_POST['save']))
      $nombres = $MySQLiconn->real_escape_string($_POST['nombres']);
 	 $apellidos = $MySQLiconn->real_escape_string($_POST['apellidos']);
 	 $email = $MySQLiconn->real_escape_string($_POST['email']);
+	 $telefono = $MySQLiconn->real_escape_string($_POST['telefono']);
      $id_dest = $MySQLiconn->real_escape_string($_POST['id_dest']);
      $datepicker = $MySQLiconn->real_escape_string($_POST['datepicker']);
+	 $horario = $MySQLiconn->real_escape_string($_POST['horario']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
 	 //$id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
 	 $personas = $MySQLiconn->real_escape_string($_POST['personas']);
 	 $total = $MySQLiconn->real_escape_string($_POST['total']);
-
-	
-		
+	 //$id_user = $MySQLiconn->real_escape_string($_POST['id_user']);
+	 $password = md5(123);
+	 //$id_user = $_SESSION['userId'];
+	 //var_dump($_POST['id_usuario']);
+	 
+	 if(!(isset($_POST['id_usuario']))){
+		 
+		  $SQL = $MySQLiconn->query("INSERT INTO usuario(password,nombre,apellido,email,telefono) VALUES('$password','$nombres','$apellidos','$email','$telefono')");
+		  
+		  $id_user = mysqli_insert_id($MySQLiconn);
+	 	}
+	 else {
+		$id_user = $MySQLiconn->real_escape_string($_POST['id_usuario']);
+		}
  
-		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,desc_corta,desc_larga,id_municipio,precio,dias,imagen,minimo, direccion) VALUES('$nombre_dest','$desc_corta ','$desc_larga ',' $id_municipio','$precio','$dias','$imagen_ins','$minimo','$direccion')");
+		  $SQL2 = $MySQLiconn->query("INSERT INTO reservacion (id_destino,id_usuario,fecha_tour,id_horario_destino,precio,cant_personas,total) VALUES('$id_dest','$id_user','$datepicker',' $horario','$precio','$personas','$total')");
+		
+		//var_dump('mensaje'.$SQL2);
 
-			$inserted = mysqli_insert_id($MySQLiconn);
-
-		 if(!$SQL)
+		 if(!$SQL2)
 			  {
 			   //echo $MySQLiconn->error;
 			   $_SESSION['message'] = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
+			   exit();
 			  } 
 
 			else {
 
 				 
 				$_SESSION['message'] = "Registro Guardado";
-				header("Location: destino");
+				header("Location: reservacion");
 	 			exit();
 			}
 

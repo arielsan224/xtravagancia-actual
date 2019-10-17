@@ -85,7 +85,7 @@ if(isset($_POST['fecha']))
 if (isset($_POST['email'])){
 	$email = $MySQLiconn->real_escape_string($_POST['email']);
 	$json_array = array();
-	$info_user = $MySQLiconn->query("SELECT u.nombre, u.apellido
+	$info_user = $MySQLiconn->query("SELECT u.nombre, u.apellido,u.telefono,u.id_usuario
 									FROM usuario u
 									WHERE u.email = '$email'");
 	
@@ -135,13 +135,13 @@ if (isset($_POST['id_dest_sem'])){
 
 if(isset($_POST['id_dest_hor'])){
 	$id_dest = $MySQLiconn->real_escape_string($_POST['id_dest_hor']);
-	$horario_list = $MySQLiconn->query("SELECT t.id_tiempo, CONCAT (TIME_FORMAT(t.inicio, '%H:%i'),'-', 									TIME_FORMAT(t.fin, '%H:%i')) as horario
+	$horario_list = $MySQLiconn->query("SELECT hd.id_horario_destino, CONCAT (TIME_FORMAT(t.inicio, '%h:%i %p'),'-', 									TIME_FORMAT(t.fin, '%h:%i %p')) as horario
 								FROM horario_destino hd
 								INNER JOIN tiempo t ON t.id_tiempo = hd.id_tiempo
 								WHERE hd.id_destino = ".$id_dest);
 	$cmbo_horarios = '<option value="0">Seleccione horario</option>';
 	while($horarios = $horario_list->fetch_array()){
-		$cmbo_horarios .= "<option value='$horarios[id_tiempo]'>$horarios[horario]</option>";
+		$cmbo_horarios .= "<option value='$horarios[id_horario_destino]'>$horarios[horario]</option>";
 	}
 	echo $cmbo_horarios;
 	//var_dump($cmbo_horarios);

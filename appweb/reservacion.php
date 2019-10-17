@@ -65,7 +65,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 										<div>
 
 										<div class="row">
-	
+											<input type="hidden" id="id_usuario" name="id_usuario" value="">
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Email</label>
@@ -85,6 +85,13 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 													<input type="text" class="form-control"  id="apellidos" placeholder="Apellidos" name="apellidos" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
 												</div>
 											</div>
+											<div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Telefono</label>
+													<input type="tel" pattern="[0-9]{8}" class="form-control" id="telefono" placeholder="1234-4678" name="telefono" value="" >
+												</div>
+											</div>
+											
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Departamento</label>
@@ -135,7 +142,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 													  <div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													  </div>
-													  <input class="form-control pull-right" id="datepicker" type="text">
+													  <input class="form-control pull-right" id="datepicker" type="text" name="datepicker" readonly>
 													</div>
 													<!-- /.input group -->
 												  </div>
@@ -155,7 +162,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Precio</label>
-													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="" disabled>
+													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="" readonly>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
@@ -168,7 +175,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Total</label>
-													<input type="number" class="form-control" id="total" placeholder="Total" name="total" disabled>
+													<input type="number" class="form-control" id="total" placeholder="Total" name="total" readonly>
 												</div>
 											</div>
 											
@@ -509,8 +516,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			$('#email').val('');
 			$('#nombres').val('');
 			$('#apellidos').val('');
-			$('#nombres').attr('disabled',false);
-			$('#apellidos').attr('disabled',false);
+			$('#nombres').attr('readonly',false);
+			$('#apellidos').attr('readonly',false);
+			$('#telefono').attr('readonly',false);
 			//$('#info').show();
 			$('#email').focus();
 			
@@ -528,15 +536,22 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		.done(function(info_user){
 			var nombres;
 			var apellidos;
+			var telefono;
+			var id_usuario;
 			if(info_user && info_user.length > 0){ 
 				nombres   = info_user[0].nombre;
 				apellidos =info_user[0].apellido;
+				telefono  =info_user[0].telefono; 
+				id_usuario=info_user[0].id_usuario;
 				//alert(info_user[0].nombre);
-				$('#nombres').attr('disabled',true);
-				$('#apellidos').attr('disabled',true);
+				$('#nombres').attr('readonly',true);
+				$('#apellidos').attr('readonly',true);
+				$('#telefono').attr('readonly',true);
 				$('#nombres').val(nombres);
 				$('#apellidos').val(apellidos);
 				$('#id_depto').focus();
+				$('#telefono').val(telefono)
+				$('#id_usuario').val(id_usuario);
 			}
 			else {
 				$('#nombres').focus();
@@ -644,8 +659,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 	
 	$("#myModal").on('hidden.bs.modal', function (e) { 
         $("#formModal")[0].reset();
-		$('#nombres').attr('disabled',false);
-		$('#apellidos').attr('disabled',false);
+		$('#nombres').attr('readonly',false);
+		$('#apellidos').attr('readonly',false);
         $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
 
       });
@@ -679,10 +694,11 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			$('#datepicker').datepicker({
 			  language: 'es',
 			  autoclose: true,
-			  format: "dd/mm/yyyy",
+			  format: "yyyy-mm-dd",
 			  min: new Date(),
 			  startDate: new Date(),
-			  daysOfWeekDisabled: rango
+			  daysOfWeekDisabled: rango,
+			  disabled: true
 			});
 					  
 		  //alert(precio)
