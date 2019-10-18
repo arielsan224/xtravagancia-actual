@@ -304,11 +304,11 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									<td class= "text-center" >
 								<select name="cmbo_accion" id="cmbo_accion" onchange="return confirm('Estas seguro que desea modificar el registro!')&& (window.location.href=this.value)">
 									<option value="">Seleccione</option>
-									<option value="?edit=<?php echo $row['id_destino']; ?>">Editar</option>
-									<option value="?adm=<?php echo $row['id_destino']; ?>">Administrar</option>
-									<?php if ($row['id_estatus']==2) {?>
-									<option value="?del=<?php echo $row['id_destino']; ?>&est=<?php echo $row['id_estatus']; ?> "> Cancelar </option>
-									<?php }  ?>
+									<option value="?edit=<?php echo $row['idreservacion']; ?>">Editar</option>
+									<option value="?adm=<?php echo $row['idreservacion']; ?>">Administrar</option>
+									<?php if ($row['id_estatus']==2 || $row['id_estatus']==3){ ?>
+									<option value="?del=<?php echo $row['idreservacion']; ?>&est=<?php echo $row['id_estatus']; ?> "><?php if ($row['id_estatus']==2){  ?> Cancelar <?php } else if ($row['id_estatus']==3) { ?>Reservar <?php }?></option>
+									<?php }?>
 								</select>
 								  </td>
 							 </tr>  

@@ -23,7 +23,7 @@ if(isset($_POST['save']))
 	 //$id_user = $_SESSION['userId'];
 	 //var_dump($_POST['id_usuario']);
 	 
-	 if(!(isset($_POST['id_usuario']))){
+	 if(!(isset($_POST['id_usuario']))|| $_POST['id_usuario']=='' ){
 		 
 		  $SQL = $MySQLiconn->query("INSERT INTO usuario(password,nombre,apellido,email,telefono) VALUES('$password','$nombres','$apellidos','$email','$telefono')");
 		  
@@ -60,20 +60,20 @@ if(isset($_POST['save']))
 if(isset($_GET['del'], $_GET['est']))
 {
   //if(unlink($_GET['url'])) { 
-	 if ($_GET['est']==1)
+	 if ($_GET['est']==2)
 	 {
-		 $estatus = 0;
-		 $est_text = 'inactivar';
-		 $esta_text = 'Inactivado';
+		 $estatus = 3;
+		 $est_text = 'Cancelar';
+		 $esta_text = 'Cancelado';
 	 }
 	 else {
-		 $estatus = 1;
-		 $est_text = 'Activar';
-		 $esta_text = 'Activado';
+		 $estatus = 2;
+		 $est_text = 'Reservar';
+		 $esta_text = 'Reservado';
 	 }
 	
 	 //$SQL = $MySQLiconn->query("DELETE FROM destino WHERE id_destino=".$_GET['del']);
-	 $SQL = $MySQLiconn->query("UPDATE destino SET estatus= '".$estatus."'  WHERE id_destino=".$_GET['del']);
+	 $SQL = $MySQLiconn->query("UPDATE reservacion SET estatus= '".$estatus."'  WHERE idreservacion=".$_GET['del']);
 	  
 	 
 	 if(!$SQL)
@@ -85,7 +85,7 @@ if(isset($_GET['del'], $_GET['est']))
 		 $_SESSION['message'] = "Registro ".$esta_text;
 		 //$SQL2 = $MySQLiconn->query("ALTER TABLE destino AUTO_INCREMENT=1");
 	 }
-	 header("Location: destino.php");
+	 header("Location: reservacion");
 	 exit();
 	/*  }
 	else {
