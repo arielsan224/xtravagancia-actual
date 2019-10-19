@@ -15,12 +15,9 @@ if(isset($_POST['save']))
      $datepicker = $MySQLiconn->real_escape_string($_POST['datepicker']);
 	 $horario = $MySQLiconn->real_escape_string($_POST['horario']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
-	 //$id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
 	 $personas = $MySQLiconn->real_escape_string($_POST['personas']);
 	 $total = $MySQLiconn->real_escape_string($_POST['total']);
-	 //$id_user = $MySQLiconn->real_escape_string($_POST['id_user']);
 	 $password = md5(123);
-	 //$id_user = $_SESSION['userId'];
 	 //var_dump($_POST['id_usuario']);
 	 
 	 if(!(isset($_POST['id_usuario']))|| $_POST['id_usuario']=='' ){
@@ -102,17 +99,14 @@ if(isset($_GET['del'], $_GET['est']))
 /* code for data update */
 if(isset($_GET['edit']))
 {
- $SQL = $MySQLiconn->query("SELECT dest.id_destino,dest.nombre_dest, 																dest.direccion,dest.desc_corta,dest.desc_larga, mun.id_depto, 											dest.id_municipio, 
-								   (SELECT ac.id_categoria
-									FROM maestro_act as ma
-									inner join actividad as ac on ma.id_actividad = ac.id_actividad
-									where ma.id_destino = dest.id_destino
-									group by ac.id_categoria) as id_categoria,
-								   dest.precio,dest.dias,dest.minimo,
-								   dest.imagen,dest.estatus
-							from destino as dest
-							inner join municipio as mun on dest.id_municipio = mun.id_municipio
-							WHERE dest.id_destino=".$_GET['edit']);
+			 $SQL = $MySQLiconn->query("SELECT u.email,u.nombre,u.apellido,u.telefono,r.idreservacion,vd.id_destino,vd.nombre_dest,vd.id_depto,vd.nombre_depto,vd.id_municipio,vd.nombre_municipio,r.fecha_tour,t.id_tiempo, CONCAT (TIME_FORMAT(t.inicio, '%h:%i %p'),'-', TIME_FORMAT(t.fin, '%h:%i %p')) AS horario,r.precio,r.cant_personas,r.total
+			FROM reservacion r
+			INNER JOIN v_destinos vd ON vd.id_destino = r.id_destino
+			INNER JOIN horario_destino hd ON hd.id_horario_destino = r.id_horario_destino
+			INNER JOIN rango_dias rd ON rd.id_rango_dias = hd.id_rango_dias
+			INNER JOIN tiempo t ON t.id_tiempo = hd.id_tiempo
+			INNER JOIN usuario u ON u.id_usuario = r.id_usuario
+			WHERE r.idreservacion = ".$_GET['edit']);
  $getROW = $SQL->fetch_array();
  
  if(!$SQL)
@@ -126,20 +120,17 @@ if(isset($_GET['edit']))
 
 if(isset($_POST['update']))
 {
-     $nombres = $MySQLiconn->real_escape_string($_POST['nombres']);
-	 $apellidos = $MySQLiconn->real_escape_string($_POST['apellidos']);
-	 $email = $MySQLiconn->real_escape_string($_POST['email']);
-     $id_dest = $MySQLiconn->real_escape_string($_POST['id_dest']);
+     $id_reservacion = $MySQLiconn->real_escape_string($_POST['id_reservacion']);
      $datepicker = $MySQLiconn->real_escape_string($_POST['datepicker']);
+	 $horario = $MySQLiconn->real_escape_string($_POST['horario']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
-	 //$id_estatus = $MySQLiconn->real_escape_string($_POST['id_estatus']);
 	 $personas = $MySQLiconn->real_escape_string($_POST['personas']);
 	 $total = $MySQLiconn->real_escape_string($_POST['total']);
 		
 
 	
 	 
-	$SQL = $MySQLiconn->query("UPDATE destino SET nombre_dest= '".$nombre_dest."',desc_corta='".$desc_corta."',desc_larga='".$desc_larga."', id_municipio='".$id_municipio."', precio='".$precio."', dias='".$dias."', minimo ='".$minimo."', direccion = '".$direccion."' WHERE id_destino=".$id_destino);
+	$SQL = $MySQLiconn->query("UPDATE reservacion SET fecha_tour= '".$datepicker."',id_horario_destino='".$horario."',precio='".$precio."', cant_personas='".$personas."', total='".$total."' WHERE idreservacion=".$id_reservacion);
  	
  
 	if(!$SQL)
@@ -152,7 +143,7 @@ if(isset($_POST['update']))
 		
 		$_SESSION['message'] = "Registro Actualizado";
 	} 
- header("Location: destino.php");
+ header("Location: reservacion");
  exit();
 }
 /* code for data update */
