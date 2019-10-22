@@ -99,7 +99,7 @@ if(isset($_GET['del'], $_GET['est']))
 /* code for data update */
 if(isset($_GET['edit']))
 {
-			 $SQL = $MySQLiconn->query("SELECT u.email,u.nombre,u.apellido,u.telefono,r.idreservacion,vd.id_destino,vd.nombre_dest,vd.id_depto,vd.nombre_depto,vd.id_municipio,vd.nombre_municipio,r.fecha_tour,t.id_tiempo, CONCAT (TIME_FORMAT(t.inicio, '%h:%i %p'),'-', TIME_FORMAT(t.fin, '%h:%i %p')) AS horario,r.precio,r.cant_personas,r.total
+			 $SQL = $MySQLiconn->query("SELECT u.email,u.nombre,u.apellido,u.telefono,r.idreservacion,vd.id_destino,vd.nombre_dest,vd.id_depto,vd.nombre_depto,vd.id_municipio,vd.nombre_municipio,r.fecha_tour,t.id_tiempo,hd.id_horario_destino, CONCAT (TIME_FORMAT(t.inicio, '%h:%i %p'),'-', TIME_FORMAT(t.fin, '%h:%i %p')) AS horario,r.precio,r.cant_personas,r.total
 			FROM reservacion r
 			INNER JOIN v_destinos vd ON vd.id_destino = r.id_destino
 			INNER JOIN horario_destino hd ON hd.id_horario_destino = r.id_horario_destino
@@ -122,7 +122,7 @@ if(isset($_POST['update']))
 {
      $id_reservacion = $MySQLiconn->real_escape_string($_POST['id_reservacion']);
      $datepicker = $MySQLiconn->real_escape_string($_POST['datepicker']);
-	 $horario = $MySQLiconn->real_escape_string($_POST['horario']);
+	 //$horario = $MySQLiconn->real_escape_string($_POST['horario']);
      $precio = $MySQLiconn->real_escape_string($_POST['precio']);
 	 $personas = $MySQLiconn->real_escape_string($_POST['personas']);
 	 $total = $MySQLiconn->real_escape_string($_POST['total']);
@@ -130,7 +130,7 @@ if(isset($_POST['update']))
 
 	
 	 
-	$SQL = $MySQLiconn->query("UPDATE reservacion SET fecha_tour= '".$datepicker."',id_horario_destino='".$horario."',precio='".$precio."', cant_personas='".$personas."', total='".$total."' WHERE idreservacion=".$id_reservacion);
+	$SQL = $MySQLiconn->query("UPDATE reservacion SET fecha_tour= '".$datepicker."',precio='".$precio."', cant_personas='".$personas."', total='".$total."' WHERE idreservacion=".$id_reservacion);
  	
  
 	if(!$SQL)

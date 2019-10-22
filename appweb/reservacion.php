@@ -65,48 +65,62 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 										<div>
 
 										<div class="row">
+											<?php
+											if(isset($_GET['edit'])){
+											?>
+											<input type="hidden" name="id_reservacion" value="<?php echo $getROW['idreservacion']; ?>">
+											<?php
+												}
+											?>
 											<input type="hidden" id="id_usuario" name="id_usuario" value="">
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Email</label>
 													<a id="info" name="info" href="#" data-toggle="tooltip" data-placement="right" title="Formato de correo invalido!" class="ttwarning"></a>
-													<input type="email" class="form-control" id="email" placeholder="Email" name="email" value="" required>
+													<input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<?php if(isset($_GET['edit'])) echo $getROW['email'];  ?>" required <?php if (isset($_GET['edit'])){  ?> readonly <?php } ?> >
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Nombres</label>
-													<input type="text" class="form-control"  id="nombres" placeholder="Nombres" name="nombres" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
+													<input type="text" class="form-control"  id="nombres" placeholder="Nombres" name="nombres" value="<?php if(isset($_GET['edit'])) echo $getROW['nombre'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required <?php if (isset($_GET['edit'])){  ?> readonly <?php } ?>>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Apellidos</label>
-													<input type="text" class="form-control"  id="apellidos" placeholder="Apellidos" name="apellidos" value="" onkeyup="javascript:this.value=this.value.toTitleCase();" required>
+													<input type="text" class="form-control"  id="apellidos" placeholder="Apellidos" name="apellidos" value="<?php if(isset($_GET['edit'])) echo $getROW['apellido'];  ?>" onkeyup="javascript:this.value=this.value.toTitleCase();" required <?php if (isset($_GET['edit'])){  ?> readonly <?php } ?>>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Telefono</label>
-													<input type="tel" pattern="[0-9]{8}" class="form-control" id="telefono" placeholder="1234-4678" name="telefono" value="" >
+													<input type="tel" pattern="[0-9]{8}" class="form-control" id="telefono" placeholder="1234-4678" name="telefono" value="<?php if(isset($_GET['edit'])) echo $getROW['telefono'];  ?>" required <?php if (isset($_GET['edit'])){  ?> readonly <?php } ?>>
 												</div>
 											</div>
 											
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Departamento</label>
-													<select class="form-control" name="id_depto" id="id_depto" required>
+													<select class="form-control" name="id_depto" id="id_depto" required <?php if (isset($_GET['edit'])){  ?> disabled <?php } ?>>
 														<option value="">Seleccione departamento</option>
 														<?php
 														$mun = $MySQLiconn->query( "SELECT * FROM departamento" );
 														while ( $row = $mun->fetch_array() ) {
-														
+															if ( $getROW[ 'id_depto' ] == $row[ 'id_depto' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_depto'];  ?>">
+															<?php echo $row['nombre_depto'];  ?>
+														</option>
+
+														<?php
+														} else {
 															?>
 														<option value="<?php echo $row['id_depto'];  ?>">
 															<?php echo $row['nombre_depto'];  ?>
 														</option>
 														<?php
-														
+														}
 														}
 														?>
 													</select>
@@ -115,10 +129,31 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Municipio</label>
-													<select class="form-control" name="id_municipio" id="id_municipio" required placeholder="Seleccione municipio">
+													<select class="form-control" name="id_municipio" id="id_municipio" required placeholder="Seleccione municipio" <?php if (isset($_GET['edit'])){  ?> disabled <?php } ?> >
 
 														<option value="">Seleccione municipio</option>
 														
+														<?php
+														if(isset($_GET['edit'])){
+														$mun = $MySQLiconn->query( "SELECT * FROM municipio where id_depto=".$getROW[ 'id_depto' ] );
+														while ( $row = $mun->fetch_array() ) {
+															if ( $getROW[ 'id_municipio' ] == $row[ 'id_municipio' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_municipio'];  ?>">
+															<?php echo $row['nombre_municipio'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_municipio'];  ?>">
+															<?php echo $row['nombre_municipio'];  ?>
+														</option>
+														<?php
+														}
+														}
+															}
+														?>
 													</select>
 
 												</div>
@@ -126,9 +161,17 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Tour</label>
-													<select class="form-control" name="id_dest" id="id_dest" required placeholder="Seleccione destino">
+													<select class="form-control" name="id_dest" id="id_dest" required placeholder="Seleccione destino" required <?php if (isset($_GET['edit'])){  ?> disabled <?php } ?> >
 
 														<option value="">Seleccione destino</option>
+														<?php
+														if(isset($_GET['edit'])){
+															
+														}
+														?>
+														<option selected value="<?php echo $getROW['id_destino'];  ?>">
+															<?php echo $getROW['nombre_dest'];;  ?>
+														</option>
 														
 													</select>
 
@@ -142,7 +185,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 													  <div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													  </div>
-													  <input class="form-control pull-right" id="datepicker" type="text" name="datepicker" readonly>
+													  <input class="form-control pull-right" id="datepicker" type="text" name="datepicker" value="<?php if(isset($_GET['edit'])) echo $getROW['fecha_tour'];  ?>" readonly>
 													</div>
 													<!-- /.input group -->
 												  </div>
@@ -150,9 +193,12 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Horario</label>
-													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario">
+													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario" required <?php if (isset($_GET['edit'])){  ?> disabled <?php } ?> >
 
 														<option value="">Seleccione horario</option>
+														<option selected value="<?php echo $getROW['id_horario_destino'];  ?>">
+															<?php echo $getROW['horario'];  ?>
+														</option>
 														
 													</select>
 
@@ -162,20 +208,20 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Precio</label>
-													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="" readonly>
+													<input type="number" class="form-control" id="precio" placeholder="Precio" name="precio" value="<?php if(isset($_GET['edit'])) echo $getROW['precio'];  ?>" readonly>
 												</div>
 											</div>
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Cant. de personas</label>
-													<input type="number" class="form-control" id="personas" placeholder="Cant. de personas" name="personas" value="" required min="2">
+													<input type="number" class="form-control" id="personas" placeholder="Cant. de personas" name="personas" value="<?php if(isset($_GET['edit'])) echo $getROW['cant_personas'];  ?>" required min="2">
 												</div>
 											</div>
 
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Total</label>
-													<input type="number" class="form-control" id="total" placeholder="Total" name="total" readonly>
+													<input type="number" class="form-control" id="total" placeholder="Total" name="total" value= "<?php if(isset($_GET['edit'])) echo $getROW['total'];  ?>" readonly>
 												</div>
 											</div>
 											
@@ -215,7 +261,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 						  <button type="button" class="btn btn-primary" data-dismiss="modal" <?php
 								if(isset($_GET['edit'])){
 							?>
-							onclick="location='destino'"
+							onclick="location='reservacion'"
 							<?php
 								}
 							?>
@@ -304,9 +350,10 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									<td class= "text-center" >
 								<select name="cmbo_accion" id="cmbo_accion" onchange="return confirm('Estas seguro que desea modificar el registro!')&& (window.location.href=this.value)">
 									<option value="">Seleccione</option>
+									<?php if ($row['id_estatus']==2 ){ ?>
 									<option value="?edit=<?php echo $row['idreservacion']; ?>">Editar</option>
-									<option value="?adm=<?php echo $row['idreservacion']; ?>">Administrar</option>
-									<?php if ($row['id_estatus']==2 || $row['id_estatus']==3){ ?>
+									<?php } 
+									   if ($row['id_estatus']==2 || $row['id_estatus']==3){ ?>
 									<option value="?del=<?php echo $row['idreservacion']; ?>&est=<?php echo $row['id_estatus']; ?> "><?php if ($row['id_estatus']==2){  ?> Cancelar <?php } else if ($row['id_estatus']==3) { ?>Reservar <?php }?></option>
 									<?php }?>
 								</select>
