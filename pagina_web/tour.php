@@ -306,10 +306,10 @@
 									</thead>
 									<tbody>
 					<?php 
-						$horarios = $MySQLiconn->query("select rd.dias,t.inicio,t.fin
+						$horarios = $MySQLiconn->query("select CONCAT(UCASE(SUBSTRING(rd.dias, 1, 				1)), LOWER(SUBSTRING(rd.dias, 2))) AS dias,t.inicio,t.fin
 									from horario_destino as hd
 									inner join tiempo t on hd.id_tiempo = t.id_tiempo
-									inner join rango_dias rd on t.id_rango_dias = rd.id_rango_dias
+									inner join rango_dias rd on hd.id_rango_dias = rd.id_rango_dias
 									where hd.id_destino = ".$_GET['id_dest']."
 									order by rd.id_rango_dias");
 						while ($lhorarios = mysqli_fetch_array($horarios))
@@ -416,16 +416,39 @@
 							<h3 class="inner">- Booking -</h3>
 							<div class="row">
 								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
+									<!--<div class="form-group">
 										<label><i class="icon-calendar-7"></i> Select a date</label>
-										<input class="date-pick form-control" data-date-format="M d, D" type="text">
-									</div>
+										<input class="date-pick form-control" data-date-format="M d, D" type="text" id="datepicker" name="datepicker">
+									</div>-->
+									<div class="form-group">
+													<label>Date:</label>
+
+													<div class="input-group date">
+													  <div class="input-group-addon">
+														<i class="fa fa-calendar"></i>
+													  </div>
+													  <input class="form-control " id="datepicker" type="text" name="datepicker" value="" readonly>
+													</div>
+													<!-- /.input group -->
+												  </div>
 								</div>
 								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
+									<!--<div class="form-group">
 										<label><i class=" icon-clock"></i> Time</label>
 										<input class="time-pick form-control" value="12:00 AM" type="text">
-									</div>
+									</div>-->
+									<div class="form-group form-control-sm">
+										        <div class="input-group date">
+													<label>Horario</label>
+													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario" required >
+
+														<option value="">Seleccione horario</option>
+														
+														
+													</select>
+													</div>
+
+												</div>
 								</div>
 							</div>
 							<div class="row">
@@ -625,15 +648,40 @@
     <script src="../js/jquery-2.2.4.min.js"></script>
 	<script src="../js/common_scripts_min.js"></script>
 	<script src="../js/functions.js"></script>
+	<!-- date-range-picker -->
+	<script src="../../bower_components/moment/min/moment.min.js"></script>
+	<script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<!-- bootstrap datepicker -->
+	<script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<!-- bootstrap color picker -->
+	<script src="../../bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+	<!-- bootstrap time picker -->
+	<script src="../../plugins/timepicker/bootstrap-timepicker.min.js"></script>
+	<!-- FastClick -->
+	<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+	<!-- iCheck 1.0.1 -->
+	<script src="../../plugins/iCheck/icheck.min.js"></script>
+	<script src="../../assets/validate.js"></script>
+	<script src="../../bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
+
+	<!-- Map -->
+<!-- 
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAUQKuq-IHkzCt4VoGq2z4XYJ_ip7ZRkws"></script>-->
+                                   
+	<script src="../../js/map.js"></script>
+	<script src="../../js/infobox.js"></script>
+
+	<!-- Fixed sidebar -->
+	<script src="../../js/theia-sticky-sidebar.js"></script>
 
 	<!-- Specific scripts -->
-	<script src="../js/icheck.js"></script>
-	<script>
+	<!--<script src="../js/icheck.js"></script>-->
+	<!--<script>
 		$('input').iCheck({
 			checkboxClass: 'icheckbox_square-grey',
 			radioClass: 'iradio_square-grey'
 		});
-	</script>
+	</script>-->
 	<!-- Date and time pickers -->
 	<script src="../js/jquery.sliderPro.min.js"></script>
 	<script type="text/javascript">
@@ -656,31 +704,81 @@
 	</script>
 
 	<!-- Date and time pickers -->
-	<script src="../js/bootstrap-datepicker.js"></script>
-	<script src="../js/bootstrap-timepicker.js"></script>
-	<script>
-		$('input.date-pick').datepicker('setDate', 'today');
+	<!--<script src="../js/bootstrap-datepicker.js"></script>-->
+    
+	<!--<script src="../js/bootstrap-timepicker.js"></script>-->
+   
+
+	<!--<script>
+		//$('input.date-pick').datepicker('setDate', 'today');
 		$('input.time-pick').timepicker({
 			minuteStep: 15,
 			showInpunts: false
 		})
-	</script>
+	</script>-->
 
 	<!--Review modal validation -->
-	<script src="../assets/validate.js"></script>
-
-	<!-- Map -->
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAUQKuq-IHkzCt4VoGq2z4XYJ_ip7ZRkws"></script>
-                                   
-	<script src="../js/map.js"></script>
-	<script src="../js/infobox.js"></script>
-
-	<!-- Fixed sidebar -->
-	<script src="../js/theia-sticky-sidebar.js"></script>
+	
 	<script>
 		jQuery('#sidebar').theiaStickySidebar({
 			additionalMarginTop: 80
 		});
+		
+		$( window ).on( "load", function() {
+        //console.log( "window loaded" );
+			var id_dest= <?php echo $_GET['id_dest'] ?>;
+			dias_semanas(id_dest);
+			busca_horarios(id_dest);
+    	});
+		
+		var dias_semanas = function(id){
+		var dest= id;
+		$.ajax({
+		  type: 'POST',
+		  url: '../crud/actividades.php',
+		  data: {'id_dest_sem': dest}
+		  //dataType: 'json'
+		})
+		.done(function(semanas){
+		  //Date picker
+			  var rango=semanas;
+			  //console.log(rango);
+			$('#datepicker').datepicker({
+			  language: 'es',
+			  autoclose: true,
+			  format: "yyyy-mm-dd",
+			  min: new Date(),
+			  startDate: new Date(),
+			  daysOfWeekDisabled: rango,
+			  disabled: true
+			});
+					  
+		  //alert(precio)
+		})
+		.fail(function(){
+		  alert('Hubo un error al cargar las semanas')
+		})
+	};
+	var busca_horarios = function(id){
+		var dest= id;
+		$.ajax({
+		  type: 'POST',
+		  url: '../crud/actividades.php',
+		  data: {'id_dest_hor': dest}
+		  //dataType: 'json'
+		})
+		.done(function(horario){
+		  //combo horario
+			//console.log(horario);
+			  $('#horario').html(horario);
+			
+		  //alert(precio)
+		})
+		.fail(function(){
+		  alert('Hubo un error al cargar los horarios')
+		})
+		
+	};
 	</script>
 </body>
 

@@ -765,7 +765,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 		})
 		.done(function(horario){
 		  //combo horario
-			console.log(horario);
+			//console.log(horario);
 			  $('#horario').html(horario);
 			
 		  //alert(precio)
