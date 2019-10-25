@@ -7,7 +7,7 @@
 	require_once '../crud/conexion.php';
 		
 	$dest = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,vd.desc_larga,
-													vd.imagen,vd.precio,vd.dias,vd.minimo,vd.direccion,
+													vd.imagen,vd.precio,vd.dias,vd.minimo,(vd.minimo*vd.precio) as t_minimo,vd.direccion,
 													cat.descripcion as categoria,cat.tag
 													FROM v_destinos AS vd
 													INNER JOIN (
@@ -129,104 +129,10 @@
 								</p>
 							</div>
 
-							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="../css/images/blank.gif" 
-                        data-src="../img/slider_single_tour/leon/3_medium.jpg" 
-                        data-small="../img/slider_single_tour/leon/3_medium.jpg" 
-                        data-medium="../img/slider_single_tour/leon/3_medium.jpg" 
-                        data-large="../img/slider_single_tour/leon/3_medium.jpg" 
-                        data-retina="../img/slider_single_tour/leon/3_medium.jpg">
-								<p class="sp-layer sp-white sp-padding" data-position="centerCenter" data-vertical="-50" data-show-transition="right" data-show-delay="500">
-									Lorem ipsum dolor sit amet
-								</p>
-								<p class="sp-layer sp-black sp-padding" data-position="centerCenter" data-vertical="50" data-show-transition="left" data-show-delay="700">
-									consectetur adipisicing elit
-								</p>
 							</div>
-
-							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="../css/images/blank.gif" 
-                        data-src="../img/slider_single_tour/leon/4_medium.jpg" 
-                        data-small="../img/slider_single_tour/leon/4_medium.jpg" 
-                        data-medium="../img/slider_single_tour/leon/4_medium.jpg" 
-                        data-large="../img/slider_single_tour/leon/4_medium.jpg" 
-                        data-retina="../img/slider_single_tour/leon/4_medium.jpg">
-								<p class="sp-layer sp-black sp-padding" data-position="bottomLeft" data-vertical="0" data-width="100%" data-show-transition="up">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								</p>
-							</div>
-
-							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="../css/images/blank.gif" 
-                        data-src="../img/slider_single_tour/leon/5_medium.jpg" 
-                        data-small="../img/slider_single_tour/leon/5_medium.jpg" 
-                        data-medium="../img/slider_single_tour/leon/5_medium.jpg" 
-                        data-large="../img/slider_single_tour/leon/5_medium.jpg" 
-                        data-retina="../img/slider_single_tour/leon/5_medium.jpg">
-								<p class="sp-layer sp-white sp-padding" data-vertical="5%" data-horizontal="5%" data-width="90%" data-show-transition="down" data-show-delay="400">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								</p>
-							</div>
-
-							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="../css/images/blank.gif" 
-                        data-src="../img/slider_single_tour/leon/6_medium.jpg" 
-                        data-small="../img/slider_single_tour/leon/6_medium.jpg" 
-                        data-medium="../img/slider_single_tour/leon/6_medium.jpg" 
-                        data-large="../img/slider_single_tour/leon/6_medium.jpg" 
-                        data-retina="../img/slider_single_tour/leon/6_medium.jpg">
-								<p class="sp-layer sp-white sp-padding" data-horizontal="10" data-vertical="10" data-width="300">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								</p>
-							</div>
-
-							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="../css/images/blank.gif" 
-                        data-src="../img/slider_single_tour/leon/7_medium.jpg" 
-                        data-small="../img/slider_single_tour/leon/7_medium.jpg" 
-                        data-medium="../img/slider_single_tour/leon/7_medium.jpg" 
-                        data-large="../img/slider_single_tour/leon/7_medium.jpg" 
-                        data-retina="../img/slider_single_tour/leon/7_medium.jpg">
-								<p class="sp-layer sp-black sp-padding" data-position="bottomLeft" data-horizontal="5%" data-vertical="5%" data-width="90%" data-show-transition="up" data-show-delay="400">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								</p>
-							</div>
-
-							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="../css/images/blank.gif" 
-                        data-src="../img/slider_single_tour/leon/8_medium.jpg" 
-                        data-small="../img/slider_single_tour/leon/8_medium.jpg" 
-                        data-medium="../img/slider_single_tour/leon/8_medium.jpg" 
-                        data-large="../img/slider_single_tour/leon/8_medium.jpg" 
-                        data-retina="../img/slider_single_tour/leon/8_medium.jpg">
-								<p class="sp-layer sp-black sp-padding" data-horizontal="50" data-vertical="50" data-show-transition="down" data-show-delay="500">
-									Lorem ipsum dolor sit amet
-								</p>
-								<p class="sp-layer sp-white sp-padding" data-horizontal="50" data-vertical="100" data-show-transition="up" data-show-delay="500">
-									consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								</p>
-							</div>
-
-							<div class="sp-slide">
-								<img alt="Image" class="sp-image" src="../css/images/blank.gif" 
-                        data-src="../img/slider_single_tour/leon/9_medium.jpg" 
-                        data-small="../img/slider_single_tour/leon/9_medium.jpg" 
-                        data-medium="../img/slider_single_tour/leon/9_medium.jpg" 
-                        data-large="../img/slider_single_tour/leon/9_medium.jpg" 
-                        data-retina="../img/slider_single_tour/leon/9_medium.jpg">
-							</div>
-						</div>
 						<div class="sp-thumbnails">
 					<img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/1_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/2_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/3_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/4_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/5_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/6_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/7_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/8_medium.jpg">
-                    <img alt="Image" class="sp-thumbnail" src="../img/slider_single_tour/leon/9_medium.jpg">
-						</div>
+                    	</div>
 					</div>
 
 					<hr>
@@ -413,9 +319,13 @@
 					</p>
 					<div class="theiaStickySidebar">
 						<div class="box_style_1 expose" id="booking_box">
+						<form method="post"  id=book>
 							<h3 class="inner">- Booking -</h3>
+							<input type="hidden" id="id_destino" name="id_destino" value="<?php echo $getDEST['id_destino']; ?>">
+							<input type="hidden" id="precio" name="precio" value="<?php echo $getDEST['precio']; ?>">
+							<input type="hidden" id="minimo" name="minimo" value="<?php echo $getDEST['minimo']; ?>">
 							<div class="row">
-								<div class="col-md-6 col-sm-6">
+								<div >
 									<!--<div class="form-group">
 										<label><i class="icon-calendar-7"></i> Select a date</label>
 										<input class="date-pick form-control" data-date-format="M d, D" type="text" id="datepicker" name="datepicker">
@@ -432,6 +342,9 @@
 													<!-- /.input group -->
 												  </div>
 								</div>
+								
+							</div>
+							<div class="row">
 								<div class="col-md-6 col-sm-6">
 									<!--<div class="form-group">
 										<label><i class=" icon-clock"></i> Time</label>
@@ -450,22 +363,10 @@
 
 												</div>
 								</div>
-							</div>
-							<div class="row">
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
-										<label>Adults</label>
-										<div class="numbers-row">
-											<input type="text" value="1" id="adults" class="qty2 form-control" name="quantity">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<label>Children</label>
-										<div class="numbers-row">
-											<input type="text" value="0" id="children" class="qty2 form-control" name="quantity">
-										</div>
+													<label>Cant. de personas</label>
+													<input type="number" class="form-control" id="personas" placeholder="Cant. de personas" name="personas" value="<?php echo $getDEST['minimo']?>" required min="<?php echo $getDEST['minimo']?>">
 									</div>
 								</div>
 							</div>
@@ -474,40 +375,33 @@
 								<tbody>
 									<tr>
 										<td>
-											Adults
+											Cantidad de Personas
 										</td>
-										<td class="text-right">
-											2
-										</td>
-									</tr>
-									<tr>
-										<td>
-											Children
-										</td>
-										<td class="text-right">
-											0
+										<td class="text-right" id="cant">
+											<?php echo $getDEST['minimo']?>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											Total amount
+											Monto Total
 										</td>
-										<td class="text-right">
-											3x $52
+										<td class="text-right" id="opera">
+											<?php echo $getDEST['minimo']?> x $<?php echo $getDEST['precio']?>
 										</td>
 									</tr>
 									<tr class="total">
 										<td>
-											Total cost
+										Costo Total
 										</td>
-										<td class="text-right">
-											$154
+										<td class="text-right" id="total">
+											$<?php echo $getDEST['t_minimo']?>
 										</td>
 									</tr>
 								</tbody>
 							</table>
-							<a class="btn_full" href="cart.html">Book now</a>
-							<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Add to whislist</a>
+							<a class="btn_full" href="cart.html">Reservar</a>
+							<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Agregar a lista de deseos</a>
+							</form>
 						</div>
 						<!--/box_style_1 -->
 					</div>
@@ -646,6 +540,7 @@
 	<!-- Common scripts -->
 	<!--<script data-cfasync="false" src="/cdn-cgi/scripts/f2bf09f8/cloudflare-static/email-decode.min.js"></script>-->
     <script src="../js/jquery-2.2.4.min.js"></script>
+    <!--<script src="../../bower_components/jquery/dist/jquery.min.js"></script>-->
 	<script src="../js/common_scripts_min.js"></script>
 	<script src="../js/functions.js"></script>
 	<!-- date-range-picker -->
@@ -665,11 +560,23 @@
 	<script src="../../bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js"></script>
 
 	<!-- Map -->
-<!-- 
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAUQKuq-IHkzCt4VoGq2z4XYJ_ip7ZRkws"></script>-->
-                                   
+ 
+	<!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCDEl4-bsOJXafyOo1Ul1PLaI-ApsGeZw8"></script>-->
+	<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDEl4-bsOJXafyOo1Ul1PLaI-ApsGeZw8&callback=initMap"
+    async defer></script>
+ 	                                
+ 	<!--                                   
 	<script src="../../js/map.js"></script>
-	<script src="../../js/infobox.js"></script>
+	<script src="../../js/infobox.js"></script>-->
 
 	<!-- Fixed sidebar -->
 	<script src="../../js/theia-sticky-sidebar.js"></script>
@@ -779,6 +686,57 @@
 		})
 		
 	};
+	var actualiza_sub_total=function(){
+		var personas = parseInt($('#personas').val());
+		 var precio = parseInt($('#precio').val());
+		 var total = precio * personas;
+		 //alert (total)
+		 //$('#total').val(total);
+		 $("#cant").html(personas);
+		 $("#opera").html(personas+' x $'+precio);
+		 $("#total").html(total);
+	};
+		/*function minmax(value, min, max) 
+			{
+				if(parseInt(value) < min || isNaN(parseInt(value))) { 
+					return min; 
+					//$('#personas').val(min);
+					}
+				else if(parseInt(value) > max) { 
+					return max; 
+					//$('#personas').val(max);
+					}
+				else { 
+					return value;
+				    //$('#personas').val(value);
+					}
+			}*/
+		
+		$('#personas').on('change',function(){
+			
+			var person = parseInt($('#personas').val());
+			var minimo = parseInt($('#minimo').val());
+			//var precio = parseInt($('#precio').val());
+			//var total = person * precio;
+			//console.log(person);
+		 if(!isNaN(person))
+			 {
+				if(person >= 0 && person < minimo){ 
+					alert ('El minimo de Personas es de '+minimo);
+					$('#personas').val('');
+					$('#personas').focus();
+					$("#total").html('');
+					$("#opera").html('');
+					$("#cant").html('');
+				}
+				else 
+				actualiza_sub_total(); 
+			 }
+		 	
+		  else 
+			$('#total').val(0);
+		 
+	 });
 	</script>
 </body>
 
