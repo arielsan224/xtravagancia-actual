@@ -324,6 +324,7 @@
 							<input type="hidden" id="id_destino" name="id_destino" value="<?php echo $getDEST['id_destino']; ?>">
 							<input type="hidden" id="precio" name="precio" value="<?php echo $getDEST['precio']; ?>">
 							<input type="hidden" id="minimo" name="minimo" value="<?php echo $getDEST['minimo']; ?>">
+							<input type="hidden" id="user" name="user" value="<?php if(isset($_SESSION['userId'])) {  echo $_SESSION['userId']; } ?>">
 							<div class="row">
 								<div >
 									<!--<div class="form-group">
@@ -399,8 +400,10 @@
 									</tr>
 								</tbody>
 							</table>
+							<?php if(isset($_SESSION['userId'])) {  ?>
 							<a class="btn_full" href="cart.html">Reservar</a>
 							<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Agregar a lista de deseos</a>
+							<?php } ?>
 							</form>
 						</div>
 						<!--/box_style_1 -->
