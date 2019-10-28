@@ -139,12 +139,16 @@ if(isset($_POST['id_dest_hor'])){
 								FROM horario_destino hd
 								INNER JOIN tiempo t ON t.id_tiempo = hd.id_tiempo
 								WHERE hd.id_destino = ".$id_dest);
-	$cmbo_horarios = '<option value="0">Seleccione horario</option>';
+	$cmbo_horarios = '<option value="">Seleccione horario</option>';
 	while($horarios = $horario_list->fetch_array()){
 		$cmbo_horarios .= "<option value='$horarios[id_horario_destino]'>$horarios[horario]</option>";
 	}
 	echo $cmbo_horarios;
 	//var_dump($cmbo_horarios);
+}
+
+if(isset($_POST['fecha']) && isset($_POST['id_horario']) && isset($_POST['id_destino']) ){
+	
 }
 
   ?>                        					

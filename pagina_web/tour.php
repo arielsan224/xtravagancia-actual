@@ -4,7 +4,13 @@
 	if (!isset($_GET['id_dest'])){
 		header('location: all_tours_list');
 	}
-	require_once '../crud/conexion.php';
+	//require_once '../crud/conexion.php';
+		include_once '../crud/web_res.php';
+	if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
+	$mensajito = $_SESSION[ 'message' ];
+
+	}
+
 		
 	$dest = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,vd.desc_larga,
 													vd.imagen,vd.precio,vd.dias,vd.minimo,(vd.minimo*vd.precio) as t_minimo,vd.direccion,
@@ -73,6 +79,19 @@
 			<div id="map" class="map"></div>
 		</div>
 		<!-- End Map -->
+		<?php if (isset($mensajito)) {?>
+							<div class="alert alert-info alert-dismissible text-center" role="alert">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<?php 
+								echo $mensajito; 
+								$mensajito=null;
+								/*$_SESSION['message'] = false;*/
+								unset($_SESSION['message']);
+
+								?>
+								
+							</div>
+							<?php } ?>
 
 		<div class="container margin_60">
 			<div class="row">
@@ -319,12 +338,12 @@
 					</p>
 					<div class="theiaStickySidebar">
 						<div class="box_style_1 expose" id="booking_box">
-						<form method="post"  id=book>
+						<form method="post" id="book" name="book">
 							<h3 class="inner">- Booking -</h3>
 							<input type="hidden" id="id_destino" name="id_destino" value="<?php echo $getDEST['id_destino']; ?>">
 							<input type="hidden" id="precio" name="precio" value="<?php echo $getDEST['precio']; ?>">
 							<input type="hidden" id="minimo" name="minimo" value="<?php echo $getDEST['minimo']; ?>">
-							<input type="hidden" id="user" name="user" value="<?php if(isset($_SESSION['userId'])) {  echo $_SESSION['userId']; } ?>">
+							<input type="hidden" id="id_usuario" name="id_usuario" value="<?php if(isset($_SESSION['userId'])) {  echo $_SESSION['userId']; } ?>">
 							<div class="row">
 								<div >
 									<!--<div class="form-group">
@@ -338,10 +357,10 @@
 													  <div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													  </div>
-													  <input class="form-control " id="datepicker" type="text" name="datepicker" value="" readonly>
+													  <input class="form-control" id="datepicker" type="text" name="datepicker" value="" required data-readonly autocomplete="off">
 													</div>
 													<!-- /.input group -->
-												  </div>
+									</div>
 								</div>
 								
 							</div>
@@ -354,9 +373,9 @@
 									<div class="form-group form-control-sm">
 										        <div class="input-group date">
 													<label>Horario</label>
-													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario" required >
+													<select class="form-control" name="horario" id="horario" placeholder="Seleccione horario" required >
 
-														<option value="">Seleccione horario</option>
+														<option value=""></option>
 														
 														
 													</select>
@@ -367,7 +386,7 @@
 								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
 													<label>Cant. de personas</label>
-													<input type="number" class="form-control" id="personas" placeholder="Cant. de personas" name="personas" value="<?php echo $getDEST['minimo']?>" required min="<?php echo $getDEST['minimo']?>">
+													<input type="number" class="form-control" id="personas" placeholder="Cant. de personas" name="personas" value="<?php echo $getDEST['minimo']?>" min="<?php echo $getDEST['minimo']?>" required>
 									</div>
 								</div>
 							</div>
@@ -401,10 +420,13 @@
 								</tbody>
 							</table>
 							<?php if(isset($_SESSION['userId'])) {  ?>
-							<a class="btn_full" href="cart.html">Reservar</a>
+							<button class="btn_full" id="save" name="save"><a>Reservar</a></button>
 							<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Agregar a lista de deseos</a>
-							<?php } ?>
+							<?php } else { ?>
+							<a class="btn_full" id="disp" name="disp">Verificar disponibilidad</a>
+							<?php }  ?>
 							</form>
+							
 						</div>
 						<!--/box_style_1 -->
 					</div>
@@ -740,6 +762,27 @@
 			$('#total').val(0);
 		 
 	 });
+		$('#disp').on('click',function(){
+			var fecha=$('#datepicker').val();
+			var id_horario=$('#horario').val();
+			var id_destino=$('#id_destino').val();
+			alert('fecha: '+fecha+', horario: '+id_horario+', destino: '+id_destino);
+			$.ajax({
+				type: 'POST',
+		  		url: '../crud/actividades.php',
+		  		data: {'id_destino': id_destino,'id_horario': id_horario,'id_horario':fecha}
+			}).done(function(){
+				
+			}).fail(function(){
+				
+			})
+			e.preventDefault();
+			
+		});
+		/*$('#save').on('click',function(){
+			alert('submit');
+			$('#book').submit();
+		});*/
 	</script>
 </body>
 
