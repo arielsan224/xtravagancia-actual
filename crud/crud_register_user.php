@@ -64,7 +64,11 @@ if(isset($_POST['login'])) {
 					header('location: appweb/admin');
 					//exit();
 						}
-					else header('location: index');
+					else { 
+						$ruta=$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING'];
+						$ruta= str_replace(".php","",$ruta);
+						header('location: ../'.$ruta);
+						}
 					exit();
 				/*header('location: http://localhost:9080/stock/dashboard.php');	*/
 			} else{

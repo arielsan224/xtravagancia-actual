@@ -20,7 +20,7 @@ if(isset($_POST['save']))
 		  
 	  	  $id_reserva = mysqli_insert_id($MySQLiconn);
 		
-		var_dump('mensaje'.$SQL2);
+		//var_dump('mensaje'.$SQL2);
 
 		 if(!$SQL)
 			  {
@@ -38,6 +38,31 @@ if(isset($_POST['save']))
 			}
 
 			}
+
+if(isset($_POST['id_destino']) && isset($_POST['id_usuario']) ){
+	 $id_dest = $MySQLiconn->real_escape_string($_POST['id_destino']);
+	 $id_user = $MySQLiconn->real_escape_string($_POST['id_usuario']);
+		
+	$SQL  =$MySQLiconn->query("INSERT INTO busquedas (id_usuario,id_destino) VALUES ('$id_user','$id_dest')");	
+		if(!$SQL)
+			  {
+			   //echo $MySQLiconn->error;
+			   $mensaje = "Error al insertar los registros. Error ( ".$MySQLiconn->error.")";
+				echo $mensaje;
+			   exit();
+			  } 
+
+			else {
+
+				 
+				$mensaje = "Se ha agregado el destino a favoritos.";
+				echo $mensaje;
+				exit();
+			}
+
+			
+	
+}
 /* code for data insert */
 
 

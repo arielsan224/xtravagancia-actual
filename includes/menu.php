@@ -1,6 +1,21 @@
-<?php if(!isset($_SESSION)) session_start();
+<?php if(!isset($_SESSION)) { 
+		session_start();
+	} else { 
+			$inactivo = 900;
+ 
+			if(isset($_SESSION['tiempo']) ) {
+			$vida_session = time() - $_SESSION['tiempo'];
+				if($vida_session > $inactivo)
+				{
+					session_destroy();
+					header("Location: ../../index"); 
+				}
+				}
+			$_SESSION['tiempo'] = time();
+			}
 	$errors = array();
 	include_once $_SERVER['DOCUMENT_ROOT'].'/crud/crud_register_user.php';
+	
 ?>
 <!doctype html>
 <html lang="es">

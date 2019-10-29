@@ -10,7 +10,6 @@
 	$mensajito = $_SESSION[ 'message' ];
 
 	}
-
 		
 	$dest = $MySQLiconn->query("SELECT vd.id_destino,vd.nombre_dest,vd.desc_corta,vd.desc_larga,
 													vd.imagen,vd.precio,vd.dias,vd.minimo,(vd.minimo*vd.precio) as t_minimo,vd.direccion,
@@ -32,11 +31,13 @@
 				  }
   	
   $getDEST = $dest->fetch_array();
+	//exit();
+	
+
  
 	include_once '../includes/menu.php'; 
- 
-	
-	
+ 	//$ruta=$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING'];
+	//var_dump($ruta)	
 
 ?>
 	<!-- End Header -->
@@ -331,6 +332,18 @@
 					</div>
 				</div>
 				<!--End  single_tour_desc-->
+				<?php 
+				if(isset($_SESSION['userId'])){ 
+				$fav= $MySQLiconn->query("SELECT IFNULL(sum(b.idbusquedas),0) as favorito
+									FROM busquedas b
+									WHERE b.id_destino = ".$getDEST['id_destino'].
+									" AND b.id_usuario = ".$_SESSION['userId']);
+				$getFav = $fav->fetch_array();
+					
+				//var_dump($getFav);
+
+
+				}?>
 
 				<aside class="col-md-4" id="sidebar">
 					<p class="hidden-sm hidden-xs">
@@ -338,7 +351,7 @@
 					</p>
 					<div class="theiaStickySidebar">
 						<div class="box_style_1 expose" id="booking_box">
-						<form method="post" id="book" name="book">
+						<form method="post"  id="book" name="book">
 							<h3 class="inner">- Booking -</h3>
 							<input type="hidden" id="id_destino" name="id_destino" value="<?php echo $getDEST['id_destino']; ?>">
 							<input type="hidden" id="precio" name="precio" value="<?php echo $getDEST['precio']; ?>">
@@ -357,10 +370,10 @@
 													  <div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													  </div>
-													  <input class="form-control" id="datepicker" type="text" name="datepicker" value="" required data-readonly autocomplete="off">
+													  <input class="form-control " id="datepicker" type="text" name="datepicker" value="" required data-readonly autocomplete="off">
 													</div>
 													<!-- /.input group -->
-									</div>
+												  </div>
 								</div>
 								
 							</div>
@@ -421,7 +434,7 @@
 							</table>
 							<?php if(isset($_SESSION['userId'])) {  ?>
 							<button class="btn_full" id="save" name="save"><a>Reservar</a></button>
-							<a class="btn_full_outline" href="#"><i class=" icon-heart"></i> Agregar a lista de deseos</a>
+							<a class="<?php if((isset($getFav['favorito'])) && !($getFav['favorito']==0) ){  ?>btn_full_outline_disab <?php } else {  ?>btn_full_outline <?php } ?>" id="busqueda" name="busqueda"><i class="icon-heart"></i> Agrega<?php if((isset($getFav['favorito'])) && !($getFav['favorito']==0) ){  ?>do <?php } else {  ?>r <?php } ?> a lista de deseos</a>
 							<?php } else { ?>
 							<a class="btn_full" id="disp" name="disp">Verificar disponibilidad</a>
 							<?php }  ?>
@@ -661,6 +674,7 @@
 			var id_dest= <?php echo $_GET['id_dest'] ?>;
 			dias_semanas(id_dest);
 			busca_horarios(id_dest);
+			//console.log('<?php ?>');
     	});
 		
 		var dias_semanas = function(id){
@@ -707,7 +721,7 @@
 		  //alert(precio)
 		})
 		.fail(function(){
-		  alert('Hubo un error al cargar los horarios')
+		  alert('Hubo un error al cargar los horarios');
 		})
 		
 	};
@@ -779,10 +793,29 @@
 			e.preventDefault();
 			
 		});
-		/*$('#save').on('click',function(){
-			alert('submit');
-			$('#book').submit();
-		});*/
+		$('#busqueda').on('click',function(){
+			var id_usuario = $('#id_usuario').val();
+			var id_destino=$('#id_destino').val();
+			var fav = 1;
+			//alert('user:'+id_usuario+',destino:'+ id_destino);
+			$.ajax({
+				type:'POST',
+				url: '../crud/web_res.php',
+				data:{'id_usuario':id_usuario,'id_destino':id_destino}
+				
+			}).done(function(favorito){
+				//alert(favorito);
+				$('#busqueda').html('<i class="icon-heart"></i>Agregado a lista de deseos');
+				//$('#busqueda').attr('readonly',true);
+				//$('#busqueda').off();
+				$('#busqueda').removeClass('btn_full_outline');
+				$('#busqueda').addClass('btn_full_outline_disab');
+				
+			}).fail(function(){
+				alert('Hubo un error al guardar en favoritos');
+			})
+			
+		})
 	</script>
 </body>
 

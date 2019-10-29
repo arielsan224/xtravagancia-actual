@@ -115,9 +115,9 @@
 															ELSE 'comun'
 															END AS 'desc'
 														FROM (
-														SELECT b.id_usuario,b.id_destino, COUNT(b.id_destino) conteo
+														SELECT b.id_destino, COUNT(b.id_destino) conteo
 														FROM busquedas b
-														GROUP BY b.id_usuario,b.id_destino) AS g) b ON b.id_destino = vd.id_destino
+														GROUP BY b.id_destino) AS g) b ON b.id_destino = vd.id_destino
 														WHERE vd.id_estatus = 1";
 					if (isset($_GET['desc'])){
 						$where = $_GET['desc'];
