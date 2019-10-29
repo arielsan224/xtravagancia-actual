@@ -311,6 +311,27 @@ a.btn_full_outline {
 	display: block;
 	text-align: center
 }
+a.btn_full_outline_disab {
+	font-family: inherit;
+	color: #9B9B9B;
+	background: 0 0;
+	border: 2px solid #9B9B9B;
+	pointer-events: none;
+	/*cursor: pointer;*/
+	padding: 10px 20px;
+	outline: 0;
+	font-size: 12px;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	transition: all .3s;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	font-weight: 700;
+	display: block;
+	text-align: center
+}
 .sticky ul#top_tools a, header#plain ul#top_links :hover a, header#plain ul#top_tools a {
 	color: #333
 }
