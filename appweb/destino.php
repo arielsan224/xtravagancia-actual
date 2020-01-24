@@ -65,7 +65,35 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							<h4 class="modal-title">Destinos</h4>
 						</div>
 						<div class="modal-body">
-
+							
+						<div class="stepwizard">
+							<div class="stepwizard-row setup-panel">
+								<div class="stepwizard-step col-xs-4"> 
+									<a href="#step-1" type="button" class="btn btn-success btn-circle active">1</a>
+									<p><small>Info destino</small></p>
+								</div>
+								<div class="stepwizard-step col-xs-4"> 
+									<a href="#step-2" type="button" class="btn btn-default btn-circle <?php
+											if(!isset($_GET['edit'])){?> disabled <?php
+												}
+											?>" <?php
+											if(!isset($_GET['edit'])){?> disabled <?php
+												}
+											?> >2</a>
+									<p><small>Ubicación</small></p>
+								</div>
+								<div class="stepwizard-step col-xs-4"> 
+									<a href="#step-3" type="button" class="btn btn-default btn-circle <?php
+											if(!isset($_GET['edit'])){ ?> disabled <?php
+												}
+											?>" <?php
+											if(!isset($_GET['edit'])){?> disabled <?php
+												}
+											?>>3</a>
+									<p><small>Galeria</small></p>
+								</div>
+							</div>
+						</div>
 							<form method="post" enctype="multipart/form-data" id=formModal>
 								<div class="row">
 
@@ -82,6 +110,11 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
     										</div>
     										</div>
 -->
+											<div class="panel setup-content" id="step-1">
+											  <div class="panel-heading">
+												<h3 class="panel-title">Info destino</h3>
+											  </div>
+											  <div class="panel-body">
 											<?php
 											if(isset($_GET['edit'])){
 											?>
@@ -138,7 +171,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 														<?php
 														$mun = $MySQLiconn->query( "SELECT * FROM departamento" );
 														while ( $row = $mun->fetch_array() ) {
-															if ( $getROW[ 'id_depto' ] == $row[ 'id_depto' ] ) {
+															if ( isset($getROW[ 'id_depto' ]) && $getROW[ 'id_depto' ] == $row[ 'id_depto' ] ) {
 																?>
 														<option selected value="<?php echo $row['id_depto'];  ?>">
 															<?php echo $row['nombre_depto'];  ?>
@@ -168,7 +201,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 														if(isset($_GET['edit'])){
 														$mun = $MySQLiconn->query( "SELECT * FROM municipio where id_depto=".$getROW[ 'id_depto' ] );
 														while ( $row = $mun->fetch_array() ) {
-															if ( $getROW[ 'id_municipio' ] == $row[ 'id_municipio' ] ) {
+															if ( isset($getROW[ 'id_municipio' ]) && $getROW[ 'id_municipio' ] == $row[ 'id_municipio' ] ) {
 																?>
 														<option selected value="<?php echo $row['id_municipio'];  ?>">
 															<?php echo $row['nombre_municipio'];  ?>
@@ -210,7 +243,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											<div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Categoria</label>
-													<select class="form-control" name="id_categoria" id="id_categoria" required>
+													<select  class="form-control" name="id_categoria" id="id_categoria" required>
 														<option value="">Seleccione Categoria</option>
 														<?php
 														$destest = $MySQLiconn->query( "SELECT * FROM categoria" );
@@ -238,7 +271,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												<div class="form-group">
 													<label>Actividades</label>
 													<select id="actividad" name="actividad[]" class="form-control select2 " multiple="multiple" data-placeholder="Actividades"
-                        							style="width: 100%;">
+                        							style="width: 100%;" required>
                         							<?php
 														if(isset($_GET['edit'])){
 														$act = $MySQLiconn->query( "SELECT * FROM actividad where id_categoria=".$getROW['id_categoria'] );
@@ -280,23 +313,66 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 			   									echo $row['id_actividad'];
 			   									?>
 											</div>
+											 <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+											  </div>
+											</div>
+											<div class="panel setup-content" id="step-2">
+											  <div class="panel-heading">
+												<h3 class="panel-title">Ubicación</h3>
+											  </div>
+											  <div class="panel-body">
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Dirección</label>
-													<textarea type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['direccion'];  ?></textarea>
+													<textarea type="text" class="form-control" id="direccion" required placeholder="Dirección" name="direccion" rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['direccion'];  ?></textarea>
 												</div>
 											</div>
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Descrpcion Corta</label>
-													<textarea type="text" class="form-control" id="desc_corta" placeholder="Descripcion Corta" name="desc_corta" required rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_corta'];  ?></textarea>
+													<textarea type="text" class="form-control" id="desc_corta" required placeholder="Descripcion Corta" name="desc_corta" rows="2" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_corta'];  ?></textarea>
 												</div>
 											</div>
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Descripcion Larga</label>
-													<textarea type="text" class="form-control" id="desc_larga" placeholder="Descripcion Larga" name="desc_larga" required rows="6" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
+													<textarea type="text" class="form-control" id="desc_larga" required placeholder="Descripcion Larga" name="desc_larga" rows="6" onkeyup="javascript:this.value=this.value.toTitleCase();"><?php if(isset($_GET['edit'])) echo $getROW['desc_larga'];  ?></textarea>
 												</div>
+											</div>
+											<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+											</div>
+											</div>
+											<div class="panel setup-content" id="step-3">
+											  <div class="panel-heading">
+												<h3 class="panel-title">Galeria</h3>
+											  </div>
+											  <div class="panel-body">
+											<div class="col-md-12">
+												<div class="center-block" >
+													<div class="file-loading" >
+														<input id="galery_dest" name="galery_dest[]" type="file" class="file" multiple 
+															data-show-upload="false" data-show-caption="true" data-msg-placeholder="Seleccione imagenes a cargar..." data-allowed-file-extensions='["jpg", "png", "gif"]' required>
+													</div>
+												</div>
+												<div class="kv-avatar-hint"><small>Archivos < 1500 KB</small></div>
+																							
+											
+											</div>
+											<?php
+												if ( isset( $_GET[ 'edit' ] ) ) {
+													?>
+												<button class="btn btn-warning pull-right" name="update">Editar</a>
+
+												<?php
+												}
+												else
+												{
+												?>
+												<button class="btn btn-primary pull-right" name="save">Aceptar</a>
+												<?php
+												}
+												?>
+											</div>
 											</div>
 
 										</div>
@@ -313,20 +389,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 									<label>
 										<input type="checkbox" name="policy_terms" id="policy_terms">I accept terms and conditions and general policy.</label>
 								</div>-->
-										<?php
-										if ( isset( $_GET[ 'edit' ] ) ) {
-											?>
-										<button class="btn btn-warning" name="update">Editar</a>
-
-										<?php
-										}
-										else
-										{
-										?>
-										<button class="btn btn-primary" name="save">Aceptar</a>
-										<?php
-										}
-										?>
+										
 									</div>
 							</div>
 						</form>
@@ -483,7 +546,22 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <!-- Datatable responsive -->
 <script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
 <script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
+<script src="../js/step_bootstrap.js"></script>
+<script>
 
+
+	 $("#galery_dest").fileinput({
+		language: "es",
+		maxFileCount: 5,
+		maxFileSize: 1500,
+		maxImageWidth: 1000,
+		maxImageHeight: 667,
+		minImageWidth: 1000,
+		minImageHeight: 667,
+        allowedFileExtensions: ["jpg", "png", "gif"]
+    });
+
+</script>
 
 
 
@@ -561,6 +639,8 @@ $("#img_dest").fileinput({
     minImageHeight: 667,
     allowedFileExtensions: ["jpg", "png", "gif"]
 });
+	  	  
+   
 
 	$('#id_categoria').on('change', function(){
     var id = $('#id_categoria').val()
@@ -595,14 +675,28 @@ $("#img_dest").fileinput({
   });
 	
 	$("#myModal").on('hidden.bs.modal', function (e) { 
+		var step = 'step-1';
         $("#formModal")[0].reset();
-        $("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
+		$("#formModal").find('span[style="color:red;"]').text(''); //reset error spans
+		$('#actividad').empty();
+		var allWells = $('.setup-content'), navListItems = $('div.setup-panel div a');
+		var target = $('div.setup-panel div a[href="#' + step + '"]');
+		allWells.hide();
+		navListItems.removeClass('btn-success active').addClass('btn-default disabled').attr('disabled');
+		target.addClass('btn-success active').removeAttr('disabled').removeClass('disabled').trigger('click');
+		
 
       });
 
+	$(document).ready(function () {
+
+    	bootstrap_step();
+	});
+
 </script>
 
-
+</body>
+</html>
 
 
 

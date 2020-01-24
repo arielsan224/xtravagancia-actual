@@ -607,6 +607,8 @@ $("#img_dest").fileinput({
 
 
 
+</body>
+</html>
 
 
 

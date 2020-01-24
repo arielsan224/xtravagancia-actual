@@ -269,3 +269,5 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
   });
 
 </script>
+</body>
+</html>

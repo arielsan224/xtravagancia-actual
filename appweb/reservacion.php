@@ -167,11 +167,12 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 														<?php
 														if(isset($_GET['edit'])){
 															
-														}
+														
 														?>
 														<option selected value="<?php echo $getROW['id_destino'];  ?>">
 															<?php echo $getROW['nombre_dest'];;  ?>
 														</option>
+														<?php }?>
 														
 													</select>
 
@@ -196,10 +197,15 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario" required <?php if (isset($_GET['edit'])){  ?> disabled <?php } ?> >
 
 														<option value="">Seleccione horario</option>
+														<?php
+														if(isset($_GET['edit'])){
+															
+														
+														?>
 														<option selected value="<?php echo $getROW['id_horario_destino'];  ?>">
 															<?php echo $getROW['horario'];  ?>
 														</option>
-														
+														<?php }?>
 													</select>
 
 												</div>
@@ -858,6 +864,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
   })
 </script>
 
+</body>
+</html>
 
 
 

@@ -904,3 +904,6 @@ include("../includes/dashboard.php");
     })
   })
 </script>
+</body>
+</html>
+
