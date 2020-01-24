@@ -24,9 +24,8 @@ if(isset($_POST['save']))
 	 $nombre_img = $_FILES['img_dest']['name'];
 	 $imagen=$url.$nombre_img;
 	 $imagen_ins=$url2.$nombre_img;
-		//var_dump($_FILES);
-		//var_dump($imagen);
 	
+		
 		
 	if (!file_exists($url)) {
 		mkdir($url, 0777, true);
@@ -34,7 +33,7 @@ if(isset($_POST['save']))
 	 
 	if(is_uploaded_file($_FILES['img_dest']['tmp_name'])) {			
 			if(move_uploaded_file($_FILES['img_dest']['tmp_name'], $imagen )) {
-	
+				
 	    
  
 		  $SQL = $MySQLiconn->query("INSERT INTO destino (nombre_dest,desc_corta,desc_larga,id_municipio,precio,dias,imagen,minimo, direccion) VALUES('$nombre_dest','$desc_corta ','$desc_larga ',' $id_municipio','$precio','$dias','$imagen_ins','$minimo','$direccion')");
@@ -48,9 +47,10 @@ if(isset($_POST['save']))
 			  } 
 
 			elseif($inserted != 0 ) {
+				
 
 				while(true) {
-					 //// RECUPERAR LOS VALORES DE LOS ARREGLOS ////////
+					 //// RECUPERAR LOS VALORES DE LOS ARREGLOS PARA INSERTAR ACTIVIDADES////////
 							$item1 = current($items1);
 
 
@@ -74,17 +74,41 @@ if(isset($_POST['save']))
 
 							// Up! Next Value
 							$item1 = next( $items1 );
+							//var_dump($item1);
 
 
 							// Check terminator
 							if($item1 === false ) break;
-				} 
+				}
+				
+				
+				  
+				foreach ($_FILES['galery_dest']['name'] as $f => $name)
+				{
+					 
+					 $galeryname = $_FILES['galery_dest']['name'][$f];
+					 //var_dump('entro aqui url'.$galeryname);
+					 //exit();
+					 $galeryurl=$url2.$galeryname;
+					 $id_tipo_cont_web = 1;
+					 		
+
+							$sqlg = "INSERT INTO contenido_web (enlace,id_tipo_cont_web, id_destino) 
+							VALUES ('$galeryurl','$id_tipo_cont_web','$inserted')";
+
+
+							$sqlgal=$MySQLiconn->query($sqlg) or mysqli_error();
+					        move_uploaded_file($_FILES['galery_dest']['tmp_name'][$f], $galeryurl );
+								
+									
+
+			  			}		
+				  
+				
 				$_SESSION['message'] = "Registro Guardado";
 				header("Location: destino");
 	 			exit();
 			}
-			//$_SESSION['message'] = "Registro Guardado";
-				//print_r( $_SESSION['message'] ); 
 					}
 			else{
 				$_SESSION['message'] = "La imagen no se guardo favor verificar";
@@ -93,6 +117,7 @@ if(isset($_POST['save']))
 	else {
 		$_SESSION['message'] = "No se cargo ninguna imagen";
 	}
+		
 	
 }
 /* code for data insert */

@@ -21,7 +21,7 @@ $id_depto = $_POST['id_depto'];
 
 $depto = $MySQLiconn->query( "SELECT * FROM municipio where id_depto= $id_depto" );
 
-$municipio = '<option value="0">Seleccione municipio</option>';
+$municipio = '<option value="">Seleccione municipio</option>';
 while ( $row = $depto->fetch_array() ){
     $municipio .= "<option value='$row[id_municipio]'>$row[nombre_municipio]</option>";
   }
@@ -37,7 +37,7 @@ $dest = $MySQLiconn->query( "SELECT d.id_destino,d.nombre_dest
 FROM destino d
 WHERE d.id_municipio = $id_municipio" );
 
-$destino = '<option value="0">Seleccione destino</option>';
+$destino = '<option value="">Seleccione destino</option>';
 while ( $row = $dest->fetch_array() ){
     $destino .= "<option value='$row[id_destino]'>$row[nombre_dest]</option>";
   }
