@@ -139,7 +139,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											}
 											?>
 											<div class="col-md-6">
-											<div class="col-xs-12 text-center " >
+											<div class="col-xs-12 text-center form-group" >
+												<label>Imagen de destino</label>
 												<div class="kv-avatar center-block" >
 													<div class="file-loading" >
 														<input id="img_dest" name="img_dest" type="file" 
@@ -321,6 +322,55 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												<h3 class="panel-title">Ubicación</h3>
 											  </div>
 											  <div class="panel-body">
+											  <div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Dias</label>
+													<select id="dias" name="dias" class="form-control " data-placeholder="Dias"
+                        							style="width: 100%;" required>
+
+														<option value="">Seleccione Categoria</option>
+														<?php
+														$destest = $MySQLiconn->query( "SELECT * FROM rango_dias" );
+														while ( $row = $destest->fetch_array() ) {
+															if ( $getROW[ 'id_categoria' ] == $row[ 'id_rango_dias' ] ) {
+																?>
+														<option selected value="<?php echo $row['id_rango_dias'];  ?>">
+															<?php echo $row['dias'];  ?>
+														</option>
+
+														<?php
+														} else {
+															?>
+														<option value="<?php echo $row['id_rango_dias'];  ?>">
+															<?php echo $row['dias'];  ?>
+														</option>
+														<?php
+														}
+														}
+														?>
+													</select>
+
+												</div>
+											</div>
+											  <div class="col-md-6 col-sm-6">
+												<div class="form-group">
+													<label>Horario</label>
+													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario" required <?php if (isset($_GET['edit'])){  ?> disabled <?php } ?> >
+
+														<option value="">Seleccione horario</option>
+														<?php
+														if(isset($_GET['edit'])){
+															
+														
+														?>
+														<option selected value="<?php echo $getROW['id_horario_destino'];  ?>">
+															<?php echo $getROW['horario'];  ?>
+														</option>
+														<?php }?>
+													</select>
+
+												</div>
+											</div>
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
 													<label>Dirección</label>
@@ -349,9 +399,10 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											  <div class="panel-body">
 											<div class="col-md-12">
 												<div class="center-block" >
+													<label>Galeria de destino</label>
 													<div class="file-loading" >
 														<input id="galery_dest" name="galery_dest[]" type="file" class="file" multiple 
-															data-show-upload="false" data-show-caption="true" data-msg-placeholder="Seleccione imagenes a cargar..." data-allowed-file-extensions='["jpg", "png", "gif"]' required>
+															data-show-upload="false" data-show-caption="true" data-msg-placeholder="Seleccione imagenes a cargar..." data-allowed-file-extensions='["jpg", "png", "gif"]' data-language ='es' required oninput="setCustomValidity('')">
 													</div>
 												</div>
 												<div class="kv-avatar-hint"><small>Archivos < 1500 KB</small></div>
@@ -547,22 +598,6 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 <script src="../bower_components/Responsive-2.2.0/js/dataTables.responsive.min.js"></script>
 <script src="../bower_components/Responsive-2.2.0/js/responsive.bootstrap.min.js"></script>
 <script src="../js/step_bootstrap.js"></script>
-<script>
-
-
-	 $("#galery_dest").fileinput({
-		language: "es",
-		maxFileCount: 5,
-		maxFileSize: 1500,
-		maxImageWidth: 1000,
-		maxImageHeight: 667,
-		minImageWidth: 1000,
-		minImageHeight: 667,
-        allowedFileExtensions: ["jpg", "png", "gif"]
-    });
-
-</script>
-
 
 
 <script>
@@ -627,10 +662,10 @@ $("#img_dest").fileinput({
     removeLabel: '',
     browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
     removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-    removeTitle: 'Cancel or reset changes',
+    removeTitle: 'Cancelar o reset cambios',
     elErrorContainer: '#kv-avatar-errors-1',
     msgErrorClass: 'alert alert-block alert-danger',
-    defaultPreviewContent: '<img src="../uploads/default_avatar_male.jpg" alt="Your Avatar">',
+    defaultPreviewContent: '<img src="../uploads/avatar montana2.png" alt="Your Avatar">',
     layoutTemplates: {main2: '{preview} ' +  /*btnCust +*/ ' {remove} {browse}'},
 //	uploadUrl: "/uploads/",
 	maxImageWidth: 1000,
@@ -640,7 +675,18 @@ $("#img_dest").fileinput({
     allowedFileExtensions: ["jpg", "png", "gif"]
 });
 	  	  
-   
+   $("#galery_dest").fileinput({
+		language: "es",
+	    overwriteInitial: true,
+	    showUpload:false,
+		maxFileCount: 5,
+		maxFileSize: 1500,
+		maxImageWidth: 1000,
+		maxImageHeight: 667,
+		minImageWidth: 1000,
+		minImageHeight: 667,
+        allowedFileExtensions: ["jpg", "png", "gif"]
+    });
 
 	$('#id_categoria').on('change', function(){
     var id = $('#id_categoria').val()
@@ -687,10 +733,16 @@ $("#img_dest").fileinput({
 		
 
       });
+	
+	//document.getElementById('galery_dest').setCustomValidity('Debe cargar al menos una imagen');
+	$("#galery_dest")[0].setCustomValidity('Debe cargar al menos una imagen');
+	
+
 
 	$(document).ready(function () {
 
     	bootstrap_step();
+				
 	});
 
 </script>
