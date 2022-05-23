@@ -68,11 +68,11 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 							
 						<div class="stepwizard">
 							<div class="stepwizard-row setup-panel">
-								<div class="stepwizard-step col-xs-4"> 
+								<div class="stepwizard-step col-md-4"> 
 									<a href="#step-1" type="button" class="btn btn-success btn-circle active">1</a>
 									<p><small>Info destino</small></p>
 								</div>
-								<div class="stepwizard-step col-xs-4"> 
+								<div class="stepwizard-step col-md-4"> 
 									<a href="#step-2" type="button" class="btn btn-default btn-circle <?php
 											if(!isset($_GET['edit'])){?> disabled <?php
 												}
@@ -82,7 +82,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											?> >2</a>
 									<p><small>Ubicación</small></p>
 								</div>
-								<div class="stepwizard-step col-xs-4"> 
+								<div class="stepwizard-step col-md-4"> 
 									<a href="#step-3" type="button" class="btn btn-default btn-circle <?php
 											if(!isset($_GET['edit'])){ ?> disabled <?php
 												}
@@ -311,7 +311,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												</div>
 												<?php
 //												var_dump ($selected_ids);
-			   									echo $row['id_actividad'];
+//			   									echo $row['id_actividad'];
 			   									?>
 											</div>
 											 <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
@@ -325,14 +325,14 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											  <div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Dias</label>
-													<select id="dias" name="dias" class="form-control " data-placeholder="Dias"
+													<select id="id_rango_dias" name="id_rango_dias" class="form-control " data-placeholder="Dias"
                         							style="width: 100%;" required>
 
-														<option value="">Seleccione Categoria</option>
+														<option value="">Seleccione Dias</option>
 														<?php
 														$destest = $MySQLiconn->query( "SELECT * FROM rango_dias" );
 														while ( $row = $destest->fetch_array() ) {
-															if ( $getROW[ 'id_categoria' ] == $row[ 'id_rango_dias' ] ) {
+															if ( $getROW[ 'id_rango_dias' ] == $row[ 'id_rango_dias' ] ) {
 																?>
 														<option selected value="<?php echo $row['id_rango_dias'];  ?>">
 															<?php echo $row['dias'];  ?>
@@ -355,21 +355,58 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 											  <div class="col-md-6 col-sm-6">
 												<div class="form-group">
 													<label>Horario</label>
-													<select class="form-control" name="horario" id="horario" required placeholder="Seleccione horario" required <?php if (isset($_GET['edit'])){  ?> disabled <?php } ?> >
+													<select id="horario" name="horario[]" class="form-control select2 " multiple="multiple" data-placeholder="Horarios"
+                        							style="width: 100%;" required>
 
 														<option value="">Seleccione horario</option>
 														<?php
+														$tiempo = $MySQLiconn->query( "SELECT id_tiempo,inicio, fin FROM tiempo ");
 														if(isset($_GET['edit'])){
+														$selected_idst = array();
+														$result1t =$MySQLiconn->query("SELECT id_tiempo FROM horario_destino  WHERE estatus=1 and id_destino =".$getROW['id_destino']);
+														while($row1t = mysqli_fetch_assoc($result1t))
+														{
+															$selected_idst[] = $row1t['id_tiempo'];
 															
+														}
 														
-														?>
-														<option selected value="<?php echo $getROW['id_horario_destino'];  ?>">
-															<?php echo $getROW['horario'];  ?>
+														while ( $row = mysqli_fetch_assoc($tiempo) ) {
+																															
+															if(in_array($row['id_tiempo'], $selected_idst))
+															{
+																?>
+														<option selected value="<?php echo $row['id_tiempo'];  ?>">
+															<?php echo date('h:i A',strtotime($row['inicio'])).'-'.date('h:i A',strtotime($row['fin']));  ?>
 														</option>
-														<?php }?>
+
+														<?php
+																
+														} else {
+															?>
+														<option value="<?php echo $row['id_tiempo'];  ?>">
+															<?php echo date('h:i A',strtotime($row['inicio'])).'-'.date('h:i A',strtotime($row['fin'])); ?>
+														</option>
+														<?php
+														}
+																
+														}
+															}
+															else { 
+																while ( $row = mysqli_fetch_assoc($tiempo) ) { 
+
+
+														?>
+														<option value="<?php echo $row['id_tiempo'];  ?>">
+															<?php echo date('h:i A',strtotime($row['inicio'])).'-'.date('h:i A',strtotime($row['fin'])); ?>
+														</option>
+														<?php } } ?>
 													</select>
 
 												</div>
+												<?php
+//												var_dump ($selected_idst);
+//			   									echo $row['id_actividad'];
+			   									?>
 											</div>
 											<div class="col-md-12 col-sm-6">
 												<div class="form-group">
@@ -397,8 +434,8 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												<h3 class="panel-title">Galeria</h3>
 											  </div>
 											  <div class="panel-body">
-											<div class="col-md-12">
-												<div class="center-block" >
+											<div class="col-lg-12">
+												<div class="form-group center-block" >
 													<label>Galeria de destino</label>
 													<div class="file-loading" >
 														<input id="galery_dest" name="galery_dest[]" type="file" class="file" multiple 
@@ -409,6 +446,7 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 																							
 											
 											</div>
+											
 											<?php
 												if ( isset( $_GET[ 'edit' ] ) ) {
 													?>
@@ -423,8 +461,9 @@ if ( isset( $_SESSION[ 'message' ] ) /*&& $_SESSION['message']*/ ) {
 												<?php
 												}
 												?>
+												</div>
 											</div>
-											</div>
+											
 
 										</div>
 
@@ -685,7 +724,7 @@ $("#img_dest").fileinput({
 		maxImageHeight: 667,
 		minImageWidth: 1000,
 		minImageHeight: 667,
-        allowedFileExtensions: ["jpg", "png", "gif"]
+		allowedFileExtensions: ["jpg", "png", "gif"]
     });
 
 	$('#id_categoria').on('change', function(){
@@ -749,8 +788,3 @@ $("#img_dest").fileinput({
 
 </body>
 </html>
-
-
-
-
-
