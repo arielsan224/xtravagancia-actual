@@ -175,6 +175,7 @@ if(isset($_GET['edit']))
 									inner join actividad as ac on ma.id_actividad = ac.id_actividad
 									where ma.id_destino = dest.id_destino
 									group by ac.id_categoria) as id_categoria,
+								    (SELECT DISTINCT hd.id_rango_dias FROM horario_destino hd WHERE hd.id_destino = dest.id_destino) AS id_rango_dias,
 								   dest.precio,dest.dias,dest.minimo,
 								   dest.imagen,dest.estatus
 							from destino as dest
@@ -205,6 +206,8 @@ if(isset($_POST['update']))
 //     $imagen = $MySQLiconn->real_escape_string($_POST['imagen']);
 //	 $imagen="img/slider_single_tour/leon/1_medium.jpg";
 	 $items1 = ($_POST['actividad']);
+	 $id_rango_dias = ($_POST['id_rango_dias']);
+	 $horarios_a= ($_POST['horario']);
 	 $id_destino=($_POST['id_destino']);
 	 $carpeta_ant = '../uploads/'.$getROW['nombre_dest'].'/';
 	 $url = '../uploads/'.$nombre_dest.'/';
@@ -262,6 +265,10 @@ if(isset($_POST['update']))
   	
  	else {
 		
+
+		//////////////////////////////////////////////////////////////////////////////////////
+		//actualizacion de las actividades
+		//////////////////////////////////////////////////////////////////////////////////////
 		$SQL2 = $MySQLiconn->query("DELETE FROM maestro_act WHERE id_destino=".$id_destino);
  		$SQL3 = $MySQLiconn->query("ALTER TABLE maestro_act AUTO_INCREMENT=1");
 	
@@ -283,6 +290,7 @@ if(isset($_POST['update']))
 				    ///////// QUERY DE INSERCIÓN ////////////////////////////
 				    $sql = "INSERT INTO maestro_act (id_actividad, id_destino) 
 					VALUES $valoresQ";
+					//$_SESSION['message'] = "Registro Actualizado( ".$sql.")";
 
 					
 					$sqlRes=$MySQLiconn->query($sql) or mysqli_error();
@@ -294,9 +302,65 @@ if(isset($_POST['update']))
 				    
 				    // Check terminator
 				    if($item1 === false ) break;
-		} 
-		$_SESSION['message'] = "Registro Actualizado";
-	} 
+					} 
+			
+
+		//////////////////////////////////////////////////////////////////////////////////////
+		//actualizacion los horarios
+		//////////////////////////////////////////////////////////////////////////////////////
+		$SQL4t = $MySQLiconn->query("UPDATE horario_destino SET estatus = 0 WHERE id_destino=".$id_destino);
+		/*if(!$SQL4t)
+			  {
+			   //echo $MySQLiconn->error;
+			   $_SESSION['message'] = "Error al Error ( ".$MySQLiconn->error.")";
+			  } */
+		//$SQL5t = $MySQLiconn->query("ALTER TABLE horario_destino AUTO_INCREMENT=1");
+		//$_SESSION['message'] = "Registro Actualizado( ".$id_destino.")";
+	
+		while(true) {
+			 //// RECUPERAR LOS VALORES DE LOS ARREGLOS ////////
+				    $horario = current($horarios_a);
+				    
+				    
+				    ////// ASIGNARLOS A VARIABLES ///////////////////
+				    $id_tiemp=(( $horario !== false) ? $horario : ", &nbsp;");
+				    
+
+				    //// CONCATENAR LOS VALORES EN ORDEN PARA SU FUTURA INSERCIÓN ////////
+				    $valorest='('.$id_tiemp.',"'.$id_destino.'"'.',"'.$id_rango_dias.'"),';
+
+
+
+				    //////// YA QUE TERMINA CON COMA CADA FILA, SE RESTA CON LA FUNCIÓN SUBSTR EN LA ULTIMA FILA /////////////////////
+				    $valoresQT= substr($valorest, 0, -1);
+				    
+				    ///////// QUERY DE INSERCIÓN ////////////////////////////
+				    $sqlt = "INSERT INTO horario_destino (id_tiempo, id_destino,id_rango_dias) 
+					VALUES $valoresQT";
+					//$_SESSION['message'] = "Registro Actualizado( ".$sqlt.")";
+
+
+					
+					$sqlResT=$MySQLiconn->query($sqlt) or mysqli_error();
+					/*if(!$sqlResT)
+						  {
+						   //echo $MySQLiconn->error;
+						   $_SESSION['message'] = "Error al Error ( ".$MySQLiconn->error.")";
+						  }*/
+
+				    
+				    // Up! Next Value
+				    $horario = next( $horarios_a );
+				    
+				    
+				    // Check terminator
+				    if($horario === false ) break;
+					} 			
+
+
+
+			$_SESSION['message'] = "Registro Actualizado";		
+			} 
  header("Location: destino.php");
  exit();
 }
